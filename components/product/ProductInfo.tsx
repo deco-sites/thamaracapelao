@@ -341,7 +341,8 @@ function ProductInfo({
         {isAvailable
           ? (
             <>
-              <div class="group-has-[[data-variant-selector]:focus]/product-info:pointer-events-none group-has-[[data-variant-selector]:focus]/product-info:opacity-80">
+              <div class="">
+                {/* <div class="group-has-[[data-variant-selector]:focus]/product-info:pointer-events-none group-has-[[data-variant-selector]:focus]/product-info:opacity-80"> */}
                 {isAvailable && <ProductAddToCart product={product} />}
               </div>
 
