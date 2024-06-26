@@ -164,7 +164,7 @@ export default function Items(
                           {section.textItems.map((item) => (
                             <li>
                               <a
-                                class="py-4 px-5 block leading-[18px] hover:font-bold md:py-2 md:pl-0"
+                                class="py-4 px-5 block leading-[18px] hover:underline md:py-2 md:pl-0"
                                 href={item.href}
                                 target={item.external ? "_blank" : undefined}
                                 rel={item.external
