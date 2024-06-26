@@ -4,7 +4,9 @@
   "sections": [
     {
       "__resolveType": "site/sections/SEO/PageSEO.tsx",
-      "structuredData": null
+      "structuredData": null,
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/9c982f00-ef34-40fa-b995-9c2f909f5f23",
+      "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/c0d0f92c-7f5f-4659-92ec-e6eccc8bc2a1"
     },
     {
       "__resolveType": "Header - 01"
