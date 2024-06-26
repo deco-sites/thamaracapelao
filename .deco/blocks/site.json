@@ -2,13 +2,14 @@
   "seo": {
     "type": "website",
     "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/a5d890ba-e5b8-471e-8b77-7412c1d4fa56",
-    "title": "Fast Fashion",
     "jsonLDs": [],
     "noIndexing": false,
-    "description": "Improve your page performance with deco.cx",
-    "titleTemplate": "%s | e-Plus",
-    "descriptionTemplate": "%s | e-Plus",
-    "themeColor": "#fff"
+    "description": "Thamara Capelão",
+    "titleTemplate": "%s | Thamara Capelão",
+    "descriptionTemplate": "%s | Thamara Capelão",
+    "themeColor": "#fff",
+    "title": "Thamara Capelão",
+    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/177f1c0d-1d4f-4579-b596-067bed55bccf"
   },
   "theme": {
     "__resolveType": "Fashion theme"
