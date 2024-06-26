@@ -37,8 +37,7 @@
     "base": "#ffffff",
     "info": "#0099ff",
     "danger": "#ff1635",
-    "success": "#07700f",
-    "base-100": "#ffffff"
+    "success": "#07700f"
   },
   "buttonStyle": {
     "--border-btn": "1px",
