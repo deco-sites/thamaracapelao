@@ -292,7 +292,7 @@ function ProductBuyTogether(
               <div class="h-[50px] w-full">
                 {extraProducts.value.length > 1 && (
                   <>
-                    <Slider.NextButton class="w-full p-3 px-0 md:px-3 flex items-center justify-center gap-2.5 text-neutral-400 hover:bg-primary-500 hover:text-neutral-600 text-sm font-medium border border-neutral-400">
+                    <Slider.NextButton class="w-full p-3 px-0 md:px-3 flex items-center justify-center gap-2.5 text-neutral-400 hover:bg-primary hover:text-primary-content text-sm font-medium border border-neutral-400">
                       <Icon size={24} id="Reload" strokeWidth={3} />
                       <span class="font-bold">Ver outro produto</span>
                     </Slider.NextButton>
