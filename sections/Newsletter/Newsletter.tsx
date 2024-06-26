@@ -1,12 +1,12 @@
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { useId } from "preact/hooks";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
 import {
   NewsletterSkeleton,
   Props as NewsletterProps,
 } from "../../components/footer/Newsletter.tsx";
 import Newsletter from "$store/islands/Newsletter.tsx";
 import { AppContext } from "deco-sites/fast-fashion/apps/site.ts";
+import { useScriptAsDataURI } from "deco/hooks/useScript.ts";
 
 export interface Props extends NewsletterProps {
   /** @ignore */

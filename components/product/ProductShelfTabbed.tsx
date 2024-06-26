@@ -15,7 +15,7 @@ import { SendEventOnView } from "$store/components/Analytics.tsx";
 import { clx } from "deco-sites/fast-fashion/sdk/clx.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { toProductItem } from "$store/sdk/ga4/transform/toProductItem.ts";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScriptAsDataURI } from "deco/hooks/useScript.ts";
 
 /** @titleBy title */
 interface Tab {

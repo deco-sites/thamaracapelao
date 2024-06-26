@@ -14,7 +14,7 @@ import { clx } from "$store/sdk/clx.ts";
 import { toProductItem } from "$store/sdk/ga4/transform/toProductItem.ts";
 import { SendEventOnView } from "$store/components/Analytics.tsx";
 import { toAnalytics } from "$store/sdk/ga4/transform/toAnalytics.ts";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScriptAsDataURI } from "deco/hooks/useScript.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 
 export interface Props {
