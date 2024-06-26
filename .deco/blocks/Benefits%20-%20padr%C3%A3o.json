@@ -1,1 +1,45 @@
-{"title":"Take a look at our benefits","benefits":[{"icon":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/85e9ef91-4340-4762-b4e3-573bba830789","label":"10% OFF no boleto","description":"Shop online with no additional fees!"},{"icon":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/bd4ac462-5be4-4f66-bd78-48334c815373","label":"Retire na loja física","description":"Instant assistance anytime"},{"icon":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/23583234-2f54-46bd-9762-5e0a31cac6f8","label":"Frete grátis acima de R$99,99*","description":"Discount for new customers"},{"icon":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/2ba6a9af-ba46-4c0d-9307-441156b2f093","label":"Variedades de produto","description":"Easy and Convenient Return Policy"}],"__resolveType":"site/sections/Content/Benefits.tsx"}
+{
+  "title": "Take a look at our benefits",
+  "benefits": [
+    {
+      "icon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/85e9ef91-4340-4762-b4e3-573bba830789",
+      "label": "10% OFF no boleto",
+      "description": "Shop online with no additional fees!"
+    },
+    {
+      "icon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/bd4ac462-5be4-4f66-bd78-48334c815373",
+      "label": "Retire na loja física",
+      "description": "Instant assistance anytime"
+    },
+    {
+      "icon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/23583234-2f54-46bd-9762-5e0a31cac6f8",
+      "label": "Frete grátis acima de R$99,99*",
+      "description": "Discount for new customers"
+    },
+    {
+      "icon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/2ba6a9af-ba46-4c0d-9307-441156b2f093",
+      "label": "Variedades de produto",
+      "description": "Easy and Convenient Return Policy"
+    }
+  ],
+  "__resolveType": "site/sections/Content/Benefits.tsx",
+  "sectionProps": {
+    "layout": {
+      "mobile": {
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      },
+      "desktop": {
+        "marginTop": "0px",
+        "marginBottom": "0px"
+      }
+    }
+  },
+  "layout": {
+    "numberOfSliders": {
+      "mobile": 1,
+      "tablet": 1,
+      "desktop": 1
+    }
+  }
+}
