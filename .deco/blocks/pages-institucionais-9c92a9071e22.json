@@ -40,7 +40,7 @@
                 "alt": "imagem",
                 "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/abf17a77-6d49-4487-a0b5-f777c5873003"
               },
-              "title": "Perguntas Frequentes",
+              "title": "Políticas de Pagamentos",
               "__resolveType": "site/sections/Institutional/InstitutionalBody.tsx"
             }
           ],
