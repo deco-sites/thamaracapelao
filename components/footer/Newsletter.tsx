@@ -220,7 +220,7 @@ export default function Newsletter({
 
   return (
     <Section isMobile={isMobile} {...sectionProps}>
-      <div class="bg-secondary-200 text-secondary-content py-[46px] md:py-7">
+      <div class="bg-secondary-200 text-secondary-200-content py-[46px] md:py-7">
         <div class="container flex flex-col gap-8 justify-center max-w-5xl">
           <div class="flex flex-col items-center">
             {title && (
@@ -306,7 +306,7 @@ export function NewsletterSkeleton({
 }: Props & { isMobile: boolean }) {
   return (
     <Section isMobile={isMobile} {...sectionProps}>
-      <div class="bg-secondary-200 text-secondary-content py-[46px] md:py-7">
+      <div class="bg-secondary-200 text-secondary-200-content py-[46px] md:py-7">
         <div class="container flex flex-col gap-8 justify-center max-w-5xl">
           <div class="flex flex-col items-center">
             {title && (
