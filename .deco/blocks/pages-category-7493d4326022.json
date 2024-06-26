@@ -47,11 +47,11 @@
         "layout": {
           "mobile": {
             "marginTop": "32px",
-            "marginBottom": "0px"
+            "marginBottom": "32px"
           },
           "desktop": {
             "marginTop": "32px",
-            "marginBottom": "0px"
+            "marginBottom": "32px"
           }
         }
       },
