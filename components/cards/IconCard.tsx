@@ -1,5 +1,5 @@
-import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
-import { clx } from "../../sdk/clx.ts";
+import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import { clx } from "$store/sdk/clx.ts";
 import {
   borderColorClasses2,
   BorderColors,
@@ -9,7 +9,6 @@ import {
   borderWidthClasses,
   colorClasses,
   Colors,
-  flex,
 } from "../../constants.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 

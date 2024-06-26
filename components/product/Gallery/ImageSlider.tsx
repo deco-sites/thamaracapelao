@@ -1,18 +1,30 @@
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import Icon from "$store/components/ui/Icon.tsx";
+import Slider from "$store/components/ui/Slider.tsx";
+import SliderJS from "$store/islands/SliderJS.tsx";
+import { useId } from "$store/sdk/useId.ts";
+import {
+  ImageObject,
+  ProductDetailsPage,
+  VideoObject,
+} from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import Icon from "../../../components/ui/Icon.tsx";
-import Slider from "../../../components/ui/Slider.tsx";
-import ProductImageZoom from "../../../islands/ProductImageZoom.tsx";
-import { useId } from "../../../sdk/useId.ts";
+import SealsList from "$store/components/product/SealsList.tsx";
+import { SealConfig } from "$store/loaders/Seals/seals.tsx";
+import ZoomableImage from "$store/islands/ZoomableImage.tsx";
+import { ProductImageAspectRatio } from "$store/sections/Theme/Theme.tsx";
+import { ProductImageFit } from "$store/sections/Theme/Theme.tsx";
 
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-
-  layout?: {
+  sealsConfig?: SealConfig[];
+  isMobile: boolean;
+  layout: {
     width: number;
     height: number;
   };
+  imageAspectRatio: ProductImageAspectRatio;
+  imageFit: ProductImageFit;
 }
 
 /**
@@ -29,82 +41,183 @@ export default function GallerySlider(props: Props) {
   }
 
   const {
-    page: { product: { image: images = [] } },
-    layout,
+    page: {
+      product: { image: images = [], video: videos = [] },
+      product,
+    },
+    isMobile,
+    sealsConfig,
+    layout: { width, height },
   } = props;
-
-  const { width, height } = layout || { width: 300, height: 370 };
-
   const aspectRatio = `${width} / ${height}`;
 
-  return (
-    <div id={id} class="grid grid-flow-row sm:grid-flow-col">
-      {/* Image Slider */}
-      <div class="relative order-1 sm:order-2">
-        <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
-          {images.map((img, index) => (
-            <Slider.Item
-              index={index}
-              class="carousel-item w-full"
-            >
-              <Image
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio }}
-                src={img.url!}
-                alt={img.alternateName}
-                width={width}
-                height={height}
-                // Preload LCP image for better web vitals
-                preload={index === 0}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            </Slider.Item>
-          ))}
-        </Slider>
+  const videosUrlsAdjusted = videos.map((video) => {
+    const videoUrl = video.contentUrl?.replace("watch?v=", "embed/");
+    const videoId = videoUrl?.split("embed/")[1];
 
+    return {
+      ...video,
+      "@id": videoId,
+      contentUrl: videoUrl,
+    };
+  });
+
+  const medias: (VideoObject | ImageObject)[] | undefined = [
+    ...videosUrlsAdjusted,
+    ...images,
+  ];
+
+  return (
+    <div
+      id={id}
+      class="lg:flex gap-5 flex-1 items-start max-lg:relative lg:sticky lg:top-36 h-fit"
+    >
+      {/* Dots */}
+      {isMobile
+        ? (
+          <ul class="flex justify-center absolute bottom-12 left-1/2 -translate-x-1/2 z-30">
+            {medias?.map((_, index) => (
+              <li class="carousel-item">
+                <Slider.Dot index={index}>
+                  <div class="size-2 m-1 bg bg-neutral-400 rounded-full group-disabled:bg-primary" />
+                </Slider.Dot>
+              </li>
+            ))}
+          </ul>
+        )
+        : (
+          <div class="flex flex-col">
+            <Slider.PrevButton class="no-animation btn btn-ghost px-0 text-neutral-600 disabled:text-neutral-300">
+              <Icon size={24} id="ChevronUp" strokeWidth={3} />
+            </Slider.PrevButton>
+            <Slider.Thumbs class="carousel carousel-center gap-3 flex-col min-w-[100px] max-lg:hidden max-h-[436px]">
+              {medias.map((media, index) => (
+                <div class="carousel-item max-w-[100px] sm:max-w-[100px]">
+                  <Slider.ThumbItem
+                    index={index}
+                  >
+                    {media?.["@type"] === "ImageObject" && (
+                      <Image
+                        style={{ aspectRatio }}
+                        class="group-disabled:border-primary opacity-50 group-disabled:opacity-100 group-disabled:border-2 border border-neutral-300 object-cover w-full h-full transition"
+                        width={100}
+                        height={100}
+                        src={media.url!}
+                        alt={media.alternateName}
+                      />
+                    )}
+
+                    {media?.["@type"] === "VideoObject" &&
+                      (
+                        <img
+                          style={{ aspectRatio }}
+                          class="group-disabled:border-primary group-disabled:border-2 opacity-50 group-disabled:opacity-100 border-neutral-300 border object-cover hover:border-2 hover:border-primary "
+                          width={100}
+                          height={100}
+                          src={`https://i.ytimg.com/vi/${
+                            media["@id"]
+                          }/hqdefault.jpg`}
+                          alt={media.alternateName ?? product.name ?? "Produto"}
+                        />
+                      )}
+                  </Slider.ThumbItem>
+                </div>
+              ))}
+            </Slider.Thumbs>
+
+            <Slider.NextButton
+              class="no-animation btn btn-ghost px-0 text-neutral-600 disabled:text-neutral-300"
+              disabled={images.length < 2}
+            >
+              <Icon size={24} id="ChevronDown" strokeWidth={3} />
+            </Slider.NextButton>
+          </div>
+        )}
+
+      {/* Image Slider */}
+      <div class="lg:flex items-center gap-1 flex-1 relative">
         <Slider.PrevButton
-          class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+          class="no-animation btn btn-ghost px-0 max-lg:absolute top-1/2 left-1 z-20 cursor-pointer text-neutral-600 disabled:text-neutral-300"
           disabled
         >
-          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+          <Icon size={48} id="ChevronLeft" strokeWidth={3} />
         </Slider.PrevButton>
 
+        <div className="flex-1">
+          <Slider class="carousel carousel-center w-full">
+            <div class="absolute top-4 left-4 lg:left-[70px] gap-1.5 flex flex-col w-full z-10">
+              <SealsList
+                sealsConfig={sealsConfig}
+                product={product}
+                limit={2}
+                position="image"
+              />
+            </div>
+            {medias.map((media, index) => (
+              <Slider.Item
+                index={index}
+                class="carousel-item w-full flex justify-center"
+              >
+                {media?.["@type"] === "ImageObject" && props.isMobile && (
+                  <ZoomableImage
+                    factor={2}
+                    type="click"
+                    // @ts-ignore class is not a valid attribute for Image
+                    class="w-full object-cover"
+                    sizes="(max-width: 640px) 100vw, 38vw"
+                    style={{ aspectRatio: `${width} / ${height}` }}
+                    src={media.url ?? ""}
+                    alt={media.alternateName}
+                    width={width}
+                    height={height}
+                    preload={index < 2}
+                    loading={index < 2 ? "eager" : "lazy"}
+                  />
+                )}
+                {media?.["@type"] === "ImageObject" && !props.isMobile && (
+                  <ZoomableImage
+                    factor={2}
+                    type="click"
+                    // @ts-ignore class is not a valid attribute for Image
+                    class="w-full object-cover"
+                    sizes="(max-width: 640px) 100vw, 38vw"
+                    style={{ aspectRatio: `${width} / ${height}` }}
+                    src={media.url ?? ""}
+                    alt={media.alternateName}
+                    width={width}
+                    height={height}
+                    preload={index < 2}
+                    loading={index < 2 ? "eager" : "lazy"}
+                  />
+                )}
+
+                {media?.["@type"] === "VideoObject" && (
+                  <iframe
+                    src={media.contentUrl}
+                    title=""
+                    frameBorder="0"
+                    style={{ aspectRatio: `${width} / ${height}` }}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                )}
+              </Slider.Item>
+            ))}
+          </Slider>
+          <p class="flex justify-center items-center gap-1.5 text-neutral-500 text-sm mt-2">
+            <Icon id="Zoom" size={28} />Clique na imagem para dar zoom
+          </p>
+        </div>
+
         <Slider.NextButton
-          class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+          class="no-animation btn btn-ghost px-0 max-lg:absolute top-1/2 right-1 z-20 text-neutral-600 disabled:text-neutral-300"
           disabled={images.length < 2}
         >
-          <Icon size={24} id="ChevronRight" strokeWidth={3} />
+          <Icon size={48} id="ChevronRight" strokeWidth={3} />
         </Slider.NextButton>
-
-        <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-          <ProductImageZoom
-            images={images}
-            width={700}
-            height={Math.trunc(700 * height / width)}
-          />
-        </div>
       </div>
 
-      {/* Dots */}
-      <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
-        {images.map((img, index) => (
-          <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
-            <Slider.Dot index={index}>
-              <Image
-                style={{ aspectRatio }}
-                class="group-disabled:border-base-300 border rounded "
-                width={100}
-                height={123}
-                src={img.url!}
-                alt={img.alternateName}
-              />
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
-
-      <Slider.JS rootId={id} />
+      <SliderJS rootId={id} />
     </div>
   );
 }

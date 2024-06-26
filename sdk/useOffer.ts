@@ -24,7 +24,8 @@ const bestInstallment = (
   }
 
   if (
-    acc.billingDuration && curr.billingDuration &&
+    acc.billingDuration &&
+    curr.billingDuration &&
     acc.billingDuration < curr.billingDuration
   ) {
     return curr;
@@ -33,32 +34,35 @@ const bestInstallment = (
   return acc;
 };
 
-const installmentToString = (
+const getInstallmentsInfo = (
   installment: UnitPriceSpecification,
   sellingPrice: number,
 ) => {
   const { billingDuration, billingIncrement, price } = installment;
 
   if (!billingDuration || !billingIncrement) {
-    return "";
+    return null;
   }
 
   const withTaxes = sellingPrice < price;
 
-  return `${billingDuration}x de R$ ${billingIncrement} ${
-    withTaxes ? "com juros" : "sem juros"
-  }`;
+  return {
+    billingDuration,
+    billingIncrement,
+    withTaxes,
+  };
 };
 
 export const useOffer = (aggregateOffer?: AggregateOffer) => {
   const offer = aggregateOffer?.offers[0];
-  const listPrice = offer?.priceSpecification.find((spec) =>
-    spec.priceType === "https://schema.org/ListPrice"
+  const listPrice = offer?.priceSpecification.find(
+    (spec) => spec.priceType === "https://schema.org/ListPrice",
   );
   const installment = offer?.priceSpecification.reduce(bestInstallment, null);
   const seller = offer?.seller;
   const price = offer?.price;
   const availability = offer?.availability;
+  const methods = offer?.priceSpecification;
 
   return {
     price,
@@ -66,7 +70,8 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
     availability,
     seller,
     installments: installment && price
-      ? installmentToString(installment, price)
+      ? getInstallmentsInfo(installment, price)
       : null,
+    methods,
   };
 };

@@ -1,0 +1,179 @@
+{
+  "logo": {
+    "alt": "Logo",
+    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/d95af92f-31ae-4b5c-bc79-e3281552f9ab",
+    "width": 180,
+    "height": 40
+  },
+  "sections": [
+    {
+      "text": "<h4><strong>Fale Conosco:</strong></h4><p>(00) 0000-0000</p><p><a href=\"mailto:email@email.com.br\" data-mce-href=\"mailto:email@email.com.br\">email@email.com.br</a></p><p><br data-mce-bogus=\"1\"></p><h4><strong>Horário de Atendimento:</strong></h4><p>Seg. à Sex das 0h às 00h</p><p>Sábado das 0h às 00h</p>",
+      "@type": "html",
+      "title": "Atendimento"
+    },
+    {
+      "@type": "text",
+      "title": "Institucional",
+      "textItems": [
+        {
+          "href": "/institucional/quem-somos",
+          "@type": "text",
+          "title": "Quem somos"
+        },
+        {
+          "href": "/institucional/perguntas-frequentes",
+          "@type": "text",
+          "title": "Perguntas Frequentes"
+        },
+        {
+          "href": "/institucional/politica-de-entrega",
+          "@type": "text",
+          "title": "Entregas"
+        },
+        {
+          "href": "/institucional/trocas-e-devolucoes",
+          "@type": "text",
+          "title": "Trocas e devoluções"
+        }
+      ],
+      "colapseOnMobile": true
+    },
+    {
+      "@type": "text",
+      "title": "Ajuda e Suporte",
+      "textItems": [
+        {
+          "href": "/institucional/politica-de-privacidade",
+          "@type": "text",
+          "title": "Privacidade"
+        },
+        {
+          "href": "/account#/orders",
+          "@type": "text",
+          "title": "Meus Pedidos"
+        },
+        {
+          "href": "/account",
+          "@type": "text",
+          "title": "MInha conta"
+        },
+        {
+          "@type": "text",
+          "title": "Fale Conosco",
+          "external": false,
+          "href": "/institucional/fale-conosco"
+        }
+      ],
+      "colapseOnMobile": true
+    },
+    {
+      "@type": "image",
+      "title": "Certificações",
+      "imageItems": [
+        {
+          "alt": "Let's Encrypt",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/6251e427-4826-487f-aad2-fbcfa521100a",
+          "href": "https://letsencrypt.org/pt-br/",
+          "@type": "image",
+          "width": 51,
+          "height": 39,
+          "external": true
+        },
+        {
+          "alt": "Vtex Certified",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/5beb1200-9f9a-4187-bec6-49f4d5ad5e00",
+          "href": "https://secure.vtex.com/?an=agenciaeplus",
+          "@type": "image",
+          "width": 72,
+          "height": 44,
+          "external": true
+        }
+      ]
+    },
+    {
+      "@type": "image",
+      "title": "Redes Sociais",
+      "imageItems": [
+        {
+          "alt": "Linkdin",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/eceaaf1a-ebbc-48ec-a6e8-928f0d4e7514",
+          "href": "https://www.linkedin.com/company/agenciaeplus",
+          "@type": "image",
+          "width": 32,
+          "height": 32
+        },
+        {
+          "alt": "Instagram",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/230b3601-c99c-403e-9ea7-ff899e912974",
+          "href": "https://www.instagram.com/agenciaeplus/",
+          "@type": "image",
+          "width": 32,
+          "height": 32,
+          "external": true
+        },
+        {
+          "alt": "Pinterest",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/e88b0b8a-6784-496a-918d-789259da0b69",
+          "href": "https://www.instagram.com/agenciaeplus/",
+          "@type": "image",
+          "width": 32,
+          "height": 32,
+          "external": true
+        },
+        {
+          "alt": "Facebook",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/9a61b053-24f9-4d83-8bc7-58b51a882dac",
+          "href": "https://www.facebook.com/agenciaeplus",
+          "@type": "image",
+          "width": 32,
+          "height": 32,
+          "external": true
+        }
+      ]
+    }
+  ],
+  "copyRight": "<p>© 2021, Lorem Ipsum. Todos os direitos reservados. It is a long established fact that a reader will be distracted, São Paulo. SP CEP: 01234-100 | CNPJ: 01.234.567/0088-09</p>",
+  "paymentFlags": [
+    {
+      "alt": "Mastercard",
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/3948043a-869b-40e1-bb32-1ad0be379c81"
+    },
+    {
+      "alt": "Visa",
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/b15cf225-1d45-4be4-8c1f-a1378c7271b3"
+    },
+    {
+      "alt": "elo",
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/940a81cc-0540-40a5-ac67-29d4b5628432"
+    },
+    {
+      "alt": "hipercard",
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/f4e1fce0-f875-4dad-8bc7-065817b3e9bd"
+    },
+    {
+      "alt": "American Express",
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/36cadf23-f5b6-4042-8559-5427dc5d4f98"
+    },
+    {
+      "alt": "Diners Club",
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/6ee36d30-059d-4615-8ee5-c46ee279abe7"
+    },
+    {
+      "alt": "Hiper",
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/977400a7-5068-46d3-8c33-4ca6bd641fe0"
+    }
+  ],
+  "sectionProps": {
+    "layout": {
+      "mobile": {
+        "marginTop": "1px",
+        "marginBottom": "0px"
+      },
+      "desktop": {
+        "marginTop": "4px",
+        "marginBottom": "0px"
+      }
+    }
+  },
+  "__resolveType": "site/sections/Footer/Footer.tsx"
+}

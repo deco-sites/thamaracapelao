@@ -1,9 +1,40 @@
-import { SectionProps } from "deco/mod.ts";
 import SearchResult, {
   Props as SearchResultProps,
-} from "../../components/search/SearchResult.tsx";
+} from "$store/components/search/SearchResult.tsx";
+import { SectionProps } from "deco/types.ts";
+import { ProductListingPage } from "apps/commerce/types.ts";
+import { AppContext } from "$store/apps/site.ts";
+import { AppContext as VTEXAppContext } from "apps/vtex/mod.ts";
 
 export type Props = SearchResultProps;
+
+export async function loader(
+  props: Props,
+  req: Request,
+  ctx: AppContext & VTEXAppContext,
+) {
+  const productsIds = props.page?.products.map((product) => product.productID);
+
+  const products = productsIds?.length && productsIds?.length > 0
+    ? await ctx.invoke.vtex.loaders.intelligentSearch.productList({
+      props: {
+        ids: productsIds,
+      },
+    })
+    : [];
+
+  return {
+    ...props,
+    isMobile: ctx.device !== "desktop",
+    url: req.url,
+    productImageAspectRatio: "1/1",
+    productImageFit: "cover",
+    page: {
+      ...props.page,
+      products,
+    } as ProductListingPage,
+  };
+}
 
 function WishlistGallery(props: SectionProps<typeof loader>) {
   const isEmpty = !props.page || props.page.products.length === 0;
@@ -12,10 +43,12 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
     return (
       <div class="container mx-4 sm:mx-auto">
         <div class="mx-10 my-20 flex flex-col gap-4 justify-center items-center">
-          <span class="font-medium text-2xl">Your wishlist is empty</span>
+          <span class="font-medium text-2xl">
+            Sua lista de favoritos esta vazia
+          </span>
           <span>
-            Log in and add items to your wishlist for later. They will show up
-            here
+            Faça login e adicione produtos na sua lista de favoritos para que
+            eles apareçam aqui.
           </span>
         </div>
       </div>
@@ -24,12 +57,5 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
 
   return <SearchResult {...props} />;
 }
-
-export const loader = (props: Props, req: Request) => {
-  return {
-    ...props,
-    url: req.url,
-  };
-};
 
 export default WishlistGallery;

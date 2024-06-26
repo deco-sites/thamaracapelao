@@ -7,12 +7,14 @@ export interface Props {
   productID: string;
   productGroupID?: string;
   variant?: "icon" | "full";
+  class?: string;
 }
 
 function WishlistButton({
   variant = "icon",
   productGroupID,
   productID,
+  class: _class,
 }: Props) {
   const { user } = useUser();
   const { loading, addItem, removeItem, getItem } = useWishlist();
@@ -24,6 +26,7 @@ function WishlistButton({
 
   return (
     <Button
+      class={_class}
       loading={loading.value}
       inWishlist={inWishlist}
       isUserLoggedIn={isUserLoggedIn}

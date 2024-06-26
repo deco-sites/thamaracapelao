@@ -1,10 +1,10 @@
-import { itemToAnalyticsItem, useCart } from "apps/vnda/hooks/useCart.ts";
-import BaseCart from "../common/Cart.tsx";
+import { useCart } from "apps/vnda/hooks/useCart.ts";
+import BaseCart, { MinicartConfig } from "../common/Cart.tsx";
 
 const normalizeUrl = (url: string) =>
   url.startsWith("//") ? `https:${url}` : url;
 
-function Cart() {
+function Cart({ minicartConfig }: { minicartConfig?: MinicartConfig }) {
   const { cart, loading, updateItem, update } = useCart();
   const items = cart.value?.orderForm?.items ?? [];
 
@@ -16,13 +16,16 @@ function Cart() {
   const coupon = cart.value?.orderForm?.coupon_code ?? undefined;
   const token = cart.value?.orderForm?.token;
 
+  // TODO: Add analytics from VNDA
   return (
     <BaseCart
+      minicartConfig={minicartConfig}
       items={items.map((item) => ({
         image: {
           src: normalizeUrl(item.image_url ?? ""),
           alt: item.product_name,
         },
+        url: item.product_url,
         quantity: item.quantity,
         name: item.variant_name,
         price: {
@@ -36,7 +39,6 @@ function Cart() {
       locale={locale}
       currency={currency}
       loading={loading.value}
-      freeShippingTarget={1000}
       coupon={coupon}
       checkoutHref={`/checkout/${token}`}
       onAddCoupon={(code) => update({ coupon_code: code })}
@@ -46,11 +48,6 @@ function Cart() {
         if (!item || typeof item.id === "undefined") return;
 
         return await updateItem({ quantity, itemId: item.id });
-      }}
-      itemToAnalyticsItem={(index) => {
-        const item = items[index];
-
-        return item && itemToAnalyticsItem(item, index);
       }}
     />
   );

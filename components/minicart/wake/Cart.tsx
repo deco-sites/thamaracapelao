@@ -1,7 +1,7 @@
-import { itemToAnalyticsItem, useCart } from "apps/wake/hooks/useCart.ts";
-import BaseCart from "../common/Cart.tsx";
+import { useCart } from "apps/wake/hooks/useCart.ts";
+import BaseCart, { MinicartConfig } from "../common/Cart.tsx";
 
-function Cart() {
+function Cart({ minicartConfig }: { minicartConfig?: MinicartConfig }) {
   const { cart, loading, updateItem, addCoupon } = useCart();
   const items = cart.value.products ?? [];
 
@@ -11,12 +11,15 @@ function Cart() {
   const currency = "BRL";
   const coupon = cart.value.coupon ?? undefined;
 
+  // TODO: Add analytics from WAKE
   return (
     <BaseCart
+      minicartConfig={minicartConfig}
       items={items.map((item) => ({
         image: { src: item!.imageUrl!, alt: "product image" },
         quantity: item!.quantity!,
         name: item!.name!,
+        url: item!.url!,
         price: { sale: item!.price!, list: item!.listPrice! },
       }))}
       total={total}
@@ -25,7 +28,6 @@ function Cart() {
       locale={locale}
       currency={currency}
       loading={loading.value}
-      freeShippingTarget={1000}
       coupon={coupon}
       checkoutHref={`/checkout`}
       onAddCoupon={(code) => addCoupon({ coupon: code })}
@@ -34,11 +36,6 @@ function Cart() {
           quantity,
           productVariantId: items[index]?.productVariantId,
         })}
-      itemToAnalyticsItem={(index) => {
-        const item = items[index];
-
-        return item && itemToAnalyticsItem(item, index);
-      }}
     />
   );
 }

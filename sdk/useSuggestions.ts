@@ -6,6 +6,7 @@ import { invoke } from "../runtime.ts";
 
 const payload = signal<Suggestion | null>(null);
 const loading = signal<boolean>(false);
+const searchTerm = signal<string>("");
 
 let queue = Promise.resolve();
 let latestQuery = "";
@@ -29,29 +30,29 @@ const doFetch = async (
       key: __resolveType,
       props: { query, ...extraProps },
     };
-    payload.value = await invoke(invokePayload) as Suggestion | null;
+    payload.value = (await invoke(invokePayload)) as Suggestion | null;
+    searchTerm.value = query;
   } catch (error) {
-    console.error(
-      "Something went wrong while fetching suggestions \n",
-      error,
-    );
+    console.error("Something went wrong while fetching suggestions \n", error);
   } finally {
     loading.value = false;
   }
 };
 
-export const useSuggestions = (
-  loader: Resolved<Suggestion | null>,
-) => {
-  const setQuery = useCallback((query: string) => {
-    loading.value = true;
-    latestQuery = query;
-    queue = queue.then(() => doFetch(query, loader));
-  }, [loader]);
+export const useSuggestions = (loader: Resolved<Suggestion | null>) => {
+  const setQuery = useCallback(
+    (query: string) => {
+      loading.value = true;
+      latestQuery = query;
+      queue = queue.then(() => doFetch(query, loader));
+    },
+    [loader],
+  );
 
   return {
     loading,
     payload,
+    searchTerm,
     setQuery,
   };
 };

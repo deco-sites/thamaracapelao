@@ -1,5 +1,5 @@
 import { Section } from "deco/blocks/section.ts";
-import { useId } from "../../sdk/useId.ts";
+import { useId } from "$store/sdk/useId.ts";
 
 const animationClasses = {
   "fade-in": "animate-fade-in",
@@ -51,6 +51,7 @@ function Animation(
         <Component {...props} />
       </div>
       <script
+        defer
         async={true}
         dangerouslySetInnerHTML={{
           __html: `
@@ -154,7 +155,7 @@ const animationByType = {
 };
 
 export function Preview() {
-  const animationClass = animationClasses["slide-left"];
+  // const animationClass = animationClasses["slide-left"];
   const id = useId();
 
   return (

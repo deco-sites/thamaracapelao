@@ -1,23 +1,61 @@
-import Icon from "../../components/ui/Icon.tsx";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
+import Icon from "$store/components/ui/Icon.tsx";
+import { NavElement } from "$store/components/header/NavItem.tsx";
+import Login from "$store/components/header/Login.tsx";
+import CloseMenuButton from "$store/components/header/Buttons/CloseMenu.tsx";
+import { clx } from "deco-sites/fast-fashion/sdk/clx.ts";
 
 export interface Props {
-  items: SiteNavigationElement[];
+  items: NavElement[];
 }
 
-function MenuItem({ item }: { item: SiteNavigationElement }) {
+function MenuItem({ item, level = 0 }: { item: NavElement; level: number }) {
+  if (item.children?.length === 0 || !item.children) {
+    return (
+      <div>
+        <a
+          class={clx(
+            "collapse-title flex text-primary-content border-b border-solid border-base-100",
+            level === 2 ? "bg-primary-200" : "bg-primary-100",
+          )}
+          href={item.url}
+        >
+          {item.name}
+        </a>
+      </div>
+    );
+  }
+
   return (
-    <div class="collapse collapse-plus">
+    <div
+      class="collapse rounded-none collapse-arrow"
+      data-level={level}
+    >
       <input type="checkbox" />
-      <div class="collapse-title">{item.name}</div>
-      <div class="collapse-content">
-        <ul>
+      <div class="collapse-title text-primary-content border-b border-solid border-base-100 font-bold pt-5">
+        {item.name}
+      </div>
+      <div
+        class={clx(
+          "collapse-content px-0 !pb-0",
+          level === 2 ? "bg-primary-200" : "bg-primary-100",
+        )}
+      >
+        <ul class="">
           <li>
-            <a class="underline text-sm" href={item.url}>Ver todos</a>
+            <a
+              class={clx(
+                "collapse-title flex text-primary-content border-b border-solid border-base-100",
+                level === 1 ? "bg-primary-200" : "bg-primary-100",
+              )}
+              href={item.url}
+            >
+              Ver todos
+            </a>
           </li>
+
           {item.children?.map((node) => (
-            <li>
-              <MenuItem item={node} />
+            <li class="!font-normal">
+              <MenuItem item={node} level={level + 1} />
             </li>
           ))}
         </ul>
@@ -28,52 +66,41 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
 
 function Menu({ items }: Props) {
   return (
-    <div class="flex flex-col h-full">
-      <ul class="px-4 flex-grow flex flex-col divide-y divide-base-200">
-        {items.map((item) => (
-          <li>
-            <MenuItem item={item} />
-          </li>
-        ))}
-      </ul>
+    <div class="relative flex flex-col h-full w-[80vw] max-h-screen overflow-auto text-sm">
+      <div class="absolute top-0 right-0">
+        <CloseMenuButton />
+      </div>
 
-      <ul class="flex flex-col py-2 bg-base-200">
+      <ul class="flex flex-col py-2 bg-base-200 divide-y divide-neutral-300">
         <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="/wishlist"
-          >
-            <Icon id="Heart" size={24} strokeWidth={2} />
-            <span class="text-sm">Lista de desejos</span>
-          </a>
+          <Login />
         </li>
         <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="MapPin" size={24} strokeWidth={2} />
-            <span class="text-sm">Nossas lojas</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="Phone" size={24} strokeWidth={2} />
-            <span class="text-sm">Fale conosco</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="User" size={24} strokeWidth={2} />
+          <a class="flex items-center gap-4 p-4" href="https://www.deco.cx">
+            <Icon id="Account" size={24} class="text-primary" />
             <span class="text-sm">Minha conta</span>
           </a>
         </li>
+        <li>
+          <a class="flex items-center gap-4 p-4" href="https://www.deco.cx">
+            <Icon id="Orders" size={24} class="text-primary" />
+            <span class="text-sm">Meus pedidos</span>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-4 p-4" href="https://www.deco.cx">
+            <Icon id="HeartLine" size={24} class="text-primary" />
+            <span class="text-sm">Favoritos</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="flex flex-col bg-primary">
+        {items.map((item) => (
+          <li>
+            <MenuItem item={item} level={0} />
+          </li>
+        ))}
       </ul>
     </div>
   );

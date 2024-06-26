@@ -1,10 +1,11 @@
+import Icon from "$store/components/ui/Icon.tsx";
+import Slider from "$store/components/ui/Slider.tsx";
+import SliderJS from "$store/islands/SliderJS.tsx";
+import { clx } from "$store/sdk/clx.ts";
 import type { Section } from "deco/blocks/section.ts";
 import { ComponentChildren, toChildArray } from "preact";
 import { useId } from "preact/hooks";
-import Icon from "../../components/ui/Icon.tsx";
-import Slider from "../../components/ui/Slider.tsx";
 import { buttonClasses, ButtonColor, grid } from "../../constants.tsx";
-import { clx } from "../../sdk/clx.ts";
 
 interface Layout {
   /** @description For desktop in px. */
@@ -122,7 +123,7 @@ function Section({ interval = 0, layout, style, children }: Props) {
           </ul>
         )}
 
-        <Slider.JS rootId={id} interval={interval && interval * 1e3} infinite />
+        <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
       </div>
     </>
   );

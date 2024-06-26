@@ -1,11 +1,20 @@
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import Image from "apps/website/components/Image.tsx";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
+import Section from "$store/components/ui/Section.tsx";
+import type { SectionProps } from "$store/components/ui/Section.tsx";
+import { AppContext } from "$store/apps/site.ts";
+import { SelectPromotionParams } from "apps/commerce/types.ts";
+import { toAnalytics } from "deco-sites/fast-fashion/sdk/ga4/transform/toAnalytics.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "deco-sites/fast-fashion/components/Analytics.tsx";
 
 export interface CTA {
-  id?: string;
   href: string;
   text: string;
-  variant: "Normal" | "Reverse";
+  invertTextColor?: boolean;
 }
 
 export interface Props {
@@ -13,10 +22,21 @@ export interface Props {
    * @format html
    */
   title: string;
-  description: string;
-  image?: ImageWidget;
+  description: HTMLWidget;
+  image?: {
+    desktop: ImageWidget;
+    mobile: ImageWidget;
+    alt: string;
+    /**
+     * @title Google Analytics 4
+     * @description Parâmetros para o Google Analytics 4
+     */
+    ga4?: SelectPromotionParams;
+  };
   placement: "left" | "right";
-  cta: CTA[];
+  cta: CTA;
+  /** @title Configurações da seção */
+  sectionProps?: SectionProps;
 }
 
 const PLACEMENT = {
@@ -24,75 +44,113 @@ const PLACEMENT = {
   right: "flex-col text-left lg:flex-row",
 };
 
+export function loader(props: Props, _req: Request, ctx: AppContext) {
+  return { ...props, isMobile: ctx.device !== "desktop" };
+}
+
 export default function HeroFlats({
   title = "Hero",
   description = "Your description here",
   image,
   placement,
   cta,
-}: Props) {
+  sectionProps,
+  isMobile,
+}: ReturnType<typeof loader>) {
+  const analyticsParams = {
+    promotion_id: image?.ga4?.promotion_id ?? "banner_hero_section",
+    promotion_name: image?.ga4?.promotion_name ?? image?.alt ??
+      "Carrousel de banners da página inicial",
+    creative_name: image?.ga4?.creative_name,
+    creative_slot: image?.ga4?.creative_slot,
+    view: {
+      id: image?.ga4?.promotion_id ?? "banner_hero_section",
+      name: image?.ga4?.promotion_name ?? image?.alt ??
+        "Seção Hero",
+    },
+  };
+
+  const viewPromotionEvent = toAnalytics({
+    type: "view_promotion",
+    data: analyticsParams,
+  });
+
+  const selectPromotionEvent = toAnalytics({
+    type: "select_promotion",
+    data: analyticsParams,
+  });
+
+  const renderEvents = (id: string) => (
+    <>
+      <SendEventOnView id={id} event={viewPromotionEvent} />
+      <SendEventOnClick id={id} event={selectPromotionEvent} />
+    </>
+  );
+
   return (
-    <div>
-      <div class="mx-auto flex flex-col items-center gap-8">
+    <Section id="hero_section" isMobile={isMobile} {...sectionProps}>
+      <div class="">
         <div
-          class={`flex w-full xl:container xl:mx-auto py-20 mx-5 md:mx-10 z-10 ${
-            image
-              ? PLACEMENT[placement]
-              : "flex-col items-center justify-center text-center"
-          } lg:py-36 gap-12 md:gap-20 items-center`}
+          class={`flex w-full xl:container mx-auto z-10 ${
+            PLACEMENT[placement]
+          } flex-col-reverse justify-center text-center`}
         >
           {image && (
-            <Image
-              width={640}
-              class="w-full lg:w-1/2 object-fit"
-              sizes="(max-width: 640px) 100vw, 30vw"
-              src={image}
-              alt={image}
-              decoding="async"
-              loading="lazy"
-            />
+            <div class="flex-1">
+              <Picture preload={false}>
+                <Source
+                  media="(max-width: 767px)"
+                  src={image.mobile}
+                  width={414}
+                  height={230}
+                  fetchPriority="auto"
+                />
+
+                <Source
+                  media="(min-width: 768px)"
+                  src={image.desktop}
+                  width={733}
+                  height={472}
+                  fetchPriority="auto"
+                />
+
+                <img
+                  class="object-cover w-full flex-1 h-full"
+                  width={733}
+                  height={472}
+                  src={image.desktop}
+                  alt={image.alt}
+                  loading="lazy"
+                />
+              </Picture>
+            </div>
           )}
-          <div
-            class={`mx-6 lg:mx-auto lg:w-full space-y-4 gap-4 ${
-              image
-                ? "lg:w-1/2 lg:max-w-xl"
-                : "flex flex-col items-center justify-center lg:max-w-3xl"
-            }`}
-          >
+          <div class="bg-neutral-200 px-4 py-12  max-lg:sm:gap-4 flex flex-col gap-10 w-full lg:w-full lg:max-w-[490px] md:justify-center md:px-16">
             <div
-              class="inline-block text-[80px] leading-[100%] font-medium tracking-[-2.4px]"
+              class="font-secondary inline-block text-2xl"
               dangerouslySetInnerHTML={{
                 __html: title,
               }}
             >
             </div>
-            <p class="text-zinc-400 text-[16px] md:text-[18px] leading-[150%]">
-              {description}
-            </p>
-            <div class="flex flex-col items-center lg:items-start lg:flex-row gap-4">
-              {cta?.map((item) => (
+            <p class="text-sm text-justify md:text-center">{description}</p>
+            <div class="flex flex-col items-center lg:items-start lg:flex-row gap-4 max-md:mt-auto">
+              {cta && (
                 <a
-                  key={item?.id}
-                  id={item?.id}
-                  href={item?.href}
-                  target={item?.href.includes("http") ? "_blank" : "_self"}
-                  class={`group relative overflow-hidden rounded-full hover:bg-gradient-to-r px-6 py-2 lg:px-8 lg:py-3 transition-all duration-300 ease-out ${
-                    item.variant === "Reverse"
-                      ? "bg-secondary text-white"
-                      : "bg-accent text-black"
-                  }`}
+                  href={cta?.href}
+                  target={cta?.href.includes("http") ? "_blank" : "_self"}
+                  class="btn btn-secondary gap-2.5 h-12 max-w-56 w-full mx-auto"
                 >
-                  <span class="ease absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 transform bg-white opacity-10 transition-all duration-1000 group-hover:-translate-x-40">
-                  </span>
-                  <span class="relative font-medium lg:text-[20px]">
-                    {item?.text}
-                  </span>
+                  <span class="ml-4">{cta?.text}</span>
+                  <Icon id="ChevronRight" size={24} />
                 </a>
-              ))}
+              )}
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {renderEvents("hero_section")}
+    </Section>
   );
 }

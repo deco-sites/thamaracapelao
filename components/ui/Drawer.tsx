@@ -1,4 +1,4 @@
-import { useId } from "../../sdk/useId.ts";
+import { useId } from "$store/sdk/useId.ts";
 import { useSignal } from "@preact/signals";
 import { ComponentChildren } from "preact";
 import { useEffect } from "preact/hooks";
@@ -50,9 +50,7 @@ function Drawer(props: Props) {
         aria-label={open ? "open drawer" : "closed drawer"}
       />
 
-      <div class="drawer-content">
-        {children}
-      </div>
+      <div class="drawer-content">{children}</div>
 
       <aside class="drawer-side h-full z-50 overflow-hidden">
         <label for={id} class="drawer-overlay" />

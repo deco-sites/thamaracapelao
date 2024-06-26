@@ -1,1 +1,98 @@
-{"name":"Category","path":"/*","default":{"possiblePaths":[]},"sections":[{"jsonLD":{"__resolveType":"PLP Loader"},"__resolveType":"commerce/sections/Seo/SeoPLP.tsx"},{"__resolveType":"Header - 01"},{"page":{"__resolveType":"PLP Loader"},"layout":{"columns":{"mobile":2,"desktop":4},"variant":"aside","pagination":"show-more"},"cardLayout":{"__resolveType":"Product Card Layout - 01"},"startingPage":1,"__resolveType":"site/sections/Product/SearchResult.tsx"},{"__resolveType":"Footer - 01"}],"__resolveType":"website/pages/Page.tsx"}
+{
+  "name": "Category",
+  "path": "/*",
+  "default": {
+    "possiblePaths": []
+  },
+  "sections": [
+    {
+      "__resolveType": "site/sections/SEO/PageSEO.tsx",
+      "structuredData": {
+        "__resolveType": "PLP Loader"
+      }
+    },
+    {
+      "__resolveType": "Header - 01"
+    },
+    {
+      "__resolveType": "site/sections/Images/FullBanner.tsx",
+      "alt": "Banner de categoria",
+      "lcp": true,
+      "href": "/",
+      "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/bd7a9453-909b-4de7-818a-4a7ce342d05c",
+      "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/1c18b33a-17ff-46fc-a93f-3bb48357ee76",
+      "contents": []
+    },
+    {
+      "__resolveType": "site/sections/Category/BreadcrumbPLP.tsx",
+      "page": {
+        "__resolveType": "PLP Loader"
+      },
+      "sectionProps": {
+        "layout": {
+          "mobile": {
+            "marginTop": "32px"
+          },
+          "desktop": {
+            "marginTop": "64px"
+          }
+        }
+      }
+    },
+    {
+      "page": {
+        "__resolveType": "PLP Loader"
+      },
+      "sectionProps": {
+        "layout": {
+          "mobile": {
+            "marginTop": "32px",
+            "marginBottom": "0px"
+          },
+          "desktop": {
+            "marginTop": "32px",
+            "marginBottom": "0px"
+          }
+        }
+      },
+      "__resolveType": "site/sections/Product/SearchResult.tsx",
+      "notFoundProps": {
+        "email": "atendimento@loja.com.br",
+        "phone": "(99) 9999-9999"
+      }
+    },
+    {
+      "sectionProps": {
+        "layout": {
+          "mobile": {
+            "marginTop": "64px",
+            "marginBottom": "0px"
+          },
+          "desktop": {
+            "marginTop": "64px",
+            "marginBottom": "0px"
+          }
+        }
+      },
+      "__resolveType": "site/sections/Category/SeoText.tsx",
+      "contents": [
+        {
+          "rule": {
+            "__resolveType": "site/matchers/canonical.ts",
+            "matcher": "/video-games-alexandre"
+          },
+          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. Na tempor ligula nisi, sed vestibulum justo euismod vitae. Aenean non aliquam velit.&nbsp;</p><p>Sed eu turpis acaliquam cursus. um dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum &nbsp;vestibulum velit. Seus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. sto euismod vitae. Aenean non aliquam velit. Sed eu turp aliquam cursus. &nbsp;</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. Nam tempor ligula nisi, sed vestibulum justo euismod vitae. Aenean non aliquam velit. Sed eu turpis&nbsp;<br>aliquam cursus.&nbsp;</p>",
+          "label": "Video Games",
+          "title": "Vídeo Games"
+        }
+      ]
+    },
+    {
+      "__resolveType": "Newsletter - padrão"
+    },
+    {
+      "__resolveType": "Footer - padrão"
+    }
+  ],
+  "__resolveType": "website/pages/Page.tsx"
+}

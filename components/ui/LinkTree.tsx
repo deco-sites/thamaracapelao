@@ -1,6 +1,6 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
+import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
 import type { ComponentChildren } from "preact";
 
 export interface Props {
@@ -19,7 +19,7 @@ export interface Header {
   /** @format textarea */
   description?: string;
   /**
-   * @format color
+   * @format color-input
    * @description color to be used in title and description
    */
   textColor: string;
@@ -50,7 +50,7 @@ export interface Link {
 
 export interface Style {
   /**
-   * @format color
+   * @format color-input
    * @description color to be used in link's text
    */
   textColor: string;
@@ -63,7 +63,7 @@ export interface Gradient {
 }
 
 export interface Neutral {
-  /**  @format color */
+  /**  @format color-input */
   color: string;
 }
 
@@ -76,7 +76,7 @@ export interface Social {
     | "WhatsApp"
     | "Discord"
     | "Tiktok";
-  /** @format color */
+  /** @format color-input */
   iconColor?: string;
   /** @description width of the SVG line */
   strokeWidth?: number;
@@ -85,7 +85,7 @@ export interface Social {
 export interface Background {
   /** @description an image will override any background color */
   image?: ImageWidget;
-  /** @format color */
+  /** @format color-input */
   backgroundColor?: string;
 }
 
@@ -112,26 +112,26 @@ function Links(props: Props) {
   );
 
   const maybeLink = header?.logo?.link
-    ? <a href={header?.logo?.link!} target="_blank">{logo}</a>
+    ? (
+      <a href={header?.logo?.link!} target="_blank">
+        {logo}
+      </a>
+    )
     : logo;
 
   const ColorsNeutralAndHover = {
     color: links.style?.textColor,
     backgroundImage: `linear-gradient(to right, ${
-      links.style?.gradientColors.neutral.map((color) => color.color).join(
-        ", ",
-      )
+      links.style?.gradientColors.neutral
+        .map((color) => color.color)
+        .join(", ")
     })`,
   };
 
   return (
     <BaseContainer background={background}>
       <header class="flex flex-col justify-center items-center gap-4">
-        {header?.logo?.img && (
-          <div class="rounded-full p-4">
-            {maybeLink}
-          </div>
-        )}
+        {header?.logo?.img && <div class="rounded-full p-4">{maybeLink}</div>}
 
         {header?.title && (
           <h1
@@ -143,11 +143,7 @@ function Links(props: Props) {
         )}
 
         {header?.description && (
-          <p
-            style={{ color: header.textColor }}
-          >
-            {header?.description}
-          </p>
+          <p style={{ color: header.textColor }}>{header?.description}</p>
         )}
       </header>
 
@@ -162,16 +158,10 @@ function Links(props: Props) {
                 style={ColorsNeutralAndHover}
               >
                 {Boolean(link.icon) && (
-                  <Icon
-                    size={20}
-                    id={link.icon!}
-                    strokeWidth={2.5}
-                  />
+                  <Icon size={20} id={link.icon!} strokeWidth={2.5} />
                 )}
 
-                <span class="w-full text-center text-sm">
-                  {link.label}
-                </span>
+                <span class="w-full text-center text-sm">{link.label}</span>
 
                 <Icon
                   size={20}
@@ -215,11 +205,7 @@ function Links(props: Props) {
               target="_blank"
             >
               {props.footer.text && (
-                <p
-                  style={{ color: header.textColor }}
-                >
-                  {props.footer.text}
-                </p>
+                <p style={{ color: header.textColor }}>{props.footer.text}</p>
               )}
               {props.footer.image && (
                 <Image

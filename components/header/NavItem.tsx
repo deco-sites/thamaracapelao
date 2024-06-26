@@ -1,56 +1,120 @@
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { headerHeight } from "./constants.ts";
+import Icon from "$store/components/ui/Icon.tsx";
+import { clx } from "$store/sdk/clx.ts";
 
-function NavItem({ item }: { item: SiteNavigationElement }) {
-  const { url, name, children } = item;
-  const image = item?.image?.[0];
+/** @title {{name}} */
+export interface NavSubLeaf {
+  /**
+   * @title Nome
+   */
+  name: string;
+  /**
+   * @title Url
+   */
+  url: string;
+  /**
+   * @title Children
+   */
+}
+
+/** @titleBy name */
+export interface NavLeaf {
+  /**
+   * @title Nome
+   */
+  name: string;
+  /**
+   * @title Url
+   */
+  url: string;
+  /**
+   * @title Children
+   */
+  children?: NavSubLeaf[];
+}
+
+export interface NavElement extends NavLeaf {
+  /**
+   * @title Submenu
+   */
+  children?: NavLeaf[];
+  /**
+   * @title Imagem
+   * @description Imagem que será exibida no submenu (280x232 pixels)
+   * @format image-uri
+   */
+  image?: string;
+}
+
+function NavItem(
+  { item, openTo = "right" }: { item: NavElement; openTo: "left" | "right" },
+) {
+  const { url, name, children, image } = item;
 
   return (
-    <li class="group flex items-center">
-      <a href={url} class="py-6">
-        <span class="group-hover:underline text-xs font-thin">
-          {name}
-        </span>
+    <li
+      class={clx(
+        "dropdown-hover dropdown",
+        openTo === "left" && "dropdown-end",
+      )}
+    >
+      <a tabindex={0} role="button" href={url} class="block py-4 px-3">
+        <span class="font-bold">{name}</span>
       </a>
-
-      {children && children.length > 0 &&
-        (
-          <div
-            class="fixed hidden hover:flex group-hover:flex bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen"
-            style={{ top: "0px", left: "0px", marginTop: headerHeight }}
-          >
-            {image?.url && (
+      {children && children.length > 0 && (
+        <div
+          tabindex={0}
+          class="dropdown-content dropdown shadow-lg w-max flex gap-8 bg-white p-6 relative"
+        >
+          {image && (
+            <div>
               <Image
-                class="p-6"
-                src={image.url}
-                alt={image.alternateName}
-                width={300}
-                height={332}
+                src={image}
+                alt={name}
+                width={280}
+                height={232}
                 loading="lazy"
               />
-            )}
-            <ul class="flex items-start justify-center gap-6">
-              {children.map((node) => (
-                <li class="p-6">
-                  <a class="hover:underline" href={node.url}>
-                    <span>{node.name}</span>
-                  </a>
-
-                  <ul class="flex flex-col gap-1 mt-4">
-                    {node.children?.map((leaf) => (
+            </div>
+          )}
+          <ul class="flex items-start flex-col max-h-[232px] min-h-[232px] overflow-y-auto scrollbar">
+            {children.map((node) => (
+              <li class="group/subitem">
+                <a
+                  class="flex items-center justify-between hover:underline min-w-32 py-2.5 pr-1"
+                  href={node.url}
+                >
+                  <span>{node.name}</span>
+                  {node.children && node.children.length > 0 && (
+                    <Icon
+                      id="ChevronRight"
+                      size={24}
+                      class=""
+                    />
+                  )}
+                </a>
+                {node.children && node.children.length > 0 && (
+                  <ul class="absolute top-0 right-0 translate-x-full bg-base-100 max-h-[280px] min-h-[280px] opacity-0 invisible p-6 group-hover/subitem:opacity-100 group-hover/subitem:delay-0 group-hover/subitem:visible transition-all delay-200 shadow-lg">
+                    <div class="h-full w-3 bg-base-100 absolute top-0 left-0 -translate-x-2/3">
+                      <div class="h-5/6 w-px bg-neutral-200 absolute top-1/2 right-0 -translate-y-1/2" />
+                    </div>
+                    {node.children.map((subnode) => (
                       <li>
-                        <a class="hover:underline" href={leaf.url}>
-                          <span class="text-xs">{leaf.name}</span>
+                        <a
+                          class="block hover:underline min-w-32 py-2.5"
+                          href={subnode.url}
+                        >
+                          {subnode.name}
                         </a>
                       </li>
                     ))}
                   </ul>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </li>
   );
 }

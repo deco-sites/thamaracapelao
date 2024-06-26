@@ -9,23 +9,43 @@ import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx
 import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
-import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
-import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
-import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
-import * as $Header_Cart_shopify from "./islands/Header/Cart/shopify.tsx";
-import * as $Header_Cart_vnda from "./islands/Header/Cart/vnda.tsx";
-import * as $Header_Cart_vtex from "./islands/Header/Cart/vtex.tsx";
-import * as $Header_Cart_wake from "./islands/Header/Cart/wake.tsx";
-import * as $Header_Drawers from "./islands/Header/Drawers.tsx";
-import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
+import * as $BrowserLog from "./islands/BrowserLog.tsx";
+import * as $CopyButton from "./islands/CopyButton.tsx";
+import * as $Iframe from "./islands/Iframe.tsx";
+import * as $LayoutSwitcherScript from "./islands/LayoutSwitcherScript.ts";
+import * as $Logger from "./islands/Logger.tsx";
+import * as $Login from "./islands/Login.tsx";
+import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
+import * as $ProductBuyTogether from "./islands/ProductBuyTogether.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
+import * as $ProductReviews from "./islands/ProductReviews.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
-import * as $ShowMore from "./islands/ShowMore.tsx";
+import * as $SliderJS from "./islands/SliderJS.tsx";
+import * as $TriggerElement from "./islands/TriggerElement.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
+import * as $ZoomableImage from "./islands/ZoomableImage.tsx";
+import * as $filters_PriceRange from "./islands/filters/PriceRange.tsx";
+import * as $filters_mobile_Buttons from "./islands/filters/mobile/Buttons.tsx";
+import * as $forms_contact from "./islands/forms/contact.tsx";
+import * as $header_Buttons from "./islands/header/Buttons.tsx";
+import * as $header_Cart_linx from "./islands/header/Cart/linx.tsx";
+import * as $header_Cart_nuvemshop from "./islands/header/Cart/nuvemshop.tsx";
+import * as $header_Cart_shopify from "./islands/header/Cart/shopify.tsx";
+import * as $header_Cart_vnda from "./islands/header/Cart/vnda.tsx";
+import * as $header_Cart_vtex from "./islands/header/Cart/vtex.tsx";
+import * as $header_Cart_wake from "./islands/header/Cart/wake.tsx";
+import * as $header_Drawers from "./islands/header/Drawers.tsx";
+import * as $header_FreeShippingProgressBar_linx from "./islands/header/FreeShippingProgressBar/linx.tsx";
+import * as $header_FreeShippingProgressBar_nuvemshop from "./islands/header/FreeShippingProgressBar/nuvemshop.tsx";
+import * as $header_FreeShippingProgressBar_shopify from "./islands/header/FreeShippingProgressBar/shopify.tsx";
+import * as $header_FreeShippingProgressBar_vnda from "./islands/header/FreeShippingProgressBar/vnda.tsx";
+import * as $header_FreeShippingProgressBar_vtex from "./islands/header/FreeShippingProgressBar/vtex.tsx";
+import * as $header_FreeShippingProgressBar_wake from "./islands/header/FreeShippingProgressBar/wake.tsx";
+import * as $header_Searchbar from "./islands/header/Searchbar.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -39,23 +59,49 @@ const manifest = {
     "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
     "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
-    "./islands/Header/Buttons.tsx": $Header_Buttons,
-    "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
-    "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,
-    "./islands/Header/Cart/shopify.tsx": $Header_Cart_shopify,
-    "./islands/Header/Cart/vnda.tsx": $Header_Cart_vnda,
-    "./islands/Header/Cart/vtex.tsx": $Header_Cart_vtex,
-    "./islands/Header/Cart/wake.tsx": $Header_Cart_wake,
-    "./islands/Header/Drawers.tsx": $Header_Drawers,
-    "./islands/Header/Searchbar.tsx": $Header_Searchbar,
+    "./islands/BrowserLog.tsx": $BrowserLog,
+    "./islands/CopyButton.tsx": $CopyButton,
+    "./islands/Iframe.tsx": $Iframe,
+    "./islands/LayoutSwitcherScript.ts": $LayoutSwitcherScript,
+    "./islands/Logger.tsx": $Logger,
+    "./islands/Login.tsx": $Login,
+    "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
+    "./islands/ProductBuyTogether.tsx": $ProductBuyTogether,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,
+    "./islands/ProductReviews.tsx": $ProductReviews,
     "./islands/SearchControls.tsx": $SearchControls,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
-    "./islands/ShowMore.tsx": $ShowMore,
+    "./islands/SliderJS.tsx": $SliderJS,
+    "./islands/TriggerElement.tsx": $TriggerElement,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
+    "./islands/ZoomableImage.tsx": $ZoomableImage,
+    "./islands/filters/PriceRange.tsx": $filters_PriceRange,
+    "./islands/filters/mobile/Buttons.tsx": $filters_mobile_Buttons,
+    "./islands/forms/contact.tsx": $forms_contact,
+    "./islands/header/Buttons.tsx": $header_Buttons,
+    "./islands/header/Cart/linx.tsx": $header_Cart_linx,
+    "./islands/header/Cart/nuvemshop.tsx": $header_Cart_nuvemshop,
+    "./islands/header/Cart/shopify.tsx": $header_Cart_shopify,
+    "./islands/header/Cart/vnda.tsx": $header_Cart_vnda,
+    "./islands/header/Cart/vtex.tsx": $header_Cart_vtex,
+    "./islands/header/Cart/wake.tsx": $header_Cart_wake,
+    "./islands/header/Drawers.tsx": $header_Drawers,
+    "./islands/header/FreeShippingProgressBar/linx.tsx":
+      $header_FreeShippingProgressBar_linx,
+    "./islands/header/FreeShippingProgressBar/nuvemshop.tsx":
+      $header_FreeShippingProgressBar_nuvemshop,
+    "./islands/header/FreeShippingProgressBar/shopify.tsx":
+      $header_FreeShippingProgressBar_shopify,
+    "./islands/header/FreeShippingProgressBar/vnda.tsx":
+      $header_FreeShippingProgressBar_vnda,
+    "./islands/header/FreeShippingProgressBar/vtex.tsx":
+      $header_FreeShippingProgressBar_vtex,
+    "./islands/header/FreeShippingProgressBar/wake.tsx":
+      $header_FreeShippingProgressBar_wake,
+    "./islands/header/Searchbar.tsx": $header_Searchbar,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

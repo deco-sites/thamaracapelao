@@ -1,145 +1,81 @@
-import Header from "../../components/ui/SectionHeader.tsx";
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import { useId } from "preact/hooks";
+import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import {
+  NewsletterSkeleton,
+  Props as NewsletterProps,
+} from "../../components/footer/Newsletter.tsx";
+import Newsletter from "$store/islands/Newsletter.tsx";
+import { AppContext } from "deco-sites/fast-fashion/apps/site.ts";
 
-export interface Form {
-  placeholder?: string;
-  buttonText?: string;
-  /** @format html */
-  helpText?: string;
+export interface Props extends NewsletterProps {
+  /** @ignore */
+  display?: boolean;
 }
 
-interface Content {
-  border?: boolean;
-  /**
-   * @format button-group
-   * @options site/loaders/icons.ts
-   */
-  alignment?: "Left" | "Center" | "Right";
-  bgColor?: "Normal" | "Reverse";
-}
+const script = (
+  id: string,
+) => {
+  const element = document.getElementById(id);
 
-interface Header {
-  /**
-   * @format button-group
-   * @options site/loaders/icons.ts
-   */
-  fontSize?: "Small" | "Normal" | "Large";
-}
+  if (!element) {
+    return;
+  }
 
-interface Layout {
-  header?: Header;
-  content?: Content;
-}
+  new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        if (document.readyState !== "complete") {
+          document.addEventListener("DOMContentLoaded", () => {
+            // @ts-expect-error trustme, I'm an engineer
+            entry.target.click();
+          });
 
-export interface Props {
-  title?: string;
-  /** @format textarea */
-  description?: string;
-  form?: Form;
-  layout?: Layout;
-}
-
-const DEFAULT_PROPS: Props = {
-  title: "",
-  description: "",
-  form: {
-    placeholder: "Digite seu email",
-    buttonText: "Inscrever",
-    helpText:
-      'Ao se inscrever, você concorda com nossa <a class="link" href="/politica-de-privacidade">Política de privacidade</a>.',
-  },
-  layout: {
-    header: {
-      fontSize: "Large",
-    },
-    content: {
-      border: false,
-      alignment: "Left",
-    },
-  },
+          return;
+        }
+        // @ts-expect-error trustme, I'm an engineer
+        entry.target.click();
+      }
+    }
+  }, { rootMargin: "200px" }).observe(element);
 };
 
-export default function Newsletter(props: Props) {
-  const { title, description, form, layout } = { ...DEFAULT_PROPS, ...props };
-  const isReverse = layout?.content?.bgColor === "Reverse";
-  const bordered = Boolean(layout?.content?.border);
+export function loader(props: Props, _req: Request, ctx: AppContext) {
+  return { ...props, isMobile: ctx.device !== "desktop" };
+}
 
-  const headerLayout = (
-    <Header
-      title={title}
-      description={description}
-      alignment={layout?.content?.alignment === "Left" ? "left" : "center"}
-      colorReverse={isReverse}
-      fontSize={layout?.header?.fontSize}
-    />
-  );
+const DeferredNewsletter = (
+  { display, ...props }: ReturnType<typeof loader>,
+) => {
+  const sectionID = useId();
+  const buttonId = `deferred-${sectionID}`;
+  const partial = usePartialSection<typeof DeferredNewsletter>({
+    props: { display: true },
+  });
 
-  const formLayout = form && (
-    <form action="/" class="flex flex-col gap-4">
-      <div class="flex flex-col lg:flex-row gap-3">
-        <input
-          class="input input-bordered lg:w-80"
-          type="text"
-          placeholder={form.placeholder}
-        />
-        <button
-          class={`btn ${isReverse ? "btn-accent" : ""}`}
-          type="submit"
-        >
-          {form.buttonText}
-        </button>
-      </div>
-      {form.helpText && (
-        <div
-          class="text-sm"
-          dangerouslySetInnerHTML={{ __html: form.helpText }}
-        />
-      )}
-    </form>
-  );
-
-  const bgLayout = isReverse
-    ? "bg-secondary text-secondary-content"
-    : "bg-transparent";
+  if (display) {
+    return <Newsletter {...props} />;
+  }
 
   return (
-    <div
-      class={`${
-        bordered
-          ? isReverse ? "bg-secondary-content" : "bg-secondary"
-          : bgLayout
-      } ${bordered ? "p-4 lg:p-16" : "p-0"}`}
-    >
-      {(!layout?.content?.alignment ||
-        layout?.content?.alignment === "Center") && (
-        <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-center">
-            {formLayout}
-          </div>
-        </div>
-      )}
-      {layout?.content?.alignment === "Left" && (
-        <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-start">
-            {formLayout}
-          </div>
-        </div>
-      )}
-      {layout?.content?.alignment === "Right" && (
-        <div
-          class={`container flex flex-col rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-center">
-            {formLayout}
-          </div>
-        </div>
-      )}
-    </div>
+    <>
+      <button
+        {...partial}
+        id={buttonId}
+        class="flex"
+        data-deferred
+        aria-label={`Deferred Section - ${sectionID}`}
+      />
+      <NewsletterSkeleton {...props} />
+      <script
+        defer
+        src={useScriptAsDataURI(
+          script,
+          buttonId,
+        )}
+      />
+    </>
   );
-}
+};
+
+export default DeferredNewsletter;

@@ -1,19 +1,18 @@
-import { itemToAnalyticsItem, useCart } from "apps/wake/hooks/useCart.ts";
+import { useCart } from "apps/wake/hooks/useCart.ts";
 import Button from "./common.tsx";
 
 function CartButton() {
   const { loading, cart } = useCart();
-  const { total, products, coupon } = cart.value;
+  const { products } = cart.value;
+
+  const _handleAnalytics = () => {
+    // TODO: Implement view_cart GA4 event for wake
+  };
 
   return (
     <Button
-      currency="BRL"
       loading={loading.value}
-      total={total}
-      items={(products ?? []).map(
-        (item, index) =>
-          itemToAnalyticsItem({ ...item!, coupon: coupon ?? "" }, index),
-      )}
+      totalItems={(products ?? []).length}
     />
   );
 }

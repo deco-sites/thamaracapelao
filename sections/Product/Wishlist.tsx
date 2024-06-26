@@ -1,1 +1,4 @@
-export { default, loader } from "../../components/wishlist/WishlistGallery.tsx";
+export {
+  default,
+  loader,
+} from "$store/components/wishlist/WishlistGallery.tsx";

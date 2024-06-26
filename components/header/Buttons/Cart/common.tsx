@@ -1,48 +1,44 @@
-import { AnalyticsItem } from "apps/commerce/types.ts";
-import Button from "../../../../components/ui/Button.tsx";
-import Icon from "../../../../components/ui/Icon.tsx";
-import { sendEvent } from "../../../../sdk/analytics.tsx";
-import { useUI } from "../../../../sdk/useUI.ts";
+import Button from "$store/components/ui/Button.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
+import { useUI } from "$store/sdk/useUI.ts";
 
 interface Props {
   loading: boolean;
-  currency: string;
-  total: number;
-  items: AnalyticsItem[];
+  totalItems: number;
+  handleViewCart?: () => void;
 }
 
-function CartButton({ loading, currency, total, items }: Props) {
+function CartButton({ loading, totalItems, handleViewCart }: Props) {
   const { displayCart } = useUI();
-  const totalItems = items.length;
 
-  const onClick = () => {
-    sendEvent({
-      name: "view_cart",
-      params: { currency, value: total, items },
-    });
+  const handleClick = () => {
+    handleViewCart?.();
     displayCart.value = true;
   };
 
   return (
-    <div class="indicator">
-      <span
-        class={`indicator-item badge badge-secondary badge-sm ${
-          totalItems === 0 ? "hidden" : ""
-        }`}
-      >
-        {totalItems > 9 ? "9+" : totalItems}
-      </span>
-
-      <Button
-        class="btn-circle btn-sm btn-ghost"
-        aria-label="open cart"
-        data-deco={displayCart.value && "open-cart"}
-        loading={loading}
-        onClick={onClick}
-      >
-        <Icon id="ShoppingCart" size={24} strokeWidth={2} />
-      </Button>
-    </div>
+    <Button
+      class="btn-ghost h-10 px-2 min-h-10 w-[58px] md:p-0 md:w-[70px] hover:bg-transparent disabled:bg-transparent font-normal"
+      aria-label="open cart"
+      data-deco={displayCart.value && "open-cart"}
+      loading={loading}
+      onClick={handleClick}
+    >
+      <div class="indicator max-md:pr-3">
+        <Icon id="ShoppingCart" size={28} class="text-primary" />
+        <span
+          class={`md:hidden indicator-item badge badge-neutral badge-md text-xs px-0 size-5 transform-none`}
+        >
+          {totalItems > 9 ? "9+" : totalItems}
+        </span>
+      </div>
+      <div class="hidden md:flex flex-col text-left">
+        <span>Itens</span>
+        <strong>
+          ({totalItems > 0 ? String(totalItems).padStart(2, "0") : "0"})
+        </strong>
+      </div>
+    </Button>
   );
 }
 

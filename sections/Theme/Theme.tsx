@@ -5,223 +5,481 @@
  * https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/src/docs/src/routes/theme-generator.svelte
  */
 import SiteTheme, { Font } from "apps/website/components/Theme.tsx";
+import { Page as PageType } from "deco/blocks/page.tsx";
 import Color from "npm:colorjs.io";
+import { defaultColors } from "./defaultColors.ts";
+import type { ComplementaryColors, ThemeColors } from "./theme.d.ts";
 import type { ComponentChildren } from "preact";
-import { clx } from "../../sdk/clx.ts";
-
-export interface ThemeColors {
-  /**
-   * @format color-input
-   * @title Base
-   */
-  "base-100"?: string;
-  /** @format color-input */
-  "primary"?: string;
-  /** @format color-input */
-  "secondary"?: string;
-  /**
-   * @title Accent
-   * @format color-input */
-  "tertiary"?: string;
-  /** @format color-input */
-  "neutral"?: string;
-  /** @format color-input */
-  "success"?: string;
-  /** @format color-input */
-  "warning"?: string;
-  /** @format color-input */
-  "error"?: string;
-  /** @format color-input */
-  "info"?: string;
-}
-
-export interface ComplementaryColors {
-  /** @format color-input */
-  "base-200"?: string;
-  /** @format color-input */
-  "base-300"?: string;
-  /** @format color-input */
-  "base-content"?: string;
-  /** @format color-input */
-  "primary-content"?: string;
-  /** @format color-input */
-  "secondary-content"?: string;
-  /**
-   * @title Accent Content
-   * @format color-input */
-  "tertiary-content"?: string;
-  /** @format color-input */
-  "neutral-content"?: string;
-  /** @format color-input */
-  "success-content"?: string;
-  /** @format color-input */
-  "warning-content"?: string;
-  /** @format color-input */
-  "error-content"?: string;
-  /** @format color-input */
-  "info-content"?: string;
-}
+import { clx } from "deco-sites/fast-fashion/sdk/clx.ts";
 
 export interface Button {
   /**
    * @default 1px
-   * @title Border width
+   * @title Largura da borda
    */
   "--border-btn": "1px" | "2px" | "3px" | "4px" | "5px" | "6px" | "7px" | "8px";
   /**
    * @default 0.2rem
-   * @title Radius
-   * @description Button and similar elements
+   * @title Raio do botão
    */
   "--rounded-btn": "0" | "0.2rem" | "0.4rem" | "0.8rem" | "2rem";
   /**
    * @default 0.95
-   * @title Scale on click
+   * @title Escala de clique
+   * @description Escala de transformação do botão ao clicar
    */
   "--btn-focus-scale": "0.9" | "0.95" | "1" | "1.05" | "1.1";
   /**
    * @default 0.25s
-   * @title Animation
-   * @description Duration when you click
+   * @title Animação do botão
+   * @description Duração da animação do botão ao clicar
    */
   "--animation-btn": "0.1s" | "0.15s" | "0.2s" | "0.25s" | "0.3s" | "0.35s";
 }
 
-export interface Miscellaneous {
-  /**
-   * @default 1rem
-   * @title Rounded box
-   * @description border radius rounded-box utility class, used in card and other large boxes
-   */
-  "--rounded-box": string;
-  /**
-   * @default 1.9rem
-   * @title Rounded badge
-   * @description border radius rounded-badge utility class, used in badges and similar
-   */
-  "--rounded-badge": string;
-  /**
-   * @default 0.2s
-   * @title Animation input
-   * @description duration of animation for inputs like checkbox, toggle, radio, etc
-   */
-  "--animation-input": string;
-  /**
-   * @default 1px
-   * @title Tab border
-   * @description border width of tabs
-   */
-  "--tab-border": string;
-  /**
-   * @default 0.5rem
-   * @title Tab radius
-   * @description border radius of tabs
-   */
-  "--tab-radius": string;
-}
+export type ProductImageAspectRatio = "1/1" | "2/3" | "4/3" | "3/4";
+export type ProductImageFit = "cover" | "contain";
+
+type ProductImages = {
+  aspectRatio?: ProductImageAspectRatio;
+  fit?: ProductImageFit;
+};
 
 export interface Props {
   /**
-   * @description Set the prefers-color-scheme media query. To support dark mode, create two instances of this block and set this option to light/dark in each instance
-   * @default light
+   * @description Cores principais do tema
    */
-  colorScheme?: "light" | "dark";
   mainColors?: ThemeColors;
-  /** @description These will be auto-generated to a readable color if not set */
+
+  /**
+   * @description Cores complementares do tema, cores não preenchidas serão
+   */
   complementaryColors?: ComplementaryColors;
+  /**
+   * @description Imagens do produto
+   */
+  productImages?: ProductImages;
+  /**
+   * @description Estilo dos botões
+   */
   buttonStyle?: Button;
-  otherStyles?: Miscellaneous;
+  /**
+   * @description Fonte do tema, a configuração das fontes primarias, secundaria e terciarias esta sendo feita pela ordem de adição
+   */
   font?: Font;
   /**
-   * @description This is the admin's color-scheme mode
+   * @description Pagina de exemplo
    */
-  mode?: "dark" | "light";
+  page?: PageType;
 }
 
-type Theme =
-  & ThemeColors
-  & ComplementaryColors
-  & Button
-  & Miscellaneous;
+const CMY_HUES = [180, 300, 60];
+// const RGB_HUES = [360, 240, 120, 0];
 
-const darken = (color: string, percentage: number) =>
-  new Color(color).darken(percentage);
+type Theme = ThemeColors & ComplementaryColors & Button & ProductImages;
 
-const isDark = (c: Color) =>
-  c.contrast("black", "WCAG21") < c.contrast("white", "WCAG21");
+function hueShift(hues: Array<number>, hue: number, intensity: number) {
+  const closestHue =
+      hues.sort((a, b) => (Math.abs(a - hue) - Math.abs(b - hue)))[0],
+    hueShift = closestHue - hue;
+  return Math.round(intensity * hueShift * 0.5);
+}
 
-const contrasted = (color: string, percentage = 0.8) => {
+function lighten(hex: string, intensity: number) {
+  if (!hex) {
+    return "";
+  }
+
+  const color = new Color(hex);
+
+  const [h, s, v] = color.hsv;
+  const hue = h + hueShift(CMY_HUES, h, intensity);
+  const saturation = s - Math.round(s * intensity);
+  const value = v + Math.round((100 - v) * intensity);
+
+  return new Color("hsv", [hue, saturation, value]);
+}
+
+// function darken(hex: string, intensity: number) {
+//   if (!hex) {
+//     return "";
+//   }
+
+//   const color = new Color(hex);
+
+//   const inverseIntensity = 1 - intensity;
+//   const [h, s, v] = color.hsv;
+//   const hue = h + hueShift(RGB_HUES, h, inverseIntensity);
+//   const saturation = s + Math.round((100 - s) * inverseIntensity);
+//   const value = v - Math.round(v * inverseIntensity);
+
+//   return new Color("hsv", [hue, saturation, value]);
+// }
+
+const getBetterContrastingColor = (
+  color: string | Color,
+  ...colors: string[]
+) => {
   const c = new Color(color);
+  const [betterColor] = colors.sort((a, b) => {
+    const colorA = new Color(a);
+    const colorB = new Color(b);
 
-  return isDark(c) ? c.mix("white", percentage) : c.mix("black", percentage);
+    return (
+      Math.abs(colorB.contrast(c, "APCA")) -
+      Math.abs(colorA.contrast(c, "APCA"))
+    );
+  });
+
+  return betterColor;
 };
 
-const toVariables = (
-  t: Theme & Required<ThemeColors>,
-): [string, string][] => {
-  const toValue = (color: string | ReturnType<typeof darken>) => {
+const INTENSITY_MAP: {
+  [key: number]: number;
+} = {
+  50: 0.95,
+  100: 0.9,
+  200: 0.75,
+  300: 0.6,
+  400: 0.3,
+  500: 0.15,
+  600: 0.03,
+};
+
+const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
+  const toValue = (color: string | ReturnType<typeof lighten>) => {
     const [l, c, h] = new Color(color).oklch;
 
     return `${(l * 100).toFixed(0)}% ${c.toFixed(2)} ${(h || 0).toFixed(0)}deg`;
   };
 
+  const primary = {
+    500: t["primary"],
+    400: t["primaryShades"]?.["400"] ??
+      lighten(t["primary"], INTENSITY_MAP[400]),
+    300: t["primaryShades"]?.["300"] ??
+      lighten(t["primary"], INTENSITY_MAP[300]),
+    200: t["primaryShades"]?.["200"] ??
+      lighten(t["primary"], INTENSITY_MAP[200]),
+    100: t["primaryShades"]?.["100"] ??
+      lighten(t["primary"], INTENSITY_MAP[100]),
+  };
+
+  const secondary = {
+    500: t["secondary"],
+    400: t["secondaryShades"]?.["400"] ??
+      lighten(t["secondary"], INTENSITY_MAP[400]),
+    300: t["secondaryShades"]?.["300"] ??
+      lighten(t["secondary"], INTENSITY_MAP[300]),
+    200: t["secondaryShades"]?.["200"] ??
+      lighten(t["secondary"], INTENSITY_MAP[200]),
+    100: t["secondaryShades"]?.["100"] ??
+      lighten(t["secondary"], INTENSITY_MAP[100]),
+  };
+
+  const neutral = {
+    700: t["neutral"],
+    600: t["neutralShades"]?.["600"] ??
+      lighten(t["neutral"], INTENSITY_MAP[600]),
+    500: t["neutralShades"]?.["500"] ??
+      lighten(t["neutral"], INTENSITY_MAP[500]),
+    400: t["neutralShades"]?.["400"] ??
+      lighten(t["neutral"], INTENSITY_MAP[400]),
+    300: t["neutralShades"]?.["300"] ??
+      lighten(t["neutral"], INTENSITY_MAP[300]),
+    200: t["neutralShades"]?.["200"] ??
+      lighten(t["neutral"], INTENSITY_MAP[200]),
+    100: t["base"],
+  };
+
+  const danger = {
+    500: t["danger"],
+    400: t["dangerShades"]?.["400"] ?? lighten(t["danger"], INTENSITY_MAP[400]),
+    300: t["dangerShades"]?.["300"] ?? lighten(t["danger"], INTENSITY_MAP[300]),
+    200: t["dangerShades"]?.["200"] ?? lighten(t["danger"], INTENSITY_MAP[200]),
+    100: t["dangerShades"]?.["100"] ?? lighten(t["danger"], INTENSITY_MAP[100]),
+  };
+
+  const warning = {
+    500: t["warning"],
+    400: t["warningShades"]?.["400"] ??
+      lighten(t["warning"], INTENSITY_MAP[400]),
+    300: t["warningShades"]?.["300"] ??
+      lighten(t["warning"], INTENSITY_MAP[300]),
+    200: t["warningShades"]?.["200"] ??
+      lighten(t["warning"], INTENSITY_MAP[200]),
+    100: t["warningShades"]?.["100"] ??
+      lighten(t["warning"], INTENSITY_MAP[100]),
+  };
+
+  const success = {
+    500: t["success"],
+    400: t["successShades"]?.["400"] ??
+      lighten(t["success"], INTENSITY_MAP[400]),
+    300: t["successShades"]?.["300"] ??
+      lighten(t["success"], INTENSITY_MAP[300]),
+    200: t["successShades"]?.["200"] ??
+      lighten(t["success"], INTENSITY_MAP[200]),
+    100: t["successShades"]?.["100"] ??
+      lighten(t["success"], INTENSITY_MAP[100]),
+  };
+
+  const info = {
+    500: t["info"],
+    400: t["infoShades"]?.["400"] ?? lighten(t["info"], INTENSITY_MAP[400]),
+    300: t["infoShades"]?.["300"] ?? lighten(t["info"], INTENSITY_MAP[300]),
+    200: t["infoShades"]?.["200"] ?? lighten(t["info"], INTENSITY_MAP[200]),
+    100: t["infoShades"]?.["100"] ?? lighten(t["info"], INTENSITY_MAP[100]),
+  };
+
   const colorVariables = Object.entries({
+    "--primary-500": primary[500],
+    "--primary-400": primary[400],
+    "--primary-400-content": getBetterContrastingColor(
+      primary[400],
+      t["neutral"],
+      t["base"],
+    ),
+    "--primary-300": primary[300],
+    "--primary-300-content": getBetterContrastingColor(
+      primary[300],
+      t["neutral"],
+      t["base"],
+    ),
+    "--primary-200": primary[200],
+    "--primary-200-content": getBetterContrastingColor(
+      primary[200],
+      t["neutral"],
+      t["base"],
+    ),
+    "--primary-100": primary[100],
+    "--primary-100-content": getBetterContrastingColor(
+      primary[100],
+      t["neutral"],
+      t["base"],
+    ),
+
+    "--secondary": secondary[500],
+    "--secondary-500": secondary[500],
+    "--secondary-400": secondary[400],
+    "--secondary-400-content": getBetterContrastingColor(
+      secondary[400],
+      t["neutral"],
+      t["base"],
+    ),
+    "--secondary-300": secondary[300],
+    "--secondary-300-content": getBetterContrastingColor(
+      secondary[300],
+      t["neutral"],
+      t["base"],
+    ),
+    "--secondary-200": secondary[200],
+    "--secondary-200-content": getBetterContrastingColor(
+      secondary[200],
+      t["neutral"],
+      t["base"],
+    ),
+    "--secondary-100": secondary[100],
+    "--secondary-100-content": getBetterContrastingColor(
+      secondary[100],
+      t["neutral"],
+      t["base"],
+    ),
+
+    "--neutral-700": t["neutral"],
+    "--neutral-600": neutral[600],
+    "--neutral-600-content": getBetterContrastingColor(
+      neutral[600],
+      t["neutral"],
+      t["base"],
+    ),
+    "--neutral-500": neutral[500],
+    "--neutral-500-content": getBetterContrastingColor(
+      neutral[500],
+      t["neutral"],
+      t["base"],
+    ),
+    "--neutral-400": neutral[400],
+    "--neutral-400-content": getBetterContrastingColor(
+      neutral[400],
+      t["neutral"],
+      t["base"],
+    ),
+    "--neutral-300": neutral[300],
+    "--neutral-300-content": getBetterContrastingColor(
+      neutral[300],
+      t["neutral"],
+      t["base"],
+    ),
+    "--neutral-200": neutral[200],
+    "--neutral-200-content": getBetterContrastingColor(
+      neutral[200],
+      t["neutral"],
+      t["base"],
+    ),
+    "--neutral-100": neutral[100],
+    "--neutral-100-content": getBetterContrastingColor(
+      neutral[100],
+      t["neutral"],
+      t["base"],
+    ),
+
+    "--danger": danger[500],
+    "--danger-500": danger[500],
+    "--danger-400": danger[400],
+    "--danger-400-content": getBetterContrastingColor(
+      danger[400],
+      t["neutral"],
+      t["base"],
+    ),
+    "--danger-300": danger[300],
+    "--danger-300-content": getBetterContrastingColor(
+      danger[300],
+      t["neutral"],
+      t["base"],
+    ),
+    "--danger-200": danger[200],
+    "--danger-200-content": getBetterContrastingColor(
+      danger[200],
+      t["neutral"],
+      t["base"],
+    ),
+    "--danger-100": danger[100],
+    "--danger-100-content": getBetterContrastingColor(
+      danger[100],
+      t["neutral"],
+      t["base"],
+    ),
+
+    "--warning": warning[500],
+    "--warning-500": warning[500],
+    "--warning-400": warning[400],
+    "--warning-400-content": getBetterContrastingColor(
+      warning[400],
+      t["neutral"],
+      t["base"],
+    ),
+    "--warning-300": warning[300],
+    "--warning-300-content": getBetterContrastingColor(
+      warning[300],
+      t["neutral"],
+      t["base"],
+    ),
+    "--warning-200": warning[200],
+    "--warning-200-content": getBetterContrastingColor(
+      warning[200],
+      t["neutral"],
+      t["base"],
+    ),
+    "--warning-100": warning[100],
+    "--warning-100-content": getBetterContrastingColor(
+      warning[100],
+      t["neutral"],
+      t["base"],
+    ),
+
+    "--success": success[500],
+    "--success-500": success[500],
+    "--success-400": success[400],
+    "--success-400-content": getBetterContrastingColor(
+      success[400],
+      t["neutral"],
+      t["base"],
+    ),
+    "--success-300": success[300],
+    "--success-300-content": getBetterContrastingColor(
+      success[300],
+      t["neutral"],
+      t["base"],
+    ),
+    "--success-200": success[200],
+    "--success-200-content": getBetterContrastingColor(
+      success[200],
+      t["neutral"],
+      t["base"],
+    ),
+    "--success-100": success[100],
+    "--success-100-content": getBetterContrastingColor(
+      success[100],
+      t["neutral"],
+      t["base"],
+    ),
+
+    "--info": info[500],
+    "--info-500": info[500],
+    "--info-400": info[400],
+    "--info-400-content": getBetterContrastingColor(
+      info[400],
+      t["neutral"],
+      t["base"],
+    ),
+    "--info-300": info[300],
+    "--info-300-content": getBetterContrastingColor(
+      info[300],
+      t["neutral"],
+      t["base"],
+    ),
+    "--info-200": info[200],
+    "--info-200-content": getBetterContrastingColor(
+      info[200],
+      t["neutral"],
+      t["base"],
+    ),
+    "--info-100": info[100],
+    "--info-100-content": getBetterContrastingColor(
+      info[100],
+      t["neutral"],
+      t["base"],
+    ),
+
     "--p": t["primary"],
-    "--pc": t["primary-content"] ?? contrasted(t["primary"]),
+    "--pc": getBetterContrastingColor(t["primary"], t["neutral"], t["base"]),
 
     "--s": t["secondary"],
-    "--sc": t["secondary-content"] ?? contrasted(t["secondary"]),
+    "--sc": getBetterContrastingColor(t["secondary"], t["neutral"], t["base"]),
 
-    "--a": t["tertiary"],
-    "--ac": t["tertiary-content"] ?? contrasted(t["tertiary"]),
+    "--a": t["secondary"],
+    "--ac": getBetterContrastingColor(t["secondary"], t["neutral"], t["base"]),
 
-    "--n": t["neutral"],
-    "--nc": t["neutral-content"] ?? contrasted(t["neutral"]),
+    "--n": t["neutral"]["600"] ?? lighten(t["neutral"], INTENSITY_MAP[600]),
+    "--nc": t["base"],
 
-    "--b1": t["base-100"],
-    "--b2": t["base-200"] ?? darken(t["base-100"], 0.07),
-    "--b3": t["base-300"] ?? darken(t["base-100"], 0.14),
-    "--bc": t["base-content"] ?? contrasted(t["base-100"]),
+    "--b1": t["base"],
+    "--b2": t["neutralShades"]?.["200"] ??
+      lighten(t["neutral"], INTENSITY_MAP[200]),
+    "--b3": t["neutralShades"]?.["300"] ??
+      lighten(t["neutral"], INTENSITY_MAP[300]),
+    "--bc": t["neutral"]["600"] ?? lighten(t["neutral"], INTENSITY_MAP[600]),
 
     "--su": t["success"],
-    "--suc": t["success-content"] ?? contrasted(t["success"]),
+    "--suc": getBetterContrastingColor(t["success"], t["neutral"], t["base"]),
 
     "--wa": t["warning"],
-    "--wac": t["warning-content"] ?? contrasted(t["warning"]),
+    "--wac": getBetterContrastingColor(t["secondary"], t["neutral"], t["base"]),
 
-    "--er": t["error"],
-    "--erc": t["error-content"] ?? contrasted(t["error"]),
+    "--er": t["danger"],
+    "--erc": getBetterContrastingColor(t["danger"], t["neutral"], t["base"]),
 
     "--in": t["info"],
-    "--inc": t["info-content"] ?? contrasted(t["info"]),
-  }).map(([key, color]) => [key, toValue(color)] as [string, string]);
+    "--inc": getBetterContrastingColor(t["info"], t["neutral"], t["base"]),
+  }).map(([key, color]) => {
+    return [key, toValue(color)] as [string, string];
+  });
 
   const miscellaneousVariables = Object.entries({
-    "--rounded-box": t["--rounded-box"],
     "--rounded-btn": t["--rounded-btn"],
-    "--rounded-badge": t["--rounded-badge"],
     "--animation-btn": t["--animation-btn"],
-    "--animation-input": t["--animation-input"],
     "--btn-focus-scale": t["--btn-focus-scale"],
     "--border-btn": t["--border-btn"],
-    "--tab-border": t["--tab-border"],
-    "--tab-radius": t["--tab-radius"],
+    "--product-aspect-ratio": t?.aspectRatio || "1/1",
+    "--product-fit": t?.fit || "cover",
   });
 
   return [...colorVariables, ...miscellaneousVariables];
 };
 
 const defaultTheme = {
-  "primary": "oklch(1 0 0)",
-  "secondary": "oklch(1 0 0)",
-  "tertiary": "oklch(1 0 0)",
-  "neutral": "oklch(1 0 0)",
-  "base-100": "oklch(1 0 0)",
-  "info": "oklch(1 0 0)",
-  "success": "oklch(0.9054 0.1546 194.7689)",
-  "warning": "oklch(1 0 0)",
-  "error": "oklch(1 0 0)",
-
+  ...defaultColors,
   "--rounded-box": "1rem", // border radius rounded-box utility class, used in card and other large boxes
   "--rounded-btn": "0.2rem" as const, // border radius rounded-btn utility class, used in buttons and similar element
   "--rounded-badge": "1.9rem", // border radius rounded-badge utility class, used in badges and similar
@@ -233,52 +491,51 @@ const defaultTheme = {
   "--tab-radius": "0.5rem", // border radius of tabs
 };
 
-/**
- * This section merges the DESIGN_SYTEM variable with incoming props into a css sheet with variables, i.e.
- * this function transforms props into
- *
- * :root {
- *   --color-primary: #FFFFFF;
- *   --color-secondary: "#161616"
- * }
- */
 function Section({
   mainColors,
   complementaryColors,
   buttonStyle,
-  otherStyles,
   font,
-  colorScheme,
+  productImages,
 }: Props) {
   const theme = {
     ...defaultTheme,
-    ...complementaryColors,
     ...mainColors,
+    ...complementaryColors,
     ...buttonStyle,
-    ...otherStyles,
+    ...productImages,
   };
+
+  const [primaryFont, secondaryFont, tertiaryFont] = font?.family.split(",") ||
+    [];
 
   const variables = [
     ...toVariables(theme),
     [
       "--font-family",
-      font?.family ||
+      primaryFont ||
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
     ],
-  ]
-    .map(([name, value]) => ({ name, value }));
+    [
+      "--font-secondary",
+      secondaryFont ||
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+    ],
+    [
+      "--font-tertiary",
+      tertiaryFont ||
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+    ],
+  ].map(([name, value]) => ({ name, value }));
 
   return (
-    <SiteTheme
-      fonts={font ? [font] : undefined}
-      variables={variables}
-      colorScheme={colorScheme}
-    />
+    <>
+      <SiteTheme fonts={font ? [font] : undefined} variables={variables} />
+    </>
   );
 }
 
 export function Preview(props: Props) {
-  const adminColorMode = props.mode === "dark" ? "dark" : "light";
   return (
     <>
       {
@@ -362,33 +619,29 @@ export function Preview(props: Props) {
         `}
       </style>
       <Section {...props} />
-      <div class={`flex flex-col gap-4 text-base w-full ${adminColorMode}`}>
+      <div class={`flex flex-col gap-4 text-base w-full`}>
         <div>Components and styles</div>
         <div class="flex flex-col w-full gap-2">
           <PreviewContainer
             title="Text colors"
-            mode={adminColorMode}
             codeString={snippets.textColors}
           >
             <TextColorsPreview />
           </PreviewContainer>
           <PreviewContainer
             title="Button styles"
-            mode={adminColorMode}
             codeString={snippets.buttonStyles}
           >
             <ButtonStylesPreview />
           </PreviewContainer>
           <PreviewContainer
             title="Button colors"
-            mode={adminColorMode}
             codeString={snippets.buttonColors}
           >
             <ButtonColorsPreview />
           </PreviewContainer>
           <PreviewContainer
             title="Button sizes"
-            mode={adminColorMode}
             codeString={snippets.buttonSizes}
           >
             <ButtonSizesPreview />
@@ -495,19 +748,14 @@ const TextColorsPreview = () => {
 };
 
 const PreviewContainer = (
-  { mode, title, children, codeString }: {
-    mode: string;
+  { title, children, codeString }: {
     title: string;
     children: ComponentChildren;
     codeString: string;
   },
 ) => {
-  const borderClass = mode === "dark"
-    ? "border-color-dark"
-    : "border-color-light";
-  const btnOutlineClass = mode === "dark"
-    ? "btn-outline-dark"
-    : "btn-outline-light";
+  const borderClass = "border-color-light";
+  const btnOutlineClass = "btn-outline-dark";
   const checkboxId = `show-code-${title.replace(/\s+/g, "-").toLowerCase()}`;
   const codeBlockId = `code-block-${title.replace(/\s+/g, "-").toLowerCase()}`;
 
@@ -526,15 +774,9 @@ const PreviewContainer = (
       display: none;
     }
     #${checkboxId}:checked ~ .hide-label {
-      background-color: ${
-    mode === "dark"
-      ? "var(--admin-hover-bg-color)"
-      : "var(--admin-text-color-light)"
+      background-color: var(--admin-text-color-light)
   };
-      color: ${
-    mode === "dark"
-      ? "var(--admin-text-color-light)"
-      : "var(--admin-hover-bg-color)"
+      color: var(--admin-hover-bg-color)
   };
     }
   `;
@@ -578,8 +820,7 @@ const PreviewContainer = (
             <div
               id={codeBlockId}
               class={clx(
-                "mt-4 mb-2 text-xs md:text-sm",
-                mode === "dark" ? "bg-slate-800" : "bg-slate-100",
+                "mt-4 mb-2 text-xs md:text-sm bg-slate-100",
               )}
             >
               <pre class="p-4 overflow-x-auto">{codeString}</pre>

@@ -1,151 +1,137 @@
-import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
+import Slider from "$store/components/ui/Slider.tsx";
+import SliderJS from "$store/islands/SliderJS.tsx";
+import { useId } from "$store/sdk/useId.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
+import Section from "$store/components/ui/Section.tsx";
+import type { SectionProps } from "$store/components/ui/Section.tsx";
+import { AppContext } from "$store/apps/site.ts";
+import { clx } from "$store/sdk/clx.ts";
 
-interface Benefit {
-  label: string;
+/**
+ * @titleBy label
+ */
+export interface Benefit {
   /**
-   * @format icon-select
-   * @options site/loaders/availableIcons.ts
+   *  @title Ícone
+   *  @description Ícone que será exibido ao lado do texto, sera exibido em tamanho 35x35
    */
-  icon: AvailableIcons;
-  description: string;
+  icon?: ImageWidget;
+  /**  @title Título */
+  label: string;
 }
 
 export interface Props {
-  /**
-   * @default Benefits
-   */
-  title?: string;
-  /**
-   * @default Check out the benefits
-   */
-  description?: string;
-  benefits?: Array<Benefit>;
+  /** @title Benefícios */
+  benefits?: Benefit[];
+  /** @title Intervalo (em segundos) */
+  interval?: number;
+  /** @title Configurações da seção */
+  sectionProps?: SectionProps;
   layout?: {
-    variation?: "Simple" | "With border" | "Color reverse";
-    headerAlignment?: "center" | "left";
+    numberOfSliders?: {
+      mobile?: 1 | 2 | 3 | 4 | 5;
+      tablet?: 1 | 2 | 3 | 4 | 5;
+      desktop?: 1 | 2 | 3 | 4 | 5;
+    };
+    /**
+     * @title Mostrar setas
+     * @default true
+     */
+    showArrows?: boolean;
   };
 }
 
-export default function Benefits(
-  props: Props,
-) {
-  const {
-    title = "Benefits",
-    description = "Check out the benefits",
-    benefits = [{
-      icon: "Truck",
-      label: "Entrega em todo Brasil",
-      description: "Consulte o prazo no fechamento da compra.",
-    }, {
-      icon: "Discount",
-      label: "15% na primeira compra",
-      description: "Aplicado direto na sacola de compras.",
-    }, {
-      icon: "ArrowsPointingOut",
-      label: "Devolução grátis",
-      description: "Veja as condições para devolver seu produto.",
-    }],
-    layout,
-  } = props;
+const slideSizesDesktop = {
+  1: "lg:w-full",
+  2: "lg:w-1/2",
+  3: "lg:w-1/3",
+  4: "lg:w-1/4",
+  5: "lg:w-1/5",
+};
 
-  const listOfBenefits = benefits.map((benefit, index) => {
-    const showDivider = index < benefits.length - 1;
-    const reverse = layout?.variation === "Color reverse";
-    const benefitLayout = !layout?.variation || layout?.variation === "Simple"
-      ? "tiled"
-      : "piledup";
+const slideSizesMobile = {
+  1: "w-full",
+  2: "w-1/2",
+  3: "w-1/3",
+  4: "w-1/4",
+  5: "w-1/5",
+};
 
-    return (
-      <div
-        class={`${
-          reverse ? "bg-primary text-primary-content p-4 lg:px-8 lg:py-4" : ""
-        } flex gap-4 ${
-          benefitLayout == "piledup" ? "flex-col items-center text-center" : ""
-        } ${
-          showDivider && benefitLayout !== "piledup"
-            ? "border-b border-neutral-300"
-            : ""
-        } ${showDivider ? "pb-4 lg:pr-8 lg:border-r lg:border-b-0" : ""} ${
-          showDivider && !reverse ? "lg:pb-0" : ""
-        }`}
-      >
-        <div class="flex-none">
-          <Icon
-            id={benefit.icon}
-            class={"text-base-content"}
-            width={36}
-            height={36}
-            strokeWidth={0.01}
-            fill="currentColor"
-          />
-        </div>
-        <div class="flex-auto flex flex-col gap-1 lg:gap-2">
-          <div
-            class={`text-base lg:text-xl leading-7 ${
-              reverse ? "text-base-100" : "text-base-content"
-            }`}
-          >
-            {benefit.label}
-          </div>
-          <p
-            class={`text-sm leading-5 ${
-              reverse ? "text-base-100" : "text-neutral"
-            } ${benefitLayout == "piledup" ? "hidden lg:block" : ""}`}
-          >
-            {benefit.description}
-          </p>
-        </div>
-      </div>
-    );
-  });
+const slideSizesTablet = {
+  1: "sm:w-full",
+  2: "sm:w-1/2",
+  3: "sm:w-1/3",
+  4: "sm:w-1/4",
+  5: "sm:w-1/5",
+};
 
+function Buttons() {
   return (
     <>
-      {!layout?.variation || layout?.variation === "Simple"
-        ? (
-          <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-            <Header
-              title={title}
-              description={description}
-              alignment={layout?.headerAlignment || "center"}
-            />
-            <div class="w-full flex justify-center">
-              <div class="flex flex-col gap-4 lg:gap-8 w-full lg:grid grid-flow-col auto-cols-fr">
-                {listOfBenefits}
-              </div>
-            </div>
-          </div>
-        )
-        : ""}
-      {layout?.variation === "With border" && (
-        <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
-          <Header
-            title={title}
-            description={description}
-            alignment={layout?.headerAlignment || "center"}
-          />
-          <div class="w-full flex justify-center">
-            <div class="grid grid-cols-2 gap-4 w-full py-6 px-4 border border-base-300 lg:gap-8 lg:grid-flow-col lg:auto-cols-fr lg:p-10">
-              {listOfBenefits}
-            </div>
-          </div>
-        </div>
-      )}
-      {layout?.variation === "Color reverse" && (
-        <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
-          <Header
-            title={title}
-            description={description}
-            alignment={layout?.headerAlignment || "center"}
-          />
-          <div class="w-full flex justify-center">
-            <div class="grid grid-cols-2 gap-4 w-full lg:gap-8 lg:grid-flow-col lg:auto-cols-fr">
-              {listOfBenefits}
-            </div>
-          </div>
-        </div>
-      )}
+      <div class="w-10 h-10 absolute translate-y-[-50%] left-0 top-1/2 xl:hidden">
+        <Slider.PrevButton class="w-10 h-10 flex justify-center items-center text-neutral-1">
+          <Icon class="text-neutral-1" size={24} id="TriangleLeft" />
+        </Slider.PrevButton>
+      </div>
+      <div class="w-10 h-10 absolute translate-y-[-50%] right-0 top-1/2 xl:hidden">
+        <Slider.NextButton class="w-10 h-10 flex justify-center items-center text-neutral-1">
+          <Icon class="text-neutral-1" size={24} id="TriangleRight" />
+        </Slider.NextButton>
+      </div>
     </>
   );
 }
+
+export function loader(props: Props, _req: Request, ctx: AppContext) {
+  return { ...props, isMobile: ctx.device !== "desktop" };
+}
+
+function Benefits(
+  { interval = 5, benefits, sectionProps, isMobile, layout }: ReturnType<
+    typeof loader
+  >,
+) {
+  const id = useId();
+
+  const { numberOfSliders, showArrows = true } = layout || {};
+
+  return (
+    <Section isMobile={isMobile} {...sectionProps} class="">
+      <div id={id} class="lg:px-0 bg-primary text-primary-content py-2">
+        <div class="container relative">
+          <Slider class="carousel carousel-center flex justify-between items-center overflow-x-auto">
+            {benefits?.map(({ label, icon }, index) => (
+              <>
+                <Slider.Item
+                  index={index}
+                  class={clx(
+                    "carousel-item w-full justify-center lg:w-1/2 xl:w-fit lg:flex lg:items-center xl:px-11 lg:last:pr-0 lg:first:pl-0",
+                    slideSizesDesktop[numberOfSliders?.desktop ?? 4],
+                    slideSizesMobile[numberOfSliders?.mobile ?? 1],
+                    slideSizesTablet[numberOfSliders?.tablet ?? 2],
+                  )}
+                >
+                  <div class="flex gap-x-2 justify-center items-center max-w-full h-16">
+                    {icon && <Image src={icon} width={35} height={35} />}
+                    <div class="">{label}</div>
+                  </div>
+                </Slider.Item>
+                <div class="divider w-px h-16 bg-primary-content m-0 hidden lg:block last:hidden" />
+              </>
+            ))}
+          </Slider>
+          {showArrows && <Buttons />}
+          <SliderJS
+            rootId={id}
+            interval={interval && interval * 1e3}
+            infinite
+          />
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+export default Benefits;

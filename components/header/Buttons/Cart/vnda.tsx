@@ -1,16 +1,17 @@
-import { itemToAnalyticsItem, useCart } from "apps/vnda/hooks/useCart.ts";
+import { useCart } from "apps/vnda/hooks/useCart.ts";
 import Button from "./common.tsx";
 
 function CartButton() {
   const { loading, cart } = useCart();
-  const total = cart.value?.orderForm?.total ?? 0;
   const items = cart.value?.orderForm?.items ?? [];
+
+  const _handleAnalytics = () => {
+    // TODO: Implement view_item GA4 event for VNDA
+  };
 
   return (
     <Button
-      items={items.map(itemToAnalyticsItem)}
-      currency="BRL"
-      total={total}
+      totalItems={items.length}
       loading={loading.value}
     />
   );

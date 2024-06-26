@@ -5,13 +5,16 @@ import { PropertyValue } from "apps/commerce/types.ts";
 export interface Props extends Omit<BtnProps, "onAddItem" | "platform"> {
   additionalProperty: PropertyValue[];
   productGroupID: string;
+  quantity?: number;
 }
 
 function AddToCartButton(props: Props) {
   const { addItems } = useCart();
-  const onAddItem = () =>
-    addItems({
-      quantity: 1,
+  const onAddItem = () => {
+    // TODO: Implement analytics mapping
+
+    return addItems({
+      quantity: props.quantity ?? 1,
       itemId: Number(props.productGroupID),
       add_to_cart_enhanced: "1",
       attributes: props.additionalProperty
@@ -20,6 +23,7 @@ function AddToCartButton(props: Props) {
         )
         : undefined,
     });
+  };
 
   return <Button onAddItem={onAddItem} {...props} />;
 }

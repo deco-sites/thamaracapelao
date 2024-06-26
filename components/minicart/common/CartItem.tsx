@@ -1,13 +1,14 @@
-import { AnalyticsItem } from "apps/commerce/types.ts";
+import Button from "$store/components/ui/Button.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
+import QuantitySelector from "$store/components/ui/QuantitySelector.tsx";
+import { formatPrice } from "$store/sdk/format.ts";
 import Image from "apps/website/components/Image.tsx";
+import { OrderFormItem } from "apps/vtex/utils/types.ts";
 import { useCallback, useState } from "preact/hooks";
-import Button from "../../../components/ui/Button.tsx";
-import Icon from "../../../components/ui/Icon.tsx";
-import QuantitySelector from "../../../components/ui/QuantitySelector.tsx";
-import { sendEvent } from "../../../sdk/analytics.tsx";
-import { formatPrice } from "../../../sdk/format.ts";
 
-export interface Item {
+export type CartCommonItem = {
+  id?: number;
+  seller?: number;
   image: {
     src: string;
     alt: string;
@@ -18,30 +19,38 @@ export interface Item {
     sale: number;
     list: number;
   };
-}
+  url: string;
+  vtex?: OrderFormItem;
+};
 
 export interface Props {
-  item: Item;
+  item: CartCommonItem;
   index: number;
 
   locale: string;
   currency: string;
 
-  onUpdateQuantity: (quantity: number, index: number) => Promise<void>;
-  itemToAnalyticsItem: (index: number) => AnalyticsItem | null | undefined;
+  onUpdateQuantity: (
+    quantity: number,
+    index: number,
+    item?: CartCommonItem,
+  ) => Promise<void>;
 }
 
-function CartItem(
-  {
-    item,
-    index,
-    locale,
-    currency,
-    onUpdateQuantity,
-    itemToAnalyticsItem,
-  }: Props,
-) {
-  const { image, name, price: { sale, list }, quantity } = item;
+function CartItem({
+  item,
+  index,
+  locale,
+  currency,
+  onUpdateQuantity,
+}: Props) {
+  const {
+    image,
+    name,
+    price: { sale, list },
+    quantity,
+    url = "",
+  } = item;
   const isGift = sale < 0.01;
   const [loading, setLoading] = useState(false);
 
@@ -57,71 +66,56 @@ function CartItem(
     [],
   );
 
+  const handleUpdateQuantity = withLoading(async (quantity: number) => {
+    await onUpdateQuantity(quantity, index, item);
+  });
+
+  const handleRemoveItem = withLoading(async () => {
+    await onUpdateQuantity(0, index, item);
+  });
+
   return (
-    <div
-      class="grid grid-rows-1 gap-2"
-      style={{
-        gridTemplateColumns: "auto 1fr",
-      }}
-    >
-      <Image
-        {...image}
-        src={image.src.replace("55-55", "255-255")}
-        style={{ aspectRatio: "108 / 150" }}
-        width={108}
-        height={150}
-        class="h-full object-contain"
-      />
-
-      <div class="flex flex-col gap-2">
-        <div class="flex justify-between items-center">
-          <span>{name}</span>
-          <Button
-            disabled={loading || isGift}
-            loading={loading}
-            class="btn-ghost btn-square"
-            onClick={withLoading(async () => {
-              const analyticsItem = itemToAnalyticsItem(index);
-
-              await onUpdateQuantity(0, index);
-
-              analyticsItem && sendEvent({
-                name: "remove_from_cart",
-                params: { items: [analyticsItem] },
-              });
-            })}
-          >
-            <Icon id="Trash" size={24} />
-          </Button>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="line-through text-sm">
-            {formatPrice(list, currency, locale)}
-          </span>
-          <span class="text-sm text-secondary">
-            {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
-          </span>
-        </div>
-
-        <QuantitySelector
-          disabled={loading || isGift}
-          quantity={quantity}
-          onChange={withLoading(async (quantity) => {
-            const analyticsItem = itemToAnalyticsItem(index);
-            const diff = quantity - item.quantity;
-
-            await onUpdateQuantity(quantity, index);
-
-            if (analyticsItem) {
-              sendEvent({
-                name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                params: {
-                  items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
-                },
-              });
-            }
-          })}
+    <div class="flex flex-row justify-between gap-4">
+      <a href={url}>
+        <Image
+          {...image}
+          width={88}
+          height={88}
+          class="h-full object-cover object-center border border-neutral-300"
         />
+      </a>
+
+      <div class="flex flex-1 flex-col ">
+        <a class="text-xs text-neutral-500 font-bold" href={url}>{name}</a>
+
+        <div class="flex lg:items-end flex-col lg:flex-row lg:gap-4 font-bold mt-2 mb-2 lg:mt-auto">
+          <span class="text-neutral-400 text-xs">
+            De {formatPrice(list, currency, locale)}
+          </span>
+
+          <span class="text-sm text-primary-500">
+            Por {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
+          </span>
+        </div>
+
+        <div class="max-w-min h-[initial]">
+          <QuantitySelector
+            disabled={loading || isGift}
+            quantity={quantity}
+            onChange={handleUpdateQuantity}
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center lg:pl-2 lg:px-3">
+        <Button
+          disabled={loading || isGift}
+          loading={loading}
+          class="btn btn-ghost btn-square !bg-transparent text-neutral-400 -mr-4"
+          onClick={handleRemoveItem}
+        >
+          <Icon id="Trash" width={24} height={24} />
+        </Button>
       </div>
     </div>
   );

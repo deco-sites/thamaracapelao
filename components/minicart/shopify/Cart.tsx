@@ -1,7 +1,8 @@
-import { itemToAnalyticsItem, useCart } from "apps/shopify/hooks/useCart.ts";
+import { useCart } from "apps/shopify/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
+import { MinicartConfig } from "deco-sites/fast-fashion/components/minicart/common/Cart.tsx";
 
-function Cart() {
+function Cart({ minicartConfig }: { minicartConfig?: MinicartConfig }) {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
   const items = cart.value?.lines?.nodes ?? [];
   const coupons = cart.value?.discountCodes;
@@ -16,13 +17,16 @@ function Cart() {
     ? new URL(cart.value?.checkoutUrl).pathname
     : "";
 
+  // TODO: Add analytics from Shopify
   return (
     <BaseCart
+      minicartConfig={minicartConfig}
       items={items?.map((item) => ({
         image: {
           src: item.merchandise.image?.url ?? "",
           alt: item.merchandise.image?.altText ?? "",
         },
+        url: item.merchandise.product.url,
         quantity: item.quantity,
         name: item.merchandise.product.title,
         price: {
@@ -36,22 +40,18 @@ function Cart() {
       locale={locale}
       currency={currency}
       loading={loading.value}
-      freeShippingTarget={1000}
       checkoutHref={checkoutHref}
       coupon={coupon}
       onAddCoupon={(text) => addCouponsToCart({ discountCodes: [text] })}
       onUpdateQuantity={(quantity, index) =>
         updateItems({
-          lines: [{
-            id: items[index].id,
-            quantity: quantity,
-          }],
+          lines: [
+            {
+              id: items[index].id,
+              quantity: quantity,
+            },
+          ],
         })}
-      itemToAnalyticsItem={(index) => {
-        const item = items[index];
-
-        return item && itemToAnalyticsItem(item, index);
-      }}
     />
   );
 }

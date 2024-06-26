@@ -1,4 +1,4 @@
-import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
+import commerce from "apps/commerce/mod.ts";
 import { color as shopify } from "apps/shopify/mod.ts";
 import { color as vnda } from "apps/vnda/mod.ts";
 import { color as vtex } from "apps/vtex/mod.ts";
@@ -9,6 +9,7 @@ import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
+import { Props as WebsiteProps } from "apps/website/mod.ts";
 
 export type Props = {
   /**
@@ -18,7 +19,7 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
-} & CommerceProps;
+} & WebsiteProps;
 
 export type Platform =
   | "vtex"
@@ -32,6 +33,7 @@ export type Platform =
 export let _platform: Platform = "custom";
 
 export type App = ReturnType<typeof Site>;
+//@ts-expect-error - This is a bug in the type definition
 export type AppContext = AC<App>;
 
 const color = (platform: string) => {
@@ -57,23 +59,21 @@ const color = (platform: string) => {
 
 let firstRun = true;
 
-/**
- * @title Site
- * @description Start your site from a template or from scratch.
- * @category Tool
- * @logo https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/1/0ac02239-61e6-4289-8a36-e78c0975bcc8
- */
 export default function Site(
-  { theme, ...state }: Props,
+  state: Props,
+  //@ts-expect-error - This is a bug in the type definition
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
-  _platform = state.platform || state.commerce?.platform || "custom";
+  _platform = state.platform || "custom";
 
   // Prevent console.logging twice
   if (firstRun) {
     firstRun = false;
     console.info(
       ` 🐁 ${rgb24("Storefront", color("deco"))} | ${
-        rgb24(_platform, color(_platform))
+        rgb24(
+          _platform,
+          color(_platform),
+        )
       } \n`,
     );
   }
@@ -84,10 +84,12 @@ export default function Site(
     dependencies: [
       commerce({
         ...state,
-        global: theme ? [...(state.global ?? []), theme] : state.global,
+        global: state.theme
+          ? [...(state.global ?? []), state.theme]
+          : state.global,
       }),
     ],
   };
 }
 
-export { onBeforeResolveProps, Preview } from "apps/website/mod.ts";
+export { onBeforeResolveProps } from "apps/website/mod.ts";

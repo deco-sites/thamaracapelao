@@ -31,12 +31,12 @@ export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
 );
 
 export const SendEventOnView = <E extends AnalyticsEvent>(
-  { event, id }: { event: E; id: string },
+  { event, id, sendOnce = true }: { event: E; id: string; sendOnce?: boolean },
 ) => (
   <script
     defer
     src={scriptAsDataURI(
-      (id: string, event: E) => {
+      (id: string, event: E, sendOnce) => {
         const elem = document.getElementById(id);
 
         if (!elem) {
@@ -50,7 +50,10 @@ export const SendEventOnView = <E extends AnalyticsEvent>(
             if (!item.isIntersecting) continue;
 
             globalThis.window.DECO.events.dispatch(event);
-            observer.unobserve(elem);
+
+            if (sendOnce) {
+              observer.unobserve(elem);
+            }
           }
         });
 
@@ -58,6 +61,7 @@ export const SendEventOnView = <E extends AnalyticsEvent>(
       },
       id,
       event,
+      sendOnce,
     )}
   />
 );

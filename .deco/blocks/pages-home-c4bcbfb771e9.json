@@ -1,1 +1,282 @@
-{"name":"Home","sections":[{"__resolveType":"Header - 01"},{"__resolveType":"website/flags/multivariate/section.ts","variants":[{"value":{"__resolveType":"site/sections/Images/Carousel.tsx","dots":false,"arrows":true,"images":[{"alt":"Feminino","action":{"href":"/feminino","label":"Explore collection","title":"VTEX Store","subTitle":"Visit our site and start building now:"},"mobile":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1","desktop":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"},{"alt":"Masculino","action":{"href":"/masculino","label":"Explore collection","title":"VTEX Store","subTitle":"Visit our site and start building now:"},"mobile":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1","desktop":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"},{"alt":"Vestidos","action":{"href":"/feminino/roupas/vestidos","label":"Explore collection","title":"VTEX Store","subTitle":"Visit our site and start building now:"},"mobile":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1","desktop":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"}],"preload":true},"rule":{"__resolveType":"Teste AB"}},{"value":{"__resolveType":"site/sections/Images/Carousel.tsx","dots":false,"arrows":true,"images":[{"alt":"Feminino","action":{"href":"/feminino","label":"Explore collection","title":"VTEX Store","subTitle":"Visit our site and start building now:"},"mobile":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1","desktop":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"},{"alt":"Masculino","action":{"href":"/masculino","label":"Explore collection","title":"VTEX Store","subTitle":"Visit our site and start building now:"},"mobile":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1","desktop":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"},{"alt":"Vestidos","action":{"href":"/feminino/roupas/vestidos","label":"Explore collection","title":"VTEX Store","subTitle":"Visit our site and start building now:"},"mobile":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1","desktop":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"}],"preload":true},"rule":{"__resolveType":"website/matchers/always.ts"}}]},{"__resolveType":"site/sections/Miscellaneous/Slide.tsx","content":[{"label":"HOT SALE","repeat":30}]},{"__resolveType":"site/sections/Miscellaneous/CampaignTimer.tsx","link":{"href":"https://github.com/deco-cx","text":"Visit our GitHub"},"text":"<p>Design, develop and deliver complete experiences</p>","labels":{"days":"days","hours":"hours","expired":" Expired!","minutes":"minutes","seconds":"seconds"},"layout":{"textPosition":"After counter"},"expiresAt":"2024-03-15T17:23:00.000Z"},{"__resolveType":"site/sections/Miscellaneous/Slide.tsx","content":[{"label":"HOT SALE","repeat":15}]},{"__resolveType":"site/sections/Product/ProductShelf.tsx","layout":{"showArrows":true},"products":{"props":{"sort":"price:desc","count":6,"collection":"139"},"crossSelling":"similars","__resolveType":"vtex/loaders/intelligentSearch/productList.ts"},"cardLayout":{"layout":{"hide":{"allPrices":false,"favoriteIcon":true,"installments":false,"productDescription":true},"basics":{"oldPriceSize":"Normal","contentAlignment":"Left"},"onMouseOver":{"card":"None","image":"Change image","showCta":true,"showCardShadow":false,"showSkuSelector":false,"showFavoriteIcon":false},"elementsPositions":{"skuSelector":"Bottom","favoriteIcon":"Top right"}},"__resolveType":"site/loaders/Layouts/ProductCard.tsx"}},{"__resolveType":"Shoppable Banner - 01"},{"__resolveType":"site/sections/Category/CategoryGrid.tsx","list":[{"href":"/","image":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/01c01ba9-ac16-4371-82ca-b93d17545f9c","label":"Your Collection","buttonText":"Explore collection"},{"href":"/","image":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/9b80d57d-64b0-4eef-a3cd-fa8daafaae9c","label":"Your Collection","buttonText":"Explore collection"},{"href":"/","image":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/ed4c0eb3-96ab-484f-b293-e91d196a5063","label":"Your Collection","buttonText":"Explore collection"},{"href":"/","image":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/b9882ff7-3dbc-43e4-9813-5cec23c012cd","label":"Your Collection","buttonText":"Explore collection"}],"header":{"title":"Explore Our Categories"},"layout":{"categoryCard":{"textPosition":"bottom","textAlignment":"left"}}},{"__resolveType":"site/sections/Product/ShelfWithImage.tsx","image":{"alt":"Collection Image","src":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/165c770b-cbbc-48c0-81ad-c732d527c77c","href":"/feminino"},"section":{"title":"Summer Vibes","layout":{"showArrows":true,"headerfontSize":"Normal","headerAlignment":"center","numberOfSliders":{"mobile":1,"desktop":1}},"products":{"props":{"sort":"price:desc","count":3,"query":"camisa"},"__resolveType":"vtex/loaders/intelligentSearch/productList.ts"},"cardLayout":{"layout":{"hide":{"allPrices":false,"favoriteIcon":true,"installments":true,"productDescription":true},"basics":{"oldPriceSize":"Normal","contentAlignment":"Left"},"onMouseOver":{"card":"None","image":"Change image","showCta":true,"showCardShadow":false,"showSkuSelector":true,"showFavoriteIcon":false},"elementsPositions":{"skuSelector":"Bottom","favoriteIcon":"Top right"}},"__resolveType":"site/loaders/Layouts/ProductCard.tsx"},"__resolveType":"site/sections/Product/ProductShelf.tsx"}},{"__resolveType":"site/sections/Product/ProductShelfTabbed.tsx","tabs":[{"title":"Woman","products":{"props":{"sort":"price:desc","count":8,"query":"vestido"},"__resolveType":"vtex/loaders/intelligentSearch/productList.ts"}},{"title":"Man","products":{"props":{"sort":"price:desc","count":8,"collection":"140"},"__resolveType":"vtex/loaders/intelligentSearch/productList.ts"}}],"title":"Best Sellers","layout":{"headerfontSize":"Large","headerAlignment":"center"},"cardLayout":{"__resolveType":"Product Card Layout - 01"}},{"title":"Blogposts","__resolveType":"site/sections/Content/BlogPosts.tsx","posts":[{"alt":"Item of the Summer","date":"January 15, 2024","href":"/","image":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1","label":"Item of the Summer","author":"deco.cx","description":"Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "},{"alt":"Item of the Summer","date":"January 15, 2024","href":"/","image":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/a3f329d8-795c-4c3b-8049-ede939d599ef","label":"Item of the Summer","author":"deco.cx","description":"Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "},{"alt":"Item of the Summer","date":"January 15, 2024","href":"/","image":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1","label":"Item of the Summer","author":"deco.cx","description":"Lorem ipsum dolor sit amet consectetur.  Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "}]},{"__resolveType":"Footer - 04"}],"__resolveType":"website/pages/Page.tsx","path":"/"}
+{
+  "name": "Home",
+  "path": "/",
+  "sections": [
+    {
+      "__resolveType": "site/sections/SEO/PageSEO.tsx",
+      "structuredData": null
+    },
+    {
+      "__resolveType": "Header - 01"
+    },
+    {
+      "__resolveType": "Carousel - 01"
+    },
+    {
+      "__resolveType": "Benefits - padrão"
+    },
+    {
+      "__resolveType": "Product Shelf - 01"
+    },
+    {
+      "__resolveType": "site/sections/Content/Hero.tsx",
+      "cta": {
+        "0": {
+          "href": "/teste",
+          "text": "teste",
+          "variant": "Reverse"
+        },
+        "1": {
+          "href": "/teste2",
+          "text": "teste-2",
+          "variant": "Reverse"
+        },
+        "href": "/hero",
+        "text": "Ver mais"
+      },
+      "image": {
+        "0": "h",
+        "1": "t",
+        "2": "t",
+        "3": "p",
+        "4": "s",
+        "5": ":",
+        "6": "/",
+        "7": "/",
+        "8": "o",
+        "9": "z",
+        "10": "k",
+        "11": "s",
+        "12": "g",
+        "13": "d",
+        "14": "m",
+        "15": "y",
+        "16": "r",
+        "17": "q",
+        "18": "c",
+        "19": "x",
+        "20": "c",
+        "21": "w",
+        "22": "h",
+        "23": "n",
+        "24": "b",
+        "25": "e",
+        "26": "p",
+        "27": "g",
+        "28": ".",
+        "29": "s",
+        "30": "u",
+        "31": "p",
+        "32": "a",
+        "33": "b",
+        "34": "a",
+        "35": "s",
+        "36": "e",
+        "37": ".",
+        "38": "c",
+        "39": "o",
+        "40": "/",
+        "41": "s",
+        "42": "t",
+        "43": "o",
+        "44": "r",
+        "45": "a",
+        "46": "g",
+        "47": "e",
+        "48": "/",
+        "49": "v",
+        "50": "1",
+        "51": "/",
+        "52": "o",
+        "53": "b",
+        "54": "j",
+        "55": "e",
+        "56": "c",
+        "57": "t",
+        "58": "/",
+        "59": "p",
+        "60": "u",
+        "61": "b",
+        "62": "l",
+        "63": "i",
+        "64": "c",
+        "65": "/",
+        "66": "a",
+        "67": "s",
+        "68": "s",
+        "69": "e",
+        "70": "t",
+        "71": "s",
+        "72": "/",
+        "73": "4",
+        "74": "4",
+        "75": "0",
+        "76": "3",
+        "77": "/",
+        "78": "6",
+        "79": "5",
+        "80": "d",
+        "81": "c",
+        "82": "f",
+        "83": "e",
+        "84": "6",
+        "85": "0",
+        "86": "-",
+        "87": "d",
+        "88": "2",
+        "89": "5",
+        "90": "c",
+        "91": "-",
+        "92": "4",
+        "93": "0",
+        "94": "6",
+        "95": "e",
+        "96": "-",
+        "97": "a",
+        "98": "c",
+        "99": "7",
+        "100": "5",
+        "101": "-",
+        "102": "c",
+        "103": "1",
+        "104": "8",
+        "105": "2",
+        "106": "e",
+        "107": "0",
+        "108": "3",
+        "109": "2",
+        "110": "9",
+        "111": "b",
+        "112": "4",
+        "113": "8",
+        "alt": "Image",
+        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/f798b1c2-f02e-4d15-8ce8-eadd1a9c30ef",
+        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10820/7cb942d7-14c1-4db3-96d1-fe9f73bb3271"
+      },
+      "title": "<h2>Titulo <strong>Hero</strong></h2>",
+      "placement": "left",
+      "description": "Forem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. ",
+      "mobileImage": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/70ce0d06-eb49-407a-809d-cd60bef3a01a",
+      "sectionProps": {
+        "layout": {
+          "mobile": {
+            "marginTop": "40px",
+            "marginBottom": "0px"
+          },
+          "desktop": {
+            "marginTop": "64px",
+            "marginBottom": "0px"
+          },
+          "marginTop": "64px"
+        }
+      }
+    },
+    {
+      "__resolveType": "Product Shelf - 02"
+    },
+    {
+      "__resolveType": "site/sections/Images/FullBanner.tsx",
+      "alt": "Banner de ponto a ponta",
+      "lcp": false,
+      "href": "/a",
+      "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/2be769f5-cc6d-4d98-aeba-ef9b36021897",
+      "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/4606cfff-aa6c-4243-a74e-1e75bd388e40",
+      "contents": [
+        {
+          "alt": "Banner",
+          "href": "/",
+          "mobile": {
+            "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/1c9fe42d-d677-4a31-8cce-444a94a7604c",
+            "height": 460
+          },
+          "tablet": {
+            "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/059d9553-e01a-4853-8cbf-8e8955d7c261",
+            "height": 460
+          },
+          "desktop": {
+            "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/6260b9d2-9a14-4727-a967-e6b7ec540cff",
+            "height": 470
+          }
+        }
+      ],
+      "sectionProps": {
+        "layout": {
+          "mobile": {
+            "marginTop": "40px",
+            "marginBottom": "0px"
+          },
+          "desktop": {
+            "marginTop": "40px",
+            "marginBottom": "0px"
+          },
+          "marginTop": "64px"
+        }
+      }
+    },
+    {
+      "__resolveType": "Product Shelf Tabbed - 01"
+    },
+    {
+      "__resolveType": "site/sections/Images/BannerArray.tsx",
+      "sectionProps": {
+        "layout": {
+          "mobile": {
+            "marginTop": "40px",
+            "marginBottom": "0px"
+          },
+          "desktop": {
+            "marginTop": "64px",
+            "marginBottom": "0px"
+          },
+          "marginTop": "64px"
+        }
+      },
+      "banners": [
+        {
+          "alt": "Banner 1",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/373042a3-807f-4938-99f8-70dcced3798a",
+          "url": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/f9bbd602-a1bb-474e-93d4-8d64bb5f5f14",
+          "href": "a"
+        },
+        {
+          "alt": "Banner 2",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/40224c20-c9db-4032-bce9-08219774c34a",
+          "url": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/f9bbd602-a1bb-474e-93d4-8d64bb5f5f14",
+          "href": "a"
+        },
+        {
+          "alt": "Banner 3",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/0d3e3d31-88f4-4381-b426-cd3431abec1c",
+          "url": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/f9bbd602-a1bb-474e-93d4-8d64bb5f5f14",
+          "href": "a"
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/Content/RichText.tsx",
+      "sectionProps": {
+        "layout": {
+          "mobile": {
+            "marginTop": "40px",
+            "marginBottom": "40px"
+          },
+          "desktop": {
+            "marginTop": "64px",
+            "marginBottom": "64px"
+          },
+          "marginTop": "64px"
+        }
+      },
+      "text": "<h1 data-mce-style=\"text-align: center;\" style=\"text-align: center;\">Fast Layout</h1><h2 data-mce-style=\"text-align: center;\" style=\"text-align: center;\">Subititulo Fast Layout</h2><p style=\"text-align: center;\" data-mce-style=\"text-align: center;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. Na tempor ligula nisi, sed vestibulum justo euismod vitae. Aenean non aliquam velit. Sed eu turpis acaliquam cursus. um dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum vestibulum velit. Seus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. sto euismod vitae. Aenean non aliquam velit. Sed eu turp aliquam cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. Nam tempor ligula nisi, sed vestibulum justo euismod vitae. Aenean non aliquam velit. Sed eu turpis <br>aliquam cursus.</p>",
+      "containerWidth": 1014
+    },
+    {
+      "__resolveType": "Newsletter - padrão"
+    },
+    {
+      "__resolveType": "Footer - padrão"
+    }
+  ],
+  "__resolveType": "website/pages/Page.tsx",
+  "unindexedDomain": false
+}

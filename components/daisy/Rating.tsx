@@ -9,7 +9,8 @@ export default function Rating(props: Props) {
 
   return (
     <div className="rating">
-      {stars.map((star, idx) => {
+      {rating}
+      {stars.map((_, idx) => {
         return (
           <input
             type="radio"

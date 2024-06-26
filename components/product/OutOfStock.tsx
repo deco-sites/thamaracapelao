@@ -1,14 +1,84 @@
 import { useSignal } from "@preact/signals";
-import { invoke } from "../../runtime.ts";
+import { invoke } from "$store/runtime.ts";
 import type { Product } from "apps/commerce/types.ts";
 import type { JSX } from "preact";
+import { useId } from "$store/sdk/useId.ts";
+import Icon from "$store/components/ui/Icon.tsx";
+import Button from "$store/components/ui/Button.tsx";
 
 export interface Props {
   productID: Product["productID"];
 }
 
+export interface Input {
+  /**
+   * @title Label
+   */
+  label: string;
+  /**
+   * @title Nome
+   * @description Assim como cadastrado no MasterData
+   */
+  name: string;
+  placeholder?: string;
+  /**
+   * @ignore
+   */
+  type: "text" | "email";
+  /**
+   * @ignore
+   */
+  error?: string;
+}
+
+function Input({
+  label,
+  placeholder,
+  type,
+  name,
+  loading,
+  error,
+}: Input & {
+  loading: boolean;
+}) {
+  const id = useId();
+
+  return (
+    <div class="flex flex-col gap-2 w-full">
+      <label htmlFor={id} class="font-bold text-sm">
+        {label}
+      </label>
+      <div class="relative flex h-fit">
+        <input
+          id={id}
+          data-error={error ? "true" : undefined}
+          data-loading={loading ? "true" : undefined}
+          class={"w-full bg-white h-12 px-4 focus:outline-none text-sm placeholder:text-gray-400 border border-gray-300 data-[loading='true']:border-success-500 data-[loading='true']:text-success-500 data-[error='true']:border-danger-500 data-[error='true']:text-danger-500"}
+          type={type}
+          placeholder={placeholder}
+          name={name}
+          disabled={loading}
+        />
+        {loading && (
+          <Icon
+            id="Check"
+            strokeWidth={4}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+            class="w-4 h-4 top-1/2 right-4 -translate-y-1/2 absolute pointer-events-none stroke-success-500"
+          />
+        )}
+      </div>
+      {error && <span class="text-xs text-danger-500">{error}</span>}
+    </div>
+  );
+}
+
 function Notify({ productID }: Props) {
   const loading = useSignal(false);
+  const errors = useSignal<Record<string, string>>({});
+  const success = useSignal(false);
 
   const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -21,21 +91,78 @@ function Notify({ productID }: Props) {
       const email =
         (e.currentTarget.elements.namedItem("email") as RadioNodeList)?.value;
 
+      const newErrors: Record<string, string> = {};
+
+      if (!name) {
+        newErrors.name = "Por favor, insira um nome";
+      }
+
+      if (!email) {
+        newErrors.email = "Por favor, insira um e-mail";
+      }
+
+      if (email && !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        newErrors.email = "Digite um e-mail válido";
+      }
+
+      if (Object.keys(newErrors).length > 0) {
+        errors.value = newErrors;
+        return;
+      }
+
       await invoke.vtex.actions.notifyme({ skuId: productID, name, email });
+
+      success.value = true;
+      errors.value = {};
+      e.currentTarget.reset();
     } finally {
       loading.value = false;
     }
   };
 
   return (
-    <form class="form-control justify-start gap-2" onSubmit={handleSubmit}>
-      <span class="text-base">Este produto está indisponivel no momento</span>
-      <span class="text-sm">Avise-me quando estiver disponivel</span>
+    <form
+      class="form-control justify-start gap-4 text-neutral-500 text-sm"
+      onSubmit={handleSubmit}
+    >
+      <span class="font-bold">Este produto está indisponível num momento</span>
+      <span class="">
+        Quer ser informado quando esse produto estiver disponível? Preencha os
+        dados abaixo que nós te avisamos ;)
+      </span>
 
-      <input placeholder="Nome" class="input input-bordered" name="name" />
-      <input placeholder="Email" class="input input-bordered" name="email" />
+      <Input
+        label="Nome"
+        name="name"
+        type="text"
+        placeholder="Digite seu nome"
+        loading={loading.value}
+        error={errors.value.name}
+      />
 
-      <button class="btn disabled:loading" disabled={loading}>Enviar</button>
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        placeholder="Digite seu e-mail"
+        loading={loading.value}
+        error={errors.value.email}
+      />
+
+      <Button
+        class="btn btn-outline btn-primary disabled:loading group"
+        disabled={loading.value}
+        type="submit"
+      >
+        <span class="text-neutral group-hover:text-primary-content">
+          Avise-me quando chegar
+        </span>
+      </Button>
+      {success.value && (
+        <span class="text-success-500 font-bold">
+          E-mail cadastrado com sucesso!
+        </span>
+      )}
     </form>
   );
 }

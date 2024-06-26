@@ -1,6 +1,6 @@
 import ImageCardsCarousel, {
   Props as CarouselProps,
-} from "../../components/cards/ImageCardsCarousel.tsx";
+} from "$store/components/cards/ImageCardsCarousel.tsx";
 
 type Props = {
   carousel?: CarouselProps;

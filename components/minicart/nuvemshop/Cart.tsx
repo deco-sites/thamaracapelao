@@ -1,7 +1,7 @@
-import { itemToAnalyticsItem, useCart } from "apps/nuvemshop/hooks/useCart.ts";
-import BaseCart from "../common/Cart.tsx";
+import { useCart } from "apps/nuvemshop/hooks/useCart.ts";
+import BaseCart, { MinicartConfig } from "../common/Cart.tsx";
 
-function Cart() {
+function Cart({ minicartConfig }: { minicartConfig?: MinicartConfig }) {
   const { cart, loading, updateItems } = useCart();
 
   const items = cart.value?.products ?? [];
@@ -14,13 +14,16 @@ function Cart() {
   const checkoutHref =
     `/checkout/v3/start/${cart.value?.id}/${cart.value?.token}`;
 
+  // TODO: Add analytics from Nuvemshop
   return (
     <BaseCart
+      minicartConfig={minicartConfig}
       items={items?.map((item) => ({
         image: {
           src: item.image.src,
           alt: item.image.alt[0] as string,
         },
+        url: item.url,
         quantity: item.quantity,
         name: item.name,
         price: {
@@ -34,7 +37,6 @@ function Cart() {
       locale={locale}
       currency={currency}
       loading={loading.value}
-      freeShippingTarget={1000}
       checkoutHref={checkoutHref}
       coupon={coupon as string}
       onUpdateQuantity={(quantity, index) =>
@@ -42,11 +44,6 @@ function Cart() {
           quantity: quantity,
           itemId: items[index].id,
         })}
-      itemToAnalyticsItem={(index) => {
-        const item = items[index];
-
-        return item && itemToAnalyticsItem(item, index);
-      }}
     />
   );
 }

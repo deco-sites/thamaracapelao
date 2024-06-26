@@ -2,58 +2,76 @@ import { asset } from "$fresh/runtime.ts";
 import type { JSX } from "preact";
 
 export type AvailableIcons =
+  | "Account"
+  | "Alert"
+  | "AlertError"
+  | "AlertInfo"
+  | "AlertSuccess"
+  | "AlertWarning"
+  | "ArrowBreadcrumb"
   | "ArrowsPointingOut"
   | "Bars3"
+  | "Check"
+  | "ChevronDown"
   | "ChevronLeft"
   | "ChevronRight"
   | "ChevronUp"
-  | "ChevronDown"
-  | "CreditCard"
+  | "Close"
+  | "CreditCards"
   | "Deco"
   | "Diners"
   | "Discord"
   | "Discount"
   | "Elo"
+  | "Elos"
+  | "Email"
+  | "Equals"
   | "Facebook"
+  | "FilledStar"
   | "FilterList"
+  | "Filters"
+  | "Grid"
+  | "HalfStar"
   | "Heart"
+  | "HeartLine"
+  | "Home"
   | "Instagram"
   | "Linkedin"
-  | "Minus"
-  | "MapPin"
+  | "List"
   | "MagnifyingGlass"
+  | "MapPin"
   | "Mastercard"
+  | "Mastercards"
   | "Message"
+  | "Minus"
+  | "Orders"
+  | "OutlineStar"
   | "Phone"
   | "Pix"
+  | "Pixs"
   | "Plus"
   | "QuestionMarkCircle"
+  | "Reload"
   | "Return"
+  | "Rule"
   | "Ruler"
   | "ShoppingCart"
   | "Star"
   | "Tiktok"
   | "Trash"
+  | "TriangleLeft"
+  | "TriangleRight"
   | "Truck"
   | "Twitter"
   | "User"
   | "Visa"
+  | "Visas"
   | "WhatsApp"
   | "XMark"
   | "Zoom"
-  | "Alert"
-  | "AlertInfo"
-  | "AlertSuccess"
-  | "AlertWarning"
-  | "AlertError"
   | "share";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
-  /**
-   * Symbol id from element to render. Take a look at `/static/icons.svg`.
-   *
-   * Example: <Icon id="Bell" />
-   */
   id: AvailableIcons;
   size?: number;
 }
@@ -69,6 +87,7 @@ function Icon(
       strokeWidth={strokeWidth}
     >
       <use href={asset(`/sprites.svg#${id}`)} />
+      {/* <title>{id}</title> */}
     </svg>
   );
 }

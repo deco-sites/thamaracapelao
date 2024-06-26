@@ -1,6 +1,7 @@
-// import { platform } from "../../apps/storefront.ts";
+// import { platform } from "$store/apps/storefront.ts";
 import { lazy } from "preact/compat";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
+import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import { MinicartConfig } from "deco-sites/fast-fashion/components/minicart/common/Cart.tsx";
 
 const CartVTEX = lazy(() => import("./vtex/Cart.tsx"));
 const CartVNDA = lazy(() => import("./vnda/Cart.tsx"));
@@ -11,31 +12,32 @@ const CartNuvemshop = lazy(() => import("./nuvemshop/Cart.tsx"));
 
 export interface Props {
   platform: ReturnType<typeof usePlatform>;
+  minicartConfig?: MinicartConfig;
 }
 
-function Cart({ platform }: Props) {
+function Cart({ platform, minicartConfig }: Props) {
   if (platform === "vtex") {
-    return <CartVTEX />;
+    return <CartVTEX minicartConfig={minicartConfig} />;
   }
 
   if (platform === "vnda") {
-    return <CartVNDA />;
+    return <CartVNDA minicartConfig={minicartConfig} />;
   }
 
   if (platform === "wake") {
-    return <CartWake />;
+    return <CartWake minicartConfig={minicartConfig} />;
   }
 
   if (platform === "linx") {
-    return <CartLinx />;
+    return <CartLinx minicartConfig={minicartConfig} />;
   }
 
   if (platform === "shopify") {
-    return <CartShopify />;
+    return <CartShopify minicartConfig={minicartConfig} />;
   }
 
   if (platform === "nuvemshop") {
-    return <CartNuvemshop />;
+    return <CartNuvemshop minicartConfig={minicartConfig} />;
   }
 
   return null;

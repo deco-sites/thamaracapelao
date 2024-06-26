@@ -15,7 +15,7 @@ export default function Hero(props: Props) {
     <div className="hero min-h-screen bg-base-200">
       <div
         className={image
-          ? "hero-content flex-col lg:flex-row"
+          ? "hero-content flex-col items-center lg:flex-row"
           : "hero-content text-center"}
       >
         {image && !imageOnRight && (

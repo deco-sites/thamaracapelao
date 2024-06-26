@@ -1,8 +1,8 @@
-import { itemToAnalyticsItem, useCart } from "apps/linx/hooks/useCart.ts";
-import BaseCart from "../common/Cart.tsx";
+import { useCart } from "apps/linx/hooks/useCart.ts";
+import BaseCart, { MinicartConfig } from "../common/Cart.tsx";
 
-function Cart() {
-  const { cart, loading, updateItem, addCoupon } = useCart();
+function Cart({ minicartConfig }: { minicartConfig?: MinicartConfig }) {
+  const { cart, loading, updateItem } = useCart();
   const items = cart.value?.Basket?.Items ?? [];
 
   const total = cart.value?.Basket?.Total ?? 0;
@@ -11,12 +11,15 @@ function Cart() {
   const currency = "BRL";
   const coupon = cart.value?.Basket?.Coupons?.[0]?.Code ?? undefined;
 
+  // TODO: Add analytics from LINX
   return (
     <BaseCart
+      minicartConfig={minicartConfig}
       items={items.map((item) => ({
         image: { src: item!.ImagePath!, alt: "product image" },
         quantity: item!.Quantity!,
         name: item!.Name!,
+        url: item!.UrlFriendly,
         price: { sale: item!.RetailPrice!, list: item!.ListPrice! },
       }))}
       total={total}
@@ -25,20 +28,13 @@ function Cart() {
       locale={locale}
       currency={currency}
       loading={loading.value}
-      freeShippingTarget={1000}
       coupon={coupon?.toString()}
       checkoutHref="/carrinho"
-      onAddCoupon={(CouponCode) => addCoupon({ CouponCode })}
       onUpdateQuantity={(quantity: number, index: number) =>
         updateItem({
           Quantity: quantity,
           BasketItemID: items[index]?.BasketItemID,
         })}
-      itemToAnalyticsItem={(index) => {
-        const item = items[index];
-
-        return item && itemToAnalyticsItem(item, coupon, index);
-      }}
     />
   );
 }

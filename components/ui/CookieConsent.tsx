@@ -1,4 +1,4 @@
-import { useId } from "../../sdk/useId.ts";
+import { useId } from "$store/sdk/useId.ts";
 
 const script = (id: string) => {
   const callback = () => {
@@ -137,6 +137,7 @@ function CookieConsent(props: Props) {
         </div>
       </div>
       <script
+        defer
         type="module"
         dangerouslySetInnerHTML={{ __html: `(${script})("${id}");` }}
       />
