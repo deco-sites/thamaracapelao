@@ -51,7 +51,6 @@ function Coupon({ coupon, onAddCoupon }: Props) {
               "flex md:flex-row w-full md:items-center justify-between",
               uiState.value === "add" &&
                 "flex-col gap-1",
-              uiState.value === "added" && "items-center",
             )}
           >
             <span class="underline font-bold text-neutral-500 cursor-pointer">

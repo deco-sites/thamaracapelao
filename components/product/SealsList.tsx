@@ -10,8 +10,6 @@ import {
 } from "$store/loaders/Seals/seals.tsx";
 import { Product, PropertyValue } from "apps/commerce/types.ts";
 import { clx } from "$store/sdk/clx.ts";
-import { useTheme } from "deco-sites/fast-fashion/sdk/useTheme.tsx";
-import { getBetterContrastingColor } from "deco-sites/fast-fashion/sections/Theme/Theme.tsx";
 
 interface Props {
   sealsConfig?: SealConfig[];
@@ -80,8 +78,6 @@ const styles = {
 
 const SealsList = ({ sealsConfig, product, position, limit = 3 }: Props) => {
   if (!sealsConfig?.length) return <></>;
-
-  const theme = useTheme();
 
   const { additionalProperty = [], isVariantOf } = product;
 
@@ -153,30 +149,21 @@ const SealsList = ({ sealsConfig, product, position, limit = 3 }: Props) => {
 
   return (
     <>
-      {filteredSeals.slice(0, limit).map((seal) => {
-        const textColor = getBetterContrastingColor(
-          seal.background,
-          theme.neutral,
-          theme["base-100"],
-        );
-
-        return (
-          <div
-            style={{
-              backgroundColor: seal.background,
-              color: textColor,
-            }}
-            class={clx(
-              position === "image" && styles.image,
-              position === "info" && styles.info,
-            )}
-          >
-            <span class="uppercase text-center inline text-[10px] leading-none">
-              {seal.label}
-            </span>
-          </div>
-        );
-      })}
+      {filteredSeals.slice(0, limit).map((seal) => (
+        <div
+          style={{
+            backgroundColor: seal.background,
+          }}
+          class={clx(
+            position === "image" && styles.image,
+            position === "info" && styles.info,
+          )}
+        >
+          <span class="uppercase text-white text-center inline text-[10px] leading-none">
+            {seal.label}
+          </span>
+        </div>
+      ))}
     </>
   );
 };
