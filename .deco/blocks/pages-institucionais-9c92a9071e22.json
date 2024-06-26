@@ -60,12 +60,12 @@
                 "alt": "imagem",
                 "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/8d9f0b3c-50ee-4fa2-99f3-d2ec3deb49ad"
               },
-              "title": "Política de Entrega",
+              "title": "Política de Fretes",
               "__resolveType": "site/sections/Institutional/InstitutionalBody.tsx"
             }
           ],
-          "slug": "politica-de-frete",
-          "title": "Política de Frete"
+          "slug": "politica-de-fretes",
+          "title": "Política de Fretes"
         },
         {
           "body": [
@@ -100,7 +100,7 @@
                 "alt": "imagem",
                 "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/e1a5610f-eea9-421c-9f14-c5d0e34e49b7"
               },
-              "title": "Trocas e Devoluções",
+              "title": "Política de Troca e Devolução",
               "__resolveType": "site/sections/Institutional/InstitutionalBody.tsx"
             }
           ],
