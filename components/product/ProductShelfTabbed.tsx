@@ -285,7 +285,9 @@ function TabbedProductShelf({
                 class={`btn px-8 py-4 btn-primary ${
                   index === ti ? "" : "btn-outline"
                 }`}
-                {...usePartialSection({ props: { tabIndex: index } })}
+                {...usePartialSection({
+                  props: { tabIndex: index, defer: null },
+                })}
               >
                 {tab.title}
               </button>

@@ -255,7 +255,7 @@ function ProductInfo({
   return (
     <>
       <div
-        class="flex flex-col flex-1 lg:sticky top-36 h-fit lg:max-w-[424px] text-neutral-600 text-sm"
+        class="flex flex-col flex-1 lg:sticky top-36 h-fit lg:max-w-[424px] text-neutral-600 text-sm group/product-info"
         id={productInfoID}
       >
         {/* Seals */}
@@ -341,7 +341,7 @@ function ProductInfo({
         {isAvailable
           ? (
             <>
-              <div>
+              <div class="group-has-[[data-variant-selector]:focus]/product-info:pointer-events-none group-has-[[data-variant-selector]:focus]/product-info:opacity-80">
                 {isAvailable && <ProductAddToCart product={product} />}
               </div>
 

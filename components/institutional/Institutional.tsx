@@ -68,7 +68,7 @@ export default function Institutional(
             class="peer hidden"
           />
           <label
-            class={"cursor-pointer xl:hidden w-full px-4 h-12 flex items-center justify-between bg-primary-500 text-neutral-600 font-bold uppercase"}
+            class={"cursor-pointer xl:hidden w-full px-4 h-12 flex items-center justify-between bg-primary-500 text-primary-content font-bold uppercase"}
             htmlFor="institucionalMenu"
           >
             <span>Menu institucional</span>

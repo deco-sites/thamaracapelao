@@ -62,7 +62,11 @@ function VariantSelector(
                     <li>
                       {renderAsImage
                         ? (
-                          <button f-partial={relativeLink} f-client-nav>
+                          <button
+                            data-variant-selector
+                            f-partial={relativeLink}
+                            f-client-nav
+                          >
                             <div class="flex flex-col items-center px-1.5">
                               <Image
                                 src={imageUrl ?? ""}
@@ -81,11 +85,15 @@ function VariantSelector(
                           </button>
                         )
                         : (
-                          <button f-partial={relativeLink} f-client-nav>
+                          <button
+                            data-variant-selector
+                            f-partial={relativeLink}
+                            f-client-nav
+                          >
                             <div
                               class={clx(
-                                "btn relative btn-primary min-w-12 px-3.5 text-neutral-600",
-                                !isSelected && "btn-outline",
+                                "btn relative btn-primary min-w-12 px-3.5 ",
+                                !isSelected && "btn-outline text-neutral ",
                                 !isAvailable && "diagonal-cross opacity-80",
                                 isSelected && !isAvailable &&
                                   "diagonal-cross-inverted opacity-100",
