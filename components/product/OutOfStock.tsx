@@ -53,7 +53,9 @@ function Input({
           id={id}
           data-error={error ? "true" : undefined}
           data-loading={loading ? "true" : undefined}
-          class={"w-full bg-white h-12 px-4 focus:outline-none text-sm placeholder:text-gray-400 border border-gray-300 data-[loading='true']:border-success-500 data-[loading='true']:text-success-500 data-[error='true']:border-danger-500 data-[error='true']:text-danger-500"}
+          class={
+            "w-full bg-white h-12 px-4 focus:outline-none text-sm placeholder:text-gray-400 border border-gray-300 data-[loading='true']:border-success-500 data-[loading='true']:text-success-500 data-[error='true']:border-danger-500 data-[error='true']:text-danger-500"
+          }
           type={type}
           placeholder={placeholder}
           name={name}
@@ -88,8 +90,9 @@ function Notify({ productID }: Props) {
 
       const name = (e.currentTarget.elements.namedItem("name") as RadioNodeList)
         ?.value;
-      const email =
-        (e.currentTarget.elements.namedItem("email") as RadioNodeList)?.value;
+      const email = (
+        e.currentTarget.elements.namedItem("email") as RadioNodeList
+      )?.value;
 
       const newErrors: Record<string, string> = {};
 
@@ -125,7 +128,7 @@ function Notify({ productID }: Props) {
       class="form-control justify-start gap-4 text-neutral-500 text-sm"
       onSubmit={handleSubmit}
     >
-      <span class="font-bold">Este produto está indisponível num momento</span>
+      <span class="font-bold">Este produto está indisponível no momento</span>
       <span class="">
         Quer ser informado quando esse produto estiver disponível? Preencha os
         dados abaixo que nós te avisamos ;)

@@ -1,5 +1,5 @@
 export const defaultColors = {
-  base: "rgba(255, 255, 255, 1)",
+  "base-100": "rgba(255, 255, 255, 1)",
   primary: "rgba(245, 183, 24, 1)",
   secondary: "rgba(166, 138, 117, 1)",
   neutral: "rgba(28, 28, 28, 1)",

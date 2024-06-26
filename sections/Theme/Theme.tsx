@@ -5,7 +5,6 @@
  * https://github.com/saadeghi/daisyui/blob/37bca23444bc9e4d304362c14b7088f9a08f1c74/src/docs/src/routes/theme-generator.svelte
  */
 import SiteTheme, { Font } from "apps/website/components/Theme.tsx";
-import { Page as PageType } from "deco/blocks/page.tsx";
 import Color from "npm:colorjs.io";
 import { defaultColors } from "./defaultColors.ts";
 import type { ComplementaryColors, ThemeColors } from "./theme.d.ts";
@@ -67,10 +66,6 @@ export interface Props {
    * @description Fonte do tema, a configuração das fontes primarias, secundaria e terciarias esta sendo feita pela ordem de adição
    */
   font?: Font;
-  /**
-   * @description Pagina de exemplo
-   */
-  page?: PageType;
 }
 
 const CMY_HUES = [180, 300, 60];
@@ -79,8 +74,9 @@ const CMY_HUES = [180, 300, 60];
 type Theme = ThemeColors & ComplementaryColors & Button & ProductImages;
 
 function hueShift(hues: Array<number>, hue: number, intensity: number) {
-  const closestHue =
-      hues.sort((a, b) => (Math.abs(a - hue) - Math.abs(b - hue)))[0],
+  const closestHue = hues.sort(
+      (a, b) => Math.abs(a - hue) - Math.abs(b - hue),
+    )[0],
     hueShift = closestHue - hue;
   return Math.round(intensity * hueShift * 0.5);
 }
@@ -189,7 +185,7 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
       lighten(t["neutral"], INTENSITY_MAP[300]),
     200: t["neutralShades"]?.["200"] ??
       lighten(t["neutral"], INTENSITY_MAP[200]),
-    100: t["base"],
+    100: t["base-100"],
   };
 
   const danger = {
@@ -238,25 +234,25 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--primary-400-content": getBetterContrastingColor(
       primary[400],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--primary-300": primary[300],
     "--primary-300-content": getBetterContrastingColor(
       primary[300],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--primary-200": primary[200],
     "--primary-200-content": getBetterContrastingColor(
       primary[200],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--primary-100": primary[100],
     "--primary-100-content": getBetterContrastingColor(
       primary[100],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
 
     "--secondary": secondary[500],
@@ -265,25 +261,25 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--secondary-400-content": getBetterContrastingColor(
       secondary[400],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--secondary-300": secondary[300],
     "--secondary-300-content": getBetterContrastingColor(
       secondary[300],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--secondary-200": secondary[200],
     "--secondary-200-content": getBetterContrastingColor(
       secondary[200],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--secondary-100": secondary[100],
     "--secondary-100-content": getBetterContrastingColor(
       secondary[100],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
 
     "--neutral-700": t["neutral"],
@@ -291,37 +287,37 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--neutral-600-content": getBetterContrastingColor(
       neutral[600],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--neutral-500": neutral[500],
     "--neutral-500-content": getBetterContrastingColor(
       neutral[500],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--neutral-400": neutral[400],
     "--neutral-400-content": getBetterContrastingColor(
       neutral[400],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--neutral-300": neutral[300],
     "--neutral-300-content": getBetterContrastingColor(
       neutral[300],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--neutral-200": neutral[200],
     "--neutral-200-content": getBetterContrastingColor(
       neutral[200],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--neutral-100": neutral[100],
     "--neutral-100-content": getBetterContrastingColor(
       neutral[100],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
 
     "--danger": danger[500],
@@ -330,25 +326,25 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--danger-400-content": getBetterContrastingColor(
       danger[400],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--danger-300": danger[300],
     "--danger-300-content": getBetterContrastingColor(
       danger[300],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--danger-200": danger[200],
     "--danger-200-content": getBetterContrastingColor(
       danger[200],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--danger-100": danger[100],
     "--danger-100-content": getBetterContrastingColor(
       danger[100],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
 
     "--warning": warning[500],
@@ -357,25 +353,25 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--warning-400-content": getBetterContrastingColor(
       warning[400],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--warning-300": warning[300],
     "--warning-300-content": getBetterContrastingColor(
       warning[300],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--warning-200": warning[200],
     "--warning-200-content": getBetterContrastingColor(
       warning[200],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--warning-100": warning[100],
     "--warning-100-content": getBetterContrastingColor(
       warning[100],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
 
     "--success": success[500],
@@ -384,25 +380,25 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--success-400-content": getBetterContrastingColor(
       success[400],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--success-300": success[300],
     "--success-300-content": getBetterContrastingColor(
       success[300],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--success-200": success[200],
     "--success-200-content": getBetterContrastingColor(
       success[200],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--success-100": success[100],
     "--success-100-content": getBetterContrastingColor(
       success[100],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
 
     "--info": info[500],
@@ -411,40 +407,52 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--info-400-content": getBetterContrastingColor(
       info[400],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--info-300": info[300],
     "--info-300-content": getBetterContrastingColor(
       info[300],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--info-200": info[200],
     "--info-200-content": getBetterContrastingColor(
       info[200],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
     "--info-100": info[100],
     "--info-100-content": getBetterContrastingColor(
       info[100],
       t["neutral"],
-      t["base"],
+      t["base-100"],
     ),
 
     "--p": t["primary"],
-    "--pc": getBetterContrastingColor(t["primary"], t["neutral"], t["base"]),
+    "--pc": getBetterContrastingColor(
+      t["primary"],
+      t["neutral"],
+      t["base-100"],
+    ),
 
     "--s": t["secondary"],
-    "--sc": getBetterContrastingColor(t["secondary"], t["neutral"], t["base"]),
+    "--sc": getBetterContrastingColor(
+      t["secondary"],
+      t["neutral"],
+      t["base-100"],
+    ),
 
     "--a": t["secondary"],
-    "--ac": getBetterContrastingColor(t["secondary"], t["neutral"], t["base"]),
+    "--ac": getBetterContrastingColor(
+      t["secondary"],
+      t["neutral"],
+      t["base-100"],
+    ),
 
     "--n": t["neutral"]["600"] ?? lighten(t["neutral"], INTENSITY_MAP[600]),
-    "--nc": t["base"],
+    "--nc": t["base-100"],
 
-    "--b1": t["base"],
+    "--b1": t["base-100"],
     "--b2": t["neutralShades"]?.["200"] ??
       lighten(t["neutral"], INTENSITY_MAP[200]),
     "--b3": t["neutralShades"]?.["300"] ??
@@ -452,16 +460,28 @@ const toVariables = (t: Theme & Required<ThemeColors>): [string, string][] => {
     "--bc": t["neutral"]["600"] ?? lighten(t["neutral"], INTENSITY_MAP[600]),
 
     "--su": t["success"],
-    "--suc": getBetterContrastingColor(t["success"], t["neutral"], t["base"]),
+    "--suc": getBetterContrastingColor(
+      t["success"],
+      t["neutral"],
+      t["base-100"],
+    ),
 
     "--wa": t["warning"],
-    "--wac": getBetterContrastingColor(t["secondary"], t["neutral"], t["base"]),
+    "--wac": getBetterContrastingColor(
+      t["secondary"],
+      t["neutral"],
+      t["base-100"],
+    ),
 
     "--er": t["danger"],
-    "--erc": getBetterContrastingColor(t["danger"], t["neutral"], t["base"]),
+    "--erc": getBetterContrastingColor(
+      t["danger"],
+      t["neutral"],
+      t["base-100"],
+    ),
 
     "--in": t["info"],
-    "--inc": getBetterContrastingColor(t["info"], t["neutral"], t["base"]),
+    "--inc": getBetterContrastingColor(t["info"], t["neutral"], t["base-100"]),
   }).map(([key, color]) => {
     return [key, toValue(color)] as [string, string];
   });
@@ -518,12 +538,12 @@ function Section({
     ],
     [
       "--font-secondary",
-      secondaryFont ||
+      secondaryFont || primaryFont ||
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
     ],
     [
       "--font-tertiary",
-      tertiaryFont ||
+      tertiaryFont || secondaryFont || primaryFont ||
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
     ],
   ].map(([name, value]) => ({ name, value }));
@@ -540,8 +560,8 @@ export function Preview(props: Props) {
     <>
       {
         /* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
-        * This is a temporary solution until the admin's color schema is accessible.
-        * TODO(@carol): Change this temporary solution.
+       * This is a temporary solution until the admin's color schema is accessible.
+       * TODO(@carol): Change this temporary solution.
        */
       }
       <style>
@@ -649,9 +669,7 @@ export function Preview(props: Props) {
         </div>
       </div>
       {props.font?.family && (
-        <div class="text-center py-2">
-          Font: {props.font.family}
-        </div>
+        <div class="text-center py-2">Font: {props.font.family}</div>
       )}
     </>
   );
@@ -747,13 +765,15 @@ const TextColorsPreview = () => {
   );
 };
 
-const PreviewContainer = (
-  { title, children, codeString }: {
-    title: string;
-    children: ComponentChildren;
-    codeString: string;
-  },
-) => {
+const PreviewContainer = ({
+  title,
+  children,
+  codeString,
+}: {
+  title: string;
+  children: ComponentChildren;
+  codeString: string;
+}) => {
   const borderClass = "border-color-light";
   const btnOutlineClass = "btn-outline-dark";
   const checkboxId = `show-code-${title.replace(/\s+/g, "-").toLowerCase()}`;
@@ -819,9 +839,7 @@ const PreviewContainer = (
             </label>
             <div
               id={codeBlockId}
-              class={clx(
-                "mt-4 mb-2 text-xs md:text-sm bg-slate-100",
-              )}
+              class={clx("mt-4 mb-2 text-xs md:text-sm bg-slate-100")}
             >
               <pre class="p-4 overflow-x-auto">{codeString}</pre>
             </div>

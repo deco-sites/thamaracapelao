@@ -1,6 +1,6 @@
 export interface ThemeColors {
   /** @format color-input */
-  base: string;
+  "base-100": string;
   /** @format color-input */
   primary: string;
   /** @format color-input */
