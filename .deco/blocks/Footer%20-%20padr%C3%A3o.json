@@ -39,11 +39,6 @@
           "href": "/institucional/como-comprar",
           "@type": "text",
           "title": "Como Comprar"
-        },
-        {
-          "href": "/institucional/fale-conosco",
-          "@type": "text",
-          "title": "Fale Conosco"
         }
       ],
       "colapseOnMobile": true
@@ -65,7 +60,7 @@
         {
           "href": "/account",
           "@type": "text",
-          "title": "MInha conta"
+          "title": "Minha conta"
         },
         {
           "@type": "text",
