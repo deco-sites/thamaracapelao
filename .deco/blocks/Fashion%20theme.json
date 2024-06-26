@@ -17,27 +17,6 @@
             "italic": false
           }
         ]
-      },
-      {
-        "family": "League Spartan",
-        "variations": [
-          {
-            "weight": "300",
-            "italic": false
-          },
-          {
-            "weight": "400",
-            "italic": false
-          },
-          {
-            "weight": "700",
-            "italic": false
-          },
-          {
-            "weight": "900",
-            "italic": false
-          }
-        ]
       }
     ],
     "__resolveType": "website/loaders/fonts/googleFonts.ts"
