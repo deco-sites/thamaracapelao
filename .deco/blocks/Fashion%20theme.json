@@ -2,7 +2,7 @@
   "font": {
     "fonts": [
       {
-        "family": "Lato",
+        "family": "League Spartan",
         "variations": [
           {
             "weight": "400",
@@ -19,7 +19,7 @@
         ]
       },
       {
-        "family": "Montserrat",
+        "family": "League Spartan",
         "variations": [
           {
             "weight": "300",
@@ -52,9 +52,9 @@
   ],
   "mainColors": {
     "neutral": "#1c1c1c",
-    "primary": "#54c051",
+    "primary": "#282828",
     "warning": "#ffbe0a",
-    "secondary": "#0d0d0d",
+    "secondary": "#282828",
     "base": "#ffffff",
     "info": "#0099ff",
     "danger": "#ff1635",

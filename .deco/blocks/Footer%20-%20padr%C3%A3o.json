@@ -1,15 +1,15 @@
 {
   "logo": {
     "alt": "Logo",
-    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4403/d95af92f-31ae-4b5c-bc79-e3281552f9ab",
+    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/619fe37f-3852-4ae9-895d-ddca2455f00b",
     "width": 180,
     "height": 40
   },
   "sections": [
     {
-      "text": "<h4><strong>Fale Conosco:</strong></h4><p>(00) 0000-0000</p><p><a href=\"mailto:email@email.com.br\" data-mce-href=\"mailto:email@email.com.br\">email@email.com.br</a></p><p><br data-mce-bogus=\"1\"></p><h4><strong>Horário de Atendimento:</strong></h4><p>Seg. à Sex das 0h às 00h</p><p>Sábado das 0h às 00h</p>",
       "@type": "html",
-      "title": "Atendimento"
+      "title": "Atendimento",
+      "text": "<h4><strong>Fale Conosco:</strong></h4><p>(00) 0000-0000</p><p><a href=\"mailto:email@email.com.br\" data-mce-href=\"mailto:email@email.com.br\">email@email.com.br</a></p><p><br data-mce-bogus=\"1\"></p><h4><strong>Horário de Atendimento:</strong></h4><p>Seg. à Sex das 0h às 00h</p><p>Sábado das 0h às 00h</p>"
     },
     {
       "@type": "text",
@@ -60,8 +60,8 @@
         {
           "@type": "text",
           "title": "Fale Conosco",
-          "external": false,
-          "href": "/institucional/fale-conosco"
+          "href": "/institucional/fale-conosco",
+          "external": false
         }
       ],
       "colapseOnMobile": true
