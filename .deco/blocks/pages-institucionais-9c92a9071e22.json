@@ -31,10 +31,10 @@
         {
           "body": [
             {
-              "title": "Perguntas frequentes",
               "__resolveType": "site/sections/SEO/PageSEO.tsx",
               "structuredData": null,
-              "description": "Políticas de Pagamentos"
+              "description": "Políticas de Pagamentos",
+              "title": "Políticas de Pagamentos"
             },
             {
               "text": "<p style=\"line-height: 1.5;\" data-mce-style=\"line-height: 1.5;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong>POLÍTICAS DE PAGAMENTO</strong></span></p><p style=\"line-height: 1.5;\" data-mce-style=\"line-height: 1.5;\"><br data-mce-bogus=\"1\"></p><p style=\"line-height: 1.5;\" data-mce-style=\"line-height: 1.5;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong>Cartões de crédito</strong></span></p><p style=\"line-height: 1.5;\" data-mce-style=\"line-height: 1.5;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong><br data-mce-bogus=\"1\"></strong></span></p><p style=\"line-height: 1.5;\" data-mce-style=\"line-height: 1.5;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong></strong></span><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong></strong></span><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Nossa loja virtual aceita os cartões Mastercard, Diners Club, Visa, American Express, Hipercard e Elo.&nbsp;</span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">&nbsp;</span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">A partir da constatação da aprovação de crédito pela sua operadora, o prazo de entrega passa a vigorar. Essa é a forma mais rápida de processar o seu pedido.</span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">&nbsp;</span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Na hora de optar pelo pagamento parcelado no cartão, você deve levar em consideração o valor total da compra e não somente o valor da parcela. Este valor deve estar dentro do limite total de seu cartão de crédito.</span></p><p><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><br data-mce-bogus=\"1\"></span></p><p><strong><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">PIX</span></strong><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">&nbsp;</span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Após finalizar seu pedido, será gerado um QR code para pagamento via PIX. Ou se preferir poderá utilizar a chave: CNPJ: 12.888.683/0001-44. O prazo para a compensação é de até 2 dias úteis.</span></p><p><strong><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><br data-mce-bogus=\"1\"></span></strong></p><p><strong><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Boleto Bancário</span></strong></p><p><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><br data-mce-bogus=\"1\"></span></p><p><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Para pagamento utilizando boleto bancário, a validação da sua compra só será feita após a compensação do pagamento pela Instituição Financeira. O prazo para a compensação é de até 3 dias úteis.</span></p><p><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Todos os pagamentos são feitos em ambiente 100% seguro. Todos os dados são criptografados por SSL e enviados diretamente para a Instituição Financeira, não ficando guardado em nossos bancos de dados.</span></p><p><br data-mce-bogus=\"1\"></p>",
@@ -52,7 +52,7 @@
         {
           "body": [
             {
-              "title": "Política de entrega",
+              "title": "Política de Fretes",
               "__resolveType": "site/sections/SEO/PageSEO.tsx",
               "structuredData": null,
               "description": "Política de Fretes"
@@ -73,7 +73,7 @@
         {
           "body": [
             {
-              "title": "Política de privacidade",
+              "title": "Como Comprar",
               "__resolveType": "site/sections/SEO/PageSEO.tsx",
               "structuredData": null,
               "description": "Como Comprar"
@@ -94,7 +94,7 @@
         {
           "body": [
             {
-              "title": "Trocas e devoluções",
+              "title": "Política de Troca e Devolução",
               "__resolveType": "site/sections/SEO/PageSEO.tsx",
               "structuredData": null,
               "description": "Política de Troca e Devolução"
