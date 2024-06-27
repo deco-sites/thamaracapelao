@@ -8,7 +8,8 @@
       "noFollow": true,
       "structuredData": {
         "__resolveType": "PLP Loader"
-      }
+      },
+      "description": "Não encontramos o resultado para a busca realizada"
     },
     {
       "__resolveType": "Header - 01"
