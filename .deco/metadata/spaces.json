@@ -1918,7 +1918,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 30,
+                "width": 41.66666666666667,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -1940,7 +1940,7 @@
               },
               {
                 "type": "stack",
-                "width": 70,
+                "width": 58.333333333333336,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -1979,8 +1979,7 @@
           "width": 30,
           "id": "%2F.deco%2Fblocks%2Fpages-institucionais-9c92a9071e22.json::Properties::list::Properties::%7B%7D",
           "state": {
-            "__signal": null,
-            "value": null
+            "__signal": null
           }
         },
         "%2F.deco%2Fblocks%2Fpages-institucionais-9c92a9071e22.json::Preview::world::Preview::%7B%7D": {
@@ -2333,7 +2332,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 30,
+                "width": 41.66666666666667,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -2355,7 +2354,7 @@
               },
               {
                 "type": "stack",
-                "width": 70,
+                "width": 58.333333333333336,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -2394,8 +2393,7 @@
           "width": 30,
           "id": "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Properties::list::Properties::%7B%7D",
           "state": {
-            "__signal": null,
-            "value": null
+            "__signal": null
           }
         },
         "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Preview::world::Preview::%7B%7D": {
@@ -2578,7 +2576,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 14.842767295597485,
+                "width": 28.364779874213834,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -2600,7 +2598,7 @@
               },
               {
                 "type": "stack",
-                "width": 85.15723270440252,
+                "width": 71.63522012578616,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
