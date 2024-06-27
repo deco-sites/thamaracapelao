@@ -40,28 +40,10 @@
       }
     },
     {
-      "page": {
-        "__resolveType": "PLP Loader"
-      },
-      "sectionProps": {
-        "layout": {
-          "mobile": {
-            "marginTop": "32px",
-            "marginBottom": "32px"
-          },
-          "desktop": {
-            "marginTop": "32px",
-            "marginBottom": "32px"
-          }
-        }
-      },
-      "__resolveType": "site/sections/Product/SearchResult.tsx",
-      "notFoundProps": {
-        "email": "atendimento@loja.com.br",
-        "phone": "(99) 9999-9999"
-      }
+      "__resolveType": "SearchResult - Padrão"
     },
     {
+      "__resolveType": "site/sections/Category/SeoText.tsx",
       "sectionProps": {
         "layout": {
           "mobile": {
@@ -74,7 +56,6 @@
           }
         }
       },
-      "__resolveType": "site/sections/Category/SeoText.tsx",
       "contents": [
         {
           "rule": {
