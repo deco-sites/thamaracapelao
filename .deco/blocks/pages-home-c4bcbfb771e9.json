@@ -6,10 +6,7 @@
       "__resolveType": "site/sections/SEO/PageSEO.tsx",
       "structuredData": null,
       "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/9c982f00-ef34-40fa-b995-9c2f909f5f23",
-      "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/c0d0f92c-7f5f-4659-92ec-e6eccc8bc2a1",
-      "description": "A marca que leva o nome da diretora criativa é reconhecida pela riqueza dos detalhes de cada criação e homenagens fortes à feminilidade.",
-      "title": "Thamara Capelão | Moda Feminina",
-      "titleTemplate": "Thamara Capelão | Moda Feminina"
+      "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/c0d0f92c-7f5f-4659-92ec-e6eccc8bc2a1"
     },
     {
       "__resolveType": "Header - 01"
@@ -272,7 +269,7 @@
           "marginTop": "64px"
         }
       },
-      "text": "<h1 data-mce-style=\"text-align: center;\" style=\"text-align: center;\">THAMARA CAPELÃO</h1><h2 data-mce-style=\"text-align: center;\" style=\"text-align: center;\">Moda Feminina</h2><p style=\"text-align: center;\" data-mce-style=\"text-align: center;\">Fundada em 1989 por <strong>Thamara Capelão</strong>, a marca que leva o nome da diretora criativa é reconhecida pela riqueza dos detalhes de cada criação e homenagens fortes à feminilidade. Atemporalidade, exclusividade e qualidade: esses são princípios que estão presentes em cada produto, atendimento e conteúdo criado.</p>",
+      "text": "<h1 data-mce-style=\"text-align: center;\" style=\"text-align: center;\">Fast Layout</h1><h2 data-mce-style=\"text-align: center;\" style=\"text-align: center;\">Subititulo Fast Layout</h2><p style=\"text-align: center;\" data-mce-style=\"text-align: center;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. Na tempor ligula nisi, sed vestibulum justo euismod vitae. Aenean non aliquam velit. Sed eu turpis acaliquam cursus. um dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum vestibulum velit. Seus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. sto euismod vitae. Aenean non aliquam velit. Sed eu turp aliquam cursus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut quam nibh, tempus vel varius egestas, interdum eget purus. Nam tempor ligula nisi, sed vestibulum justo euismod vitae. Aenean non aliquam velit. Sed eu turpis <br>aliquam cursus.</p>",
       "containerWidth": 1014
     },
     {
