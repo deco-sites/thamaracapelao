@@ -15,10 +15,6 @@ const script = (id: string) => {
         localStorage.setItem(KEY, ACCEPTED);
         elem.classList.add(HIDDEN);
       });
-      const close = elem.querySelector("[data-button-cc-close]");
-      close &&
-        close.addEventListener("click", () => elem.classList.add(HIDDEN));
-      elem.classList.remove(HIDDEN);
     }
   };
 
