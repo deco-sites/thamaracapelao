@@ -277,6 +277,9 @@
     },
     {
       "__resolveType": "Footer - padrão"
+    },
+    {
+      "__resolveType": "Cookie Consent - Padrão"
     }
   ],
   "__resolveType": "website/pages/Page.tsx",
