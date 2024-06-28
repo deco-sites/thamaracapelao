@@ -14,7 +14,7 @@ interface Content {
    */
   slug: string;
   /**
-   *  @title Conteúdo do lado direito
+   *  @title Conteúdo ao lado direito
    */
   body: Section[];
 }

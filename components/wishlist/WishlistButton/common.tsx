@@ -87,7 +87,7 @@ function ButtonCommon({
     <div
       class={clx(
         "",
-        showTooltip.value && "tooltip tooltip-bottom tooltip-open",
+        showTooltip.value && "tooltip tooltip-left tooltip-open",
       )}
       data-tip="Favoritado!"
     >
