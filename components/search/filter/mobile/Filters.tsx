@@ -113,7 +113,10 @@ export function Buttons({ url: urlStr }: Pick<Props, "url">) {
       <button class="h-12 grow border border-primary-500" onClick={handleClear}>
         Limpar
       </button>
-      <button class="h-12 grow bg-primary-500" onClick={handleApply}>
+      <button
+        class="h-12 grow bg-primary-500 text-primary-content"
+        onClick={handleApply}
+      >
         Aplicar
       </button>
     </div>

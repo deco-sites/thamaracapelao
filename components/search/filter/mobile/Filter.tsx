@@ -22,7 +22,7 @@ export default function Filter({ filter, open }: FilterValuesProps) {
         for={`filter-checkbox-${key}`}
         class="flex items-center justify-between bg-primary-500 px-6 py-3"
       >
-        <h5 class="text-neutral-700 font-bold">{label}</h5>
+        <h5 class="text-primary-content font-bold">{label}</h5>
         <Icon
           class="rotate-90 duration-200 group-has-[.filter-checkbox:checked]/filter:-rotate-90"
           id="ChevronRight"
