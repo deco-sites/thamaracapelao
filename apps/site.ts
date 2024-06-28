@@ -10,6 +10,7 @@ import type { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 import { Props as WebsiteProps } from "apps/website/mod.ts";
+import { ThemeColors } from "deco-sites/fast-fashion/sections/Theme/theme.d.ts";
 
 export type Props = {
   /**
@@ -31,6 +32,7 @@ export type Platform =
   | "custom";
 
 export let _platform: Platform = "custom";
+export let _theme: ThemeColors;
 
 export type App = ReturnType<typeof Site>;
 //@ts-expect-error - This is a bug in the type definition
@@ -64,6 +66,7 @@ export default function Site(
   //@ts-expect-error - This is a bug in the type definition
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   _platform = state.platform || "custom";
+  _theme = state.theme?.props.mainColors || {} as ThemeColors;
 
   // Prevent console.logging twice
   if (firstRun) {

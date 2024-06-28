@@ -112,7 +112,7 @@ function lighten(hex: string, intensity: number) {
 //   return new Color("hsv", [hue, saturation, value]);
 // }
 
-const getBetterContrastingColor = (
+export const getBetterContrastingColor = (
   color: string | Color,
   ...colors: string[]
 ) => {

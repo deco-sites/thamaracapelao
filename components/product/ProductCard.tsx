@@ -233,9 +233,6 @@ function ProductCard({
                     {formatPrice(price, offers?.priceCurrency)}
                   </div>
                 </div>
-                <span class="text-xs text-neutral-500 leading-[20px]">
-                  s/ juros
-                </span>
 
                 {/* Installments */}
                 {installments && installments.billingDuration > 1 && (
