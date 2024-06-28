@@ -26,44 +26,25 @@ const script = (id: string) => {
 };
 
 export interface Props {
-  title?: string;
-  /** @format html */
+  /**
+   * @title Texto
+   * @format html */
   text?: string;
-  policy?: {
-    text?: string;
-    link?: string;
-  };
-  buttons?: {
-    allowText: string;
-    cancelText?: string;
-  };
-  layout?: {
-    position?: "Expanded" | "Left" | "Center" | "Right";
-    content?: "Tiled" | "Piled up";
-  };
+  /**
+   * @title Texto do botão de aceitar
+   */
+  acceptButtonLabel?: string;
 }
 
 const DEFAULT_PROPS = {
-  title: "Cookies",
   text:
-    "Guardamos estatísticas de visitas para melhorar sua experiência de navegação.",
-  policy: {
-    text: "Saiba mais sobre sobre política de privacidade",
-    link: "/politica-de-privacidade",
-  },
-  buttons: {
-    allowText: "Aceitar",
-    cancelText: "Fechar",
-  },
-  layout: {
-    position: "Expanded",
-    content: "Tiled",
-  },
+    `<p>Este site utiliza cookies para personalizar a sua experiência. Ao continuar navegando, você concorda com a nossa <a data-mce-href="../../../institucional/quem-somos" href="../../../institucional/quem-somos">política de utilização de cookies</a>.</p>`,
+  acceptButtonLabel: "Ok, prosseguir",
 };
 
 function CookieConsent(props: Props) {
   const id = useId();
-  const { title, text, policy, buttons, layout } = {
+  const { text, acceptButtonLabel } = {
     ...DEFAULT_PROPS,
     ...props,
   };
@@ -72,69 +53,16 @@ function CookieConsent(props: Props) {
     <>
       <div
         id={id}
-        class={`
-          transform-gpu translate-y-[200%] transition fixed bottom-0 lg:bottom-2 w-screen z-50 lg:flex
-          ${layout?.position === "Left" ? "lg:justify-start" : ""}
-          ${layout?.position === "Center" ? "lg:justify-center" : ""}
-          ${layout?.position === "Right" ? "lg:justify-end" : ""}
-        `}
+        class="transform-gpu left-1/2 shadow-lg bg-base-100 -translate-x-1/2 translate-y-[200%] transition fixed bottom-0 lg:bottom-2 z-50 lg:flex w-full max-w-2xl px-[15px] py-[10px] lg:px-[30px] lg:py-[20px] flex flex-col text-center lg:text-left lg:flex-row gap-4 items-center border border-neutral-300"
       >
         <div
-          class={`
-          p-4 mx-4 my-2 flex flex-col gap-4 shadow bg-base-100 rounded border border-base-200 
-          ${
-            !layout?.position || layout?.position === "Expanded"
-              ? "lg:container lg:mx-auto"
-              : `
-            ${layout?.content === "Piled up" ? "lg:w-[480px]" : ""}
-            ${
-                !layout?.content || layout?.content === "Tiled"
-                  ? "lg:w-[520px]"
-                  : ""
-              }
-          `
-          }
-          ${
-            !layout?.content || layout?.content === "Tiled"
-              ? "lg:flex-row lg:items-end"
-              : ""
-          }
-          
-        `}
-        >
-          <div
-            class={`flex-auto flex flex-col gap-4 ${
-              !layout?.content || layout?.content === "Tiled" ? "lg:gap-2" : ""
-            }`}
-          >
-            <h3 class="text-xl">{title}</h3>
-            {text && (
-              <div
-                class="text-base"
-                dangerouslySetInnerHTML={{ __html: text }}
-              />
-            )}
+          class="text-sm [&_a]:font-bold [&_a:hover]:underline"
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
 
-            <a href={policy.link} class="text-sm link link-secondary">
-              {policy.text}
-            </a>
-          </div>
-
-          <div
-            class={`flex flex-col gap-2 ${
-              !layout?.position || layout?.position === "Expanded"
-                ? "lg:flex-row"
-                : ""
-            }`}
-          >
-            <button class="btn" data-button-cc-accept>
-              {buttons.allowText}
-            </button>
-            <button class="btn btn-outline" data-button-cc-close>
-              {buttons.cancelText}
-            </button>
-          </div>
-        </div>
+        <button class="btn btn-primary h-[50px]" data-button-cc-accept>
+          {acceptButtonLabel}
+        </button>
       </div>
       <script
         defer

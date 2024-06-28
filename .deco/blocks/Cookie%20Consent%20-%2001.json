@@ -1,5 +1,5 @@
 {
-  "text": "<p>We use cookies to personalize ads and improve your experience on the site.</p>",
+  "text": "<p>Este site utiliza cookies para personalizar a sua experiência. Ao continuar&nbsp;navegando, você concorda com a nossa <a data-mce-href=\"../../../institucional/quem-somos\" href=\"../../../institucional/quem-somos\">política de utilização de cookies</a>.</p>",
   "title": "Cookies",
   "layout": {
     "content": "Piled up",
@@ -13,5 +13,6 @@
     "allowText": "Accept",
     "cancelText": "Close"
   },
-  "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
+  "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx",
+  "acceptButtonLabel": "Ok, prosseguir"
 }
