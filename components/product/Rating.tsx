@@ -7,7 +7,7 @@ type Props = {
 
 function Rating({ rating, size = 16 }: Props) {
   return (
-    <a class="flex gap-[1px]" href="#reviewsInfo">
+    <div class="flex gap-[1px]">
       {new Array(5).fill(null).map((_, index) => {
         const startIconId = rating > index && rating < index + 1
           ? "HalfStar"
@@ -17,7 +17,7 @@ function Rating({ rating, size = 16 }: Props) {
 
         return <Icon id={startIconId} class="text-primary" size={size} />;
       })}
-    </a>
+    </div>
   );
 }
 

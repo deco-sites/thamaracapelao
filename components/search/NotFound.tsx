@@ -97,7 +97,7 @@ export default function NotFound(
 
           <a
             href="/"
-            class="p-2 w-52 h-12 flex items-center justify-center border border-primary-500 duration-150 hover:bg-primary-500 text-neutral-600 text-sm font-bold"
+            class="p-2 w-52 h-12 flex items-center justify-center border border-primary-500 duration-150 hover:bg-primary-500 hover:text-primary-content text-neutral-600 text-sm font-bold"
           >
             Voltar para a Home
           </a>

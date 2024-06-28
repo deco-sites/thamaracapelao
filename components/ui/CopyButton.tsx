@@ -1,6 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { asset } from "$fresh/runtime.ts";
 import { clx } from "$store/sdk/clx.ts";
+import Icon from "deco-sites/fast-fashion/components/ui/Icon.tsx";
 
 interface Props {
   contentToCopy: string;
@@ -24,14 +25,7 @@ export default function CopyButton({ contentToCopy }: Props) {
       onClick={copyToClipboard}
       data-tip="Link copiado!"
     >
-      <img
-        class="lg:max-w-7 lg:max-h-7"
-        height={32}
-        width={32}
-        src={asset("/image/copy.svg")}
-        alt="Copy"
-        loading="lazy"
-      />
+      <Icon id="Copy" class="text-primary" size={32} />
     </button>
   );
 }

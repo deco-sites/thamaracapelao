@@ -282,7 +282,7 @@ function ProductInfo({
               </h1>
               <div class="flex gap-4 items-center">
                 {sku && (
-                  <span class="text-xs text-neutral-500 leading-[14px]">
+                  <span class="text-xs text-neutral-500 leading-[10px]">
                     sku: {sku}
                   </span>
                 )}

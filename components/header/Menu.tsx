@@ -14,8 +14,9 @@ function MenuItem({ item, level = 0 }: { item: NavElement; level: number }) {
       <div>
         <a
           class={clx(
-            "collapse-title flex text-primary-content border-b border-solid border-base-100",
-            level === 2 ? "bg-primary-200" : "bg-primary-100",
+            "collapse-title flex border-b border-solid border-base-100",
+            level === 1 && "bg-primary-200 text-primary-200-content",
+            level === 2 && "bg-primary-100 text-primary-100-content",
           )}
           href={item.url}
         >
@@ -31,25 +32,32 @@ function MenuItem({ item, level = 0 }: { item: NavElement; level: number }) {
       data-level={level}
     >
       <input type="checkbox" />
-      <div class="collapse-title text-primary-content border-b border-solid border-base-100 font-bold pt-5">
+      <div
+        class={clx(
+          "collapse-title text-primary-content border-b border-solid border-base-100 pt-5",
+          level === 0 && "font-bold",
+          level === 1 && "bg-primary-200 !text-primary-200-content",
+          level === 2 && "bg-primary-100 text-primary-100-content",
+        )}
+      >
         {item.name}
       </div>
       <div
         class={clx(
           "collapse-content px-0 !pb-0",
-          level === 2 ? "bg-primary-200" : "bg-primary-100",
         )}
       >
         <ul class="">
           <li>
             <a
               class={clx(
-                "collapse-title flex text-primary-content border-b border-solid border-base-100",
-                level === 1 ? "bg-primary-200" : "bg-primary-100",
+                "collapse-title flex border-b border-solid border-base-100",
+                level === 0 && "bg-primary-200 text-primary-200-content",
+                level === 1 && "bg-primary-100 text-primary-100-content",
               )}
               href={item.url}
             >
-              Ver todos
+              Ver todos {level}
             </a>
           </li>
 
@@ -76,19 +84,19 @@ function Menu({ items }: Props) {
           <Login />
         </li>
         <li>
-          <a class="flex items-center gap-4 p-4" href="https://www.deco.cx">
+          <a class="flex items-center gap-4 p-4" href="/account">
             <Icon id="Account" size={24} class="text-primary" />
             <span class="text-sm">Minha conta</span>
           </a>
         </li>
         <li>
-          <a class="flex items-center gap-4 p-4" href="https://www.deco.cx">
+          <a class="flex items-center gap-4 p-4" href="/account#/orders">
             <Icon id="Orders" size={24} class="text-primary" />
             <span class="text-sm">Meus pedidos</span>
           </a>
         </li>
         <li>
-          <a class="flex items-center gap-4 p-4" href="https://www.deco.cx">
+          <a class="flex items-center gap-4 p-4" href="/wishlist">
             <Icon id="HeartLine" size={24} class="text-primary" />
             <span class="text-sm">Favoritos</span>
           </a>

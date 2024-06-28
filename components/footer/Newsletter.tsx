@@ -195,7 +195,7 @@ export default function Newsletter({
   if (success) {
     return (
       <Section isMobile={isMobile} {...sectionProps}>
-        <div class="bg-secondary-200 text-secondary-content px-5 py-12 md:py-12 text-neutral-600 text-center">
+        <div class="bg-secondary-200 text-secondary-200-content px-5 py-12 md:py-12  text-center">
           <div class="container flex flex-col gap-4 justify-center items-center">
             <div class="font-bold flex flex-col gap-2 items-center justify-center">
               <h2 class="text-2xl font-secondary">

@@ -249,11 +249,10 @@ function ProductReviews(
     <Section
       isMobile={isMobile}
       {...sectionProps}
-      class="w-full px-auto flex justify-center mb-5 container  mx-auto"
-      id="reviewsInfo"
+      class="w-full px-auto mb-5 container mx-auto"
     >
       <div class="w-full">
-        <h2 class="text-neutral-500 font-bold text-2xl text-center text-neutral-700 font-secondary mb-12">
+        <h2 class="text-neutral-500 font-bold text-2xl text-center font-secondary mb-12">
           Avaliações
         </h2>
         <div class="flex-col gap-2 lg:gap-0 lg:flex-row  flex justify-between">
@@ -451,6 +450,7 @@ function ProductReviews(
           </div>
         </div>
       </div>
+      <div id="reviewsInfo" />
     </Section>
   );
 }

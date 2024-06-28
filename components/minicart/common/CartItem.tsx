@@ -74,18 +74,22 @@ function CartItem({
     await onUpdateQuantity(0, index, item);
   });
 
+  // const imageUrl = image?.src?.replace(/(ids\/\d+)-\d+-\d+/, "$1");
+  const imageUrl = image?.src.replace(/(ids\/\d+)-\d+-\d+/, "$1-150-150");
+
   return (
     <div class="flex flex-row justify-between gap-4">
       <a href={url}>
         <Image
-          {...image}
+          src={imageUrl}
+          alt={image.alt}
           width={88}
           height={88}
-          class="h-full object-cover object-center border border-neutral-300"
+          class="h-full object-cover object-center border border-neutral-300 product-aspect product-fit min-h-[88px]"
         />
       </a>
 
-      <div class="flex flex-1 flex-col ">
+      <div class="flex flex-col">
         <a class="text-xs text-neutral-500 font-bold" href={url}>{name}</a>
 
         <div class="flex lg:items-end flex-col lg:flex-row lg:gap-4 font-bold mt-2 mb-2 lg:mt-auto">

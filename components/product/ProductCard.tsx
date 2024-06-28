@@ -178,13 +178,15 @@ function ProductCard({
 
         {/* Text seals */}
         {/* TODO Remover bordar e after */}
-        <div class="flex justify-center items-center h-5 [&>div]:min-w-0">
-          <SealsList
-            sealsConfig={sealsConfig}
-            product={product}
-            limit={2}
-            position="info"
-          />
+        <div class="">
+          <div class="-translate-y-px flex justify-center items-center h-5 [&>div]:min-w-0 group-has-[#layout-type-list:checked]:h-auto">
+            <SealsList
+              sealsConfig={sealsConfig}
+              product={product}
+              limit={2}
+              position="info"
+            />
+          </div>
         </div>
       </div>
 
@@ -213,22 +215,27 @@ function ProductCard({
         </div>
 
         {/* Right (desktop list mode) */}
-        <div class="">
+        <div class="flex flex-col max-lg:group-has-[#layout-type-list:checked]:h-full max-lg:group-has-[#layout-type-list:checked]:mt-2">
           {/* Pricing */}
           {isAvailable
             ? (
-              <div class="grid grid-rows-3 items-center h-[58px] mt-1 group-has-[#layout-type-list:checked]:mt-0 w-full sm:group-has-[#layout-type-list:checked]:min-w-52">
+              <div class="flex flex-col h-[58px] lg:h-[38px] mt-2 group-has-[#layout-type-list:checked]:mt-0 w-full sm:group-has-[#layout-type-list:checked]:min-w-52">
                 {/* Price */}
-                <div class="text-neutral-400 text-xs line-through font-bold">
-                  {discountPercentage > 0 && (
-                    <>De {formatPrice(listPrice, offers?.priceCurrency)}</>
-                  )}
-                </div>
+                <div class="flex flex-col lg:flex-row lg:items-end gap-y-1 gap-x-2">
+                  <div class="text-neutral-400 text-xs leading-[14px] line-through font-bold">
+                    {discountPercentage > 0 && (
+                      <>De {formatPrice(listPrice, offers?.priceCurrency)}</>
+                    )}
+                  </div>
 
-                <div class="text-primary-500 text-sm font-bold">
-                  {listPrice ? "Por " : "A partir de "}
-                  {formatPrice(price, offers?.priceCurrency)}
+                  <div class="text-primary-500 text-sm font-bold leading-4">
+                    {listPrice ? "Por " : "A partir de "}
+                    {formatPrice(price, offers?.priceCurrency)}
+                  </div>
                 </div>
+                <span class="text-xs text-neutral-500 leading-[20px]">
+                  s/ juros
+                </span>
 
                 {/* Installments */}
                 {installments && installments.billingDuration > 1 && (
@@ -258,15 +265,13 @@ function ProductCard({
               </div>
             )
             : (
-              <div class="flex flex-col mt-1 group-has-[#layout-type-list:checked]:mt-0 justify-end group-has-[#layout-type-list:checked]:h-auto h-[58px] w-full sm:group-has-[#layout-type-list:checked]:min-w-52">
-                <span class="flex flex-col group-has-[#layout-type-list:checked]:items-start items-center justify-end h-full text-neutral-400 text-sm font-bold">
-                  Produto indisponível
-                </span>
+              <div class="text-sm leading-4 mt-2 group-has-[#layout-type-list:checked]:mt-0 group-has-[#layout-type-list:checked]:h-auto h-[58px] lg:h-[38px] w-full sm:group-has-[#layout-type-list:checked]:min-w-52 text-neutral-400 font-bold">
+                Produto indisponível
               </div>
             )}
 
           {/* Add to cart */}
-          <div class="invisible opacity-0 group-hover/product-cart:opacity-100 group-hover/product-cart:visible max-xl:opacity-100 max-xl:visible mt-4 w-full group-has-[#layout-type-list:checked]:mt-3 group-has-[#layout-type-list:checked]:opacity-100 group-has-[#layout-type-list:checked]:visible">
+          <div class="invisible opacity-0 group-hover/product-cart:opacity-100 group-hover/product-cart:visible max-xl:opacity-100 max-xl:visible mt-4 w-full group-has-[#layout-type-list:checked]:mt-6 max-lg:group-has-[#layout-type-list:checked]:mt-auto group-has-[#layout-type-list:checked]:opacity-100 group-has-[#layout-type-list:checked]:visible">
             {isAvailable
               ? variants.length === 0
                 ? (
