@@ -57,7 +57,7 @@ function MenuItem({ item, level = 0 }: { item: NavElement; level: number }) {
               )}
               href={item.url}
             >
-              Ver todos {level}
+              Ver todos
             </a>
           </li>
 
