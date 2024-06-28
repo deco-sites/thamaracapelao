@@ -53,9 +53,7 @@ function Input({
           id={id}
           data-error={error ? "true" : undefined}
           data-loading={loading ? "true" : undefined}
-          class={
-            "w-full bg-white h-12 px-4 focus:outline-none text-sm placeholder:text-gray-400 border border-gray-300 data-[loading='true']:border-success-500 data-[loading='true']:text-success-500 data-[error='true']:border-danger-500 data-[error='true']:text-danger-500"
-          }
+          class={"w-full bg-white h-12 px-4 focus:outline-none text-sm placeholder:text-gray-400 border border-gray-300 data-[loading='true']:border-success-500 data-[loading='true']:text-success-500 data-[error='true']:border-danger-500 data-[error='true']:text-danger-500"}
           type={type}
           placeholder={placeholder}
           name={name}

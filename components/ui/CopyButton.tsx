@@ -1,5 +1,4 @@
 import { useSignal } from "@preact/signals";
-import { asset } from "$fresh/runtime.ts";
 import { clx } from "$store/sdk/clx.ts";
 import Icon from "deco-sites/fast-fashion/components/ui/Icon.tsx";
 
