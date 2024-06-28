@@ -105,7 +105,8 @@
           "href": "https://www.linkedin.com/company/thamaracapelao",
           "@type": "image",
           "width": 32,
-          "height": 32
+          "height": 32,
+          "external": true
         },
         {
           "alt": "Instagram",
