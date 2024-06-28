@@ -237,21 +237,23 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
     { threshold: THRESHOLD, root: slider, rootMargin: "16px" },
   );
 
-  slider.addEventListener("scroll", () => {
-    if (!scrolling) {
-      items.forEach((item) => observer.unobserve(item));
+  if (thumbs) {
+    slider.addEventListener("scroll", () => {
+      if (!scrolling) {
+        items.forEach((item) => observer.unobserve(item));
 
-      scrolling = true;
-    }
-  });
+        scrolling = true;
+      }
+    });
 
-  slider.addEventListener("scrollend", () => {
-    if (scrolling) {
-      items.forEach((item) => observer.observe(item));
+    slider.addEventListener("scrollend", () => {
+      if (scrolling) {
+        items.forEach((item) => observer.observe(item));
 
-      scrolling = false;
-    }
-  });
+        scrolling = false;
+      }
+    });
+  }
 
   items.forEach((item) => observer.observe(item));
 

@@ -15,6 +15,8 @@ const script = (id: string) => {
         localStorage.setItem(KEY, ACCEPTED);
         elem.classList.add(HIDDEN);
       });
+
+      elem.classList.remove(HIDDEN);
     }
   };
 
