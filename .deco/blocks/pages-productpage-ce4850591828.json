@@ -10,7 +10,9 @@
       "jsonLD": {
         "__resolveType": "PDP Loader"
       },
-      "jsonLDs": [{}],
+      "jsonLDs": [
+        {}
+      ],
       "noIndexing": false
     },
     {
@@ -31,19 +33,43 @@
               "cols": [
                 {
                   "title": "Tamanho",
-                  "values": ["PP", "P", "M", "G", "GG"]
+                  "values": [
+                    "PP",
+                    "P",
+                    "M",
+                    "G",
+                    "GG"
+                  ]
                 },
                 {
                   "title": "toráx",
-                  "values": ["82", "86", "91", "96", "101"]
+                  "values": [
+                    "82",
+                    "86",
+                    "91",
+                    "96",
+                    "101"
+                  ]
                 },
                 {
                   "title": "cintura",
-                  "values": ["66", "75", "80", "85", "96"]
+                  "values": [
+                    "66",
+                    "75",
+                    "80",
+                    "85",
+                    "96"
+                  ]
                 },
                 {
                   "title": "quadril",
-                  "values": ["94", "98", "104", "110", "115"]
+                  "values": [
+                    "94",
+                    "98",
+                    "104",
+                    "110",
+                    "115"
+                  ]
                 }
               ]
             }
@@ -131,7 +157,9 @@
         "crossSelling": "similars",
         "__resolveType": "vtex/loaders/legacy/relatedProductsLoader.ts"
       },
-      "variantsToRenderAsImage": ["Color"]
+      "variantsToRenderAsImage": [
+        "Color"
+      ]
     },
     {
       "page": {
@@ -184,7 +212,13 @@
           }
         }
       },
-      "specificationsToShow": ["Cor", "Tamanho", "idade", "category", "RefId"]
+      "specificationsToShow": [
+        "Cor",
+        "Tamanho",
+        "idade",
+        "category",
+        "RefId"
+      ]
     },
     {
       "sectionProps": {
