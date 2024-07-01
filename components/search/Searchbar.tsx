@@ -77,7 +77,11 @@ function SearchBarResult({ products }: SearchBarResultProps) {
     >
       {products.map((product, _) => (
         <a class="flex items-center gap-4 py-1" href={product.url}>
-          <img src={product.image?.[0].url} alt="" class="size-8" />
+          <img
+            src={product.image?.[0].url}
+            alt=""
+            class="w-8 product-fit product-aspect"
+          />
           <span class="truncate">{product.name}</span>
         </a>
       ))}
