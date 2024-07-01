@@ -16,7 +16,7 @@ interface TextItem {
 }
 
 /** @titleBy alt */
-interface ImageItem {
+export interface ImageItem {
   /** @title Imagem */
   src: ImageWidget;
   /** @title Link */

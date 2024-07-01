@@ -181,5 +181,15 @@
       }
     }
   },
-  "__resolveType": "site/sections/Footer/Footer.tsx"
+  "__resolveType": "site/sections/Footer/Footer.tsx",
+  "footerLogos": [
+    {
+      "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/10746/c868a63a-8d04-4c13-9764-285ecad31873",
+      "href": "https://www.agenciaeplus.com.br/",
+      "external": true,
+      "width": 115,
+      "height": 21,
+      "alt": "Agência "
+    }
+  ]
 }

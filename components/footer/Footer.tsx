@@ -1,11 +1,16 @@
 import type { Logo } from "$store/components/header/Header.tsx";
 import Image from "apps/website/components/Image.tsx";
 import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
-import { asset } from "$fresh/runtime.ts";
-import { AppContext } from "$store/apps/site.ts";
 import Section from "$store/components/ui/Section.tsx";
 import type { SectionProps } from "$store/components/ui/Section.tsx";
-import Items, { HTMLSection, ImageSection, TextSection } from "./Items.tsx";
+import Items, {
+  HTMLSection,
+  ImageItem,
+  ImageSection,
+  TextSection,
+} from "./Items.tsx";
+import { useContext } from "preact/hooks";
+import { SectionContext } from "deco/components/section.tsx";
 
 /** @titleBy alt */
 
@@ -42,13 +47,13 @@ export interface Props {
    * @title Direitos autorais
    */
   copyRight?: HTMLWidget;
+  /**
+   * @title Logotipos do rodapé
+   */
+  footerLogos?: ImageItem[];
 
   /** @title Configurações da seção */
   sectionProps?: SectionProps;
-}
-
-export function loader(props: Props, _req: Request, ctx: AppContext) {
-  return { ...props, isMobile: ctx.device !== "desktop" };
 }
 
 export default function Footer({
@@ -56,9 +61,13 @@ export default function Footer({
   sections,
   paymentFlags,
   copyRight,
-  isMobile,
+  footerLogos = [],
   sectionProps,
-}: ReturnType<typeof loader>) {
+}: Props) {
+  const sectionContext = useContext(SectionContext);
+
+  const isMobile = sectionContext?.device !== "desktop";
+
   return (
     <Section isMobile={isMobile} {...sectionProps}>
       <div class="bg-secondary-200 text-secondary-200-content">
@@ -104,15 +113,26 @@ export default function Footer({
           </div>
         )}
         <div class="bg-base-100">
-          <div class="container flex justify-center py-3">
-            <img
-              src={asset("/image/agenciaeplus.svg")}
-              alt="agenciaeplus"
-              width={115}
-              height={21}
-              loading="lazy"
-            />
-          </div>
+          {footerLogos.length > 0 && (
+            <ul class="container flex justify-center py-3 gap-4">
+              {footerLogos.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                  >
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={item.width || 180}
+                      height={item.height || 40}
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </Section>

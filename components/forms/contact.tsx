@@ -121,10 +121,10 @@ export const ContactForm = (
             <div class="w-full flex flex-col justify-center items-center">
               <span class="my-4">Mensagem enviada com sucesso!</span>
               <button
-                class="w-full bg-primary hover:bg-primary-content h-[40px] duration-300 disabled:bg-disabled-btn disabled:cursor-pointer max-w-[350px]"
+                class="btn btn-primary w-full h-[40px] duration-300 disabled:bg-disabled-btn disabled:cursor-pointer max-w-[350px]"
                 onClick={() => window.location.reload()}
               >
-                <span class="group-disabled:loading text-white font-bold">
+                <span class="group-disabled:loading font-bold">
                   Voltar
                 </span>
               </button>
@@ -168,9 +168,9 @@ export const ContactForm = (
                   <button
                     disabled={loading}
                     type="submit"
-                    class="w-full bg-primary hover:bg-primary-content h-[40px] duration-300 disabled:bg-disabled-btn disabled:cursor-pointer group"
+                    class="btn btn-primary w-full h-[40px] duration-300 disabled:bg-disabled-btn disabled:cursor-pointer group"
                   >
-                    <span class="group-disabled:loading text-white font-bold">
+                    <span class="group-disabled:loading font-bold">
                       {form?.submitText ?? "Enviar"}
                     </span>
                   </button>

@@ -20,7 +20,7 @@ export interface SealDefaultConfig {
   /**
    * @format color-input
    */
-  background?: string;
+  background: string;
   position: SealPosition;
 }
 
