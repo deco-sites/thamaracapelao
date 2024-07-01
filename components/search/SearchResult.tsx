@@ -15,6 +15,8 @@ import { AppContext } from "$store/apps/site.ts";
 import { toProductItem } from "deco-sites/fast-fashion/sdk/ga4/transform/toProductItem.ts";
 import { toAnalytics } from "deco-sites/fast-fashion/sdk/ga4/transform/toAnalytics.ts";
 import { SendEventOnView } from "deco-sites/fast-fashion/components/Analytics.tsx";
+import { useContext } from "preact/hooks";
+import { SectionContext } from "deco/components/section.tsx";
 
 export interface Layout {
   /**
@@ -34,6 +36,15 @@ export interface Props {
 
   /** @title Configurações de seção */
   sectionProps?: SectionProps;
+
+  /**
+   * @ignore
+   */
+  title?: string;
+  /**
+   * @ignore
+   */
+  hideSort?: boolean;
 }
 
 const ALWAYS_HIDE = ["categoria", "category-1"];
@@ -51,9 +62,7 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
 
   return {
     ...props,
-    isMobile: ctx.device !== "desktop",
     url: req.url,
-    isMac: req.headers.get("user-agent")?.includes("Macintosh"),
     productImageAspectRatio: ctx.theme?.props.productImages?.aspectRatio,
     productImageFit: ctx.theme?.props.productImages?.fit,
   };
@@ -64,11 +73,11 @@ function SearchResult(
     page,
     sectionProps,
     notFoundProps,
-    isMobile,
     url,
     productImageAspectRatio,
     productImageFit,
-    isMac,
+    title,
+    hideSort,
   }: ReturnType<
     typeof loader
   >,
@@ -76,11 +85,18 @@ function SearchResult(
   const { searchParams } = new URL(url ?? "http://example.com"); // Bug
   const term = searchParams.get("q") ?? undefined;
 
+  const sectionContext = useContext(SectionContext);
+  const isMobile = sectionContext?.device !== "desktop";
+  const isMac = !!sectionContext?.request?.headers.get("user-agent")?.includes(
+    "Macintosh",
+  );
+
   return (
     <Section {...sectionProps} isMobile={isMobile}>
       {page && page.products.length > 0
         ? (
           <Result
+            title={title}
             isMac={isMac}
             page={page}
             url={url}
@@ -88,6 +104,7 @@ function SearchResult(
             productImageAspectRatio={productImageAspectRatio}
             productImageFit={productImageFit}
             term={term}
+            hideSort={hideSort}
           />
         )
         : <NotFound {...notFoundProps} term={term} />}
@@ -96,12 +113,21 @@ function SearchResult(
 }
 
 function Result(
-  { page, url, isMobile, productImageAspectRatio, productImageFit, isMac }:
+  {
+    page,
+    url,
+    isMobile,
+    productImageAspectRatio,
+    productImageFit,
+    isMac,
+    title,
+    hideSort,
+  }:
     & Omit<
       ReturnType<typeof loader>,
       "sectionProps" | "notFoundProps"
     >
-    & { term?: string },
+    & { term?: string; isMac: boolean; isMobile: boolean },
 ) {
   if (!page) return null;
 
@@ -135,14 +161,15 @@ function Result(
       <Logger data={{ page }} />
       {/* Page title */}
       <h1 class="text-2xl text-neutral-600 font-bold font-secondary">
-        {breadcrumb.itemListElement.at(-1)?.name ?? "Resultados da busca"}
+        {title ?? breadcrumb.itemListElement.at(-1)?.name ??
+          "Resultados da busca"}
       </h1>
 
       {/* Mobile */}
       {(isMobile || isMac) && (
         <div class="block xl:hidden">
           <div class="flex justify-between mt-10 lg:mt-8">
-            <OrderBy url={url} />
+            {!hideSort ?? <OrderBy url={url} />}
 
             <FiltersMobile filters={filters} url={url} />
           </div>
@@ -154,7 +181,7 @@ function Result(
       {/* Filters and products */}
       <div class="flex gap-5 mt-10 lg:mt-8">
         {/* Filters */}
-        {(!isMobile || isMac) && (
+        {(!isMobile || isMac) && filters.length > 0 && (
           <div class="hidden xl:block min-w-[300px]">
             <div class="w-full px-4 font-bold border-b border-neutral h-20 flex justify-between items-center">
               <h3 class="text-lg">
@@ -183,7 +210,7 @@ function Result(
               </span>
 
               {/* Order by */}
-              {(!isMobile || isMac) && (
+              {(!isMobile || isMac) && !hideSort && (
                 <div class="hidden xl:block">
                   <OrderBy url={url} />
                 </div>

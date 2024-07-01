@@ -55,7 +55,7 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
     );
   }
 
-  return <SearchResult {...props} />;
+  return <SearchResult {...props} title="Favoritos" hideSort />;
 }
 
 export default WishlistGallery;
