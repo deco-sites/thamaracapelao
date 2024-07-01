@@ -326,5 +326,9 @@
   "/.deco/blocks/Cookie%20Consent%20-%20Padr%C3%A3o.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
+  },
+  "/.deco/blocks/Favoritos%20-%20Padr%C3%A3o.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Product/Wishlist.tsx"
   }
 }

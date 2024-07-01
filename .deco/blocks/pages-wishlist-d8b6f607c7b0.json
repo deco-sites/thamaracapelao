@@ -13,13 +13,7 @@
       "__resolveType": "Header - 01"
     },
     {
-      "__resolveType": "site/sections/Product/Wishlist.tsx",
-      "page": {
-        "count": 12,
-        "__resolveType": "vtex/loaders/product/wishlist.ts"
-      },
-      "sectionProps": {},
-      "notFoundProps": {}
+      "__resolveType": "Favoritos - Padrão"
     },
     {
       "__resolveType": "Footer - padrão"
