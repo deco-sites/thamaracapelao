@@ -43,8 +43,8 @@ function CrossSellingProduct(
           height={42 / aspectRatio}
           fit={imageFit}
           class={clx(
-            "border-2 border-transparent product-aspect product-fit",
-            current && "!border-primary",
+            "border border-transparent product-aspect product-fit hover:border-primary transition",
+            current && "!border-primary border-2",
           )}
         />
 
