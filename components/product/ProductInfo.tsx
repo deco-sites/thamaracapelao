@@ -280,9 +280,9 @@ function ProductInfo({
                     : name}
                 </span>
               </h1>
-              <div class="flex gap-4 items-center">
+              <div class="flex gap-4 items-start">
                 {sku && (
-                  <span class="text-xs text-neutral-500 leading-[10px]">
+                  <span class="text-xs text-neutral-500">
                     sku: {sku}
                   </span>
                 )}
@@ -341,7 +341,7 @@ function ProductInfo({
         {isAvailable
           ? (
             <>
-              <div class="group-has-[[data-variant-selector]:focus]/product-info:pointer-events-none group-has-[[data-variant-selector]:focus]/product-info:opacity-80">
+              <div class="">
                 {isAvailable && <ProductAddToCart product={product} />}
               </div>
 

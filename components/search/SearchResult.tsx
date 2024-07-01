@@ -169,8 +169,7 @@ function Result(
       {(isMobile || isMac) && (
         <div class="block xl:hidden">
           <div class="flex justify-between mt-10 lg:mt-8">
-            {!hideSort ?? <OrderBy url={url} />}
-
+            {!hideSort && <OrderBy url={url} />}
             <FiltersMobile filters={filters} url={url} />
           </div>
 

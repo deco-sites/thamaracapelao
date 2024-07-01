@@ -171,7 +171,7 @@ const SealsList = ({ sealsConfig, product, position, limit = 3 }: Props) => {
               position === "info" && styles.info,
             )}
           >
-            <span class="uppercase text-center inline text-[10px] leading-none">
+            <span class="uppercase text-center inline text-[10px] leading-none font-bold">
               {seal.label}
             </span>
           </div>
