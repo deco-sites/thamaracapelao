@@ -90,6 +90,9 @@ export function CurrentItem(
     ?.value;
 
   const { alternateName, name, image } = actualVariant || product;
+  const nameToUse = (alternateName !== "" && alternateName)
+    ? alternateName
+    : name;
 
   const aspectRatio = Number(imageAspectRatio.split("/")[0]) /
     Number(imageAspectRatio.split("/")[1]);
@@ -107,7 +110,7 @@ export function CurrentItem(
       <div {...props} class="relative border border-neutral-300">
         <Image
           class="object-cover product-fit product-aspect"
-          alt={alternateName ?? name}
+          alt={nameToUse}
           src={image?.[0]?.url ?? ""}
           width={WIDTH}
           height={WIDTH / aspectRatio}
@@ -115,7 +118,7 @@ export function CurrentItem(
         />
       </div>
       <h3 class="text-sm font-bold text-neutral-500 line-clamp-2 text-ellipsis min-h-[40px]">
-        {alternateName ?? name}
+        {nameToUse}
       </h3>
       <div class="flex md:flex-row flex-col items-center justify-between w-full gap-x-4 gap-y-3">
         {firstPossibilitiesMap.length

@@ -72,7 +72,6 @@ export default function RangePicker({ filter }: Props) {
 
     searchParams.set("filter.price", `${minValue}:${maxValue}`);
 
-    // console.log({ url: searchParams.toString() });
     location.href = `?${searchParams.toString()}`;
   };
 

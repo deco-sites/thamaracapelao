@@ -10,7 +10,6 @@ const sw = () =>
 
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();
-  console.log("pathName", ctx.url.pathname);
 
   return (
     <>

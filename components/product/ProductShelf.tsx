@@ -115,8 +115,6 @@ export const onBeforeResolveProps = (props: Props) => {
 };
 
 export function loader(props: Props, _req: Request, ctx: AppContext) {
-  // console.log(ctx.theme?.props);
-
   return {
     ...props,
     isMobile: ctx.device !== "desktop",

@@ -89,6 +89,10 @@ export function ExtraProductItem(
   const aspectRatio = Number(imageAspectRatio.split("/")[0]) /
     Number(imageAspectRatio.split("/")[1]);
 
+  const nameToUse = (alternateName !== "" && alternateName)
+    ? alternateName
+    : name;
+
   return (
     <>
       <a
@@ -98,7 +102,7 @@ export function ExtraProductItem(
         <div {...props} class="relative border border-neutral-300">
           <Image
             class="object-cover product-fit product-aspect"
-            alt={alternateName ?? name}
+            alt={nameToUse}
             src={image?.[0].url ?? ""}
             width={WIDTH}
             height={WIDTH / aspectRatio}
@@ -124,7 +128,7 @@ export function ExtraProductItem(
         </div>
 
         <h3 class="text-sm font-bold text-neutral-500 line-clamp-2 text-ellipsis min-h-[40px]">
-          {alternateName ?? name}
+          {nameToUse}
         </h3>
       </a>
 

@@ -24,7 +24,6 @@ import { CurrentItem } from "$store/components/product/BuyTogether/CurrentItem.t
 import { ExtraProductItem } from "$store/components/product/BuyTogether/ExtraProductItem.tsx";
 import { JSX } from "preact/jsx-runtime";
 import { useVariantPossibilities } from "../../../sdk/useVariantPossibilities.ts";
-import BrowserLog from "deco-sites/fast-fashion/islands/BrowserLog.tsx";
 
 /**
  * @title {{value}}
@@ -215,8 +214,6 @@ function ProductBuyTogether(
   const actualProductMainOffer = useOffer(currentVariantMain.value?.offers);
 
   const buyTogetherData = useComputed<Data[]>(() => {
-    console.log("availableskus", availableSecondarySkus);
-
     return [{
       productGroupID: currentVariantMain?.value?.inProductGroupWithID ?? "",
       productID: currentVariantMain?.value?.productID ?? "",
@@ -314,8 +311,6 @@ function ProductBuyTogether(
                       index={i}
                       class="relative carousel-item flex w-full pointer-events-auto flex-col gap-2"
                     >
-                      <BrowserLog payload={relatedProducts} />
-
                       <ExtraProductItem
                         extraProduct={extraProduct}
                         platform={platform}
@@ -339,7 +334,7 @@ function ProductBuyTogether(
             <Icon id="Equals" size={38} />
           </div>
 
-          <div class="relative flex flex-col mt-4 md:mt-0 [grid-area:result] justify-center gap-6 bg-neutral-200 w-full md:max-w-[246px] py-8 md:py-14 md:px-6">
+          <div class="relative flex flex-col mt-2 md:mt-0 [grid-area:result] justify-center gap-6 bg-neutral-200 w-full md:max-w-[246px] py-8 md:py-14 md:px-6">
             <div class="flex flex-col items-center justify-center gap-1.5">
               <p class="text-neutral-500">
                 Leve os <strong>2 itens</strong> por apenas

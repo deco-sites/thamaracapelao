@@ -48,8 +48,6 @@ function AddToCartButton({
   const { addItems } = useCart();
 
   const handleAddItem = () => {
-    console.log("items", items);
-
     return addItems({
       orderItems: items.map((item) => ({
         ...item,
